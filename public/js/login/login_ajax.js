@@ -8,8 +8,8 @@ var Login={
             cache       : false,
             dataType    : 'json',
             data        : datos,
-            beforeSend : function() {                
-                $(".load").show();   
+            beforeSend : function() {
+                $(".load").show();
             },
             success : function(obj) {
                 $(".load").hide();
@@ -22,7 +22,7 @@ var Login={
                 }
                 else if(obj.rst==2){
                     MostrarMensaje(obj.msj);
-                }                
+                }
             },
             error: function(){
                 $(".load").hide();
