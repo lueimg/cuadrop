@@ -1,64 +1,69 @@
 <?php
-
 class LoginController extends BaseController
 {
-
     public function postLogin()
     {
         if (Request::ajax()) {
 
-            $userdata= array(
-                'usuario' => Input::get('usuario'),
-                'password' => Input::get('password'),
-            );
+        $userdata= array(
+            'dni' => Input::get('usuario'),
+            'password' => Input::get('password'),
+        );
 
             if ( Auth::attempt($userdata, Input::get('remember', 0)) ) {
                 //buscar los permisos de este usuario y guardarlos en sesion
-                $query ="SELECT m.nombre as modulo, s.nombre as submodulo,
-                        CONCAT(m.path,'.', s.path) as path, m.icon
-                        FROM modulos m 
-                        JOIN submodulos s ON m.id=s.modulo_id
-                        JOIN submodulo_usuario su ON s.id=su.submodulo_id
-                        WHERE su.estado = 1 AND m.estado = 1 AND s.estado = 1
-                        and su.usuario_id = ?
-                        ORDER BY m.nombre, s.nombre ";
+                $query = "  SELECT m.nombre as menu, o.nombre as opcion,
+                            IF(LOCATE('.', o.ruta)>0,
+                                o.ruta,
+                                CONCAT(m.ruta,'.',o.ruta)
+                            ) as ruta, m.class_icono as icon
+                            FROM personas p
+                            JOIN cargo_persona cp ON p.id=cp.persona_id
+                            JOIN cargos c ON cp.cargo_id=c.id
+                            JOIN cargo_opcion co ON c.id=co.cargo_id
+                            JOIN opciones o ON co.opcion_id=o.id
+                            JOIN menus m ON o.menu_id=m.id
+                            WHERE p.estado=1 AND cp.estado=1 AND c.estado=1
+                            AND co.estado=1 AND o.estado=1 AND m.estado=1
+                            AND p.id=?
+                            GROUP BY m.id, o.id
+                            ORDER BY m.nombre, o.nombre";
+                $res = DB::select($query, array(Auth::user()->id));
 
-                $res = DB::select($query, array(Auth::id()));
-
-                $menu = array();
+                $menus = array();
                 $accesos = array();
                 foreach ($res as $data) {
-                    $modulo = $data->modulo;
-                    //$accesos[] = $data->path;
-                    array_push($accesos,$data->path);
-                    if (isset($menu[$modulo])) {
-                        $menu[$modulo][] = $data;
+                    $menu = $data->menu;
+                    //$accesos[] = $data->ruta;
+                    array_push($accesos, $data->ruta);
+                    if (isset($menus[$menu])) {
+                        $menus[$menu][] = $data;
                     } else {
-                        $menu[$modulo] = array($data);
+                        $menus[$menu] = array($data);
                     }
                 }
-                $usuario = Usuario::find(Auth::id());
-                
+
                 Session::set('language', 'Español');
                 Session::set('language_id', 'es');
-                Session::set('menu', $menu);
+                Session::set('menus', $menus);
                 Session::set('accesos', $accesos);
-                Session::set('perfilId', $usuario['perfil_id']);
-
                 Lang::setLocale(Session::get('language_id'));
 
                 return Response::json(
                     array(
-                    'rst'=>'1',
-                    'estado'=>Auth::user()->estado
+                        'rst'=>'1',
+                        'estado'=>Auth::user()->estado,
+                        'query'=>$query,
+                        'menu'=>$menus,
+                        'acceso'=>$accesos,
                     )
                 );
             } else {
-            $m='<strong>Usuario</strong> y/o la <strong>contraseña</strong>';
+                $m = ' y/o la <strong>contraseña</strong> son incorrectos.';
                 return Response::json(
                     array(
                     'rst'=>'2',
-                    'msj'=>'El'. $m .'son incorrectos.',
+                    'msj'=>'El <strong>Usuario</strong>'.$m,
                     )
                 );
             }
@@ -71,8 +76,8 @@ class LoginController extends BaseController
     {
         if (isset($_FILES['imagen']) and $_FILES['imagen']['size'] > 0) {
 
-            $uploadFolder = 'img/user/' . md5('u' . Auth::user()->id);
-
+            $uploadFolder = 'img/user/'.md5('u'.Auth::user()->id);
+            
             if ( !is_dir($uploadFolder) ) {
                 mkdir($uploadFolder);
             }
@@ -85,14 +90,14 @@ class LoginController extends BaseController
 
             @unlink($file);
 
+            $m="Ocurrio un error al subir el archivo. No pudo guardarse.";
             if (!move_uploaded_file($tmpArchivo, $file)) {
-                $m='Ocurrio un error al subir el archivo. No pudo guardarse.';
                 return Response::json(
                     array(
-                    'upload' => FALSE, 
-                    'rst'     => '2',
-                    'msj'      => $m,
-                    'error'  => $_FILES['archivo'],
+                        'upload' => FALSE,
+                        'rst'    => '2',
+                        'msj'    => $m,
+                        'error'  => $_FILES['archivo'],
                     )
                 );
             }
@@ -103,14 +108,13 @@ class LoginController extends BaseController
 
             return Response::json(
                 array(
-                    'rst'        => '1',
-                    'msj'        => 'Imagen subida correctamente',
+                    'rst'       => '1',
+                    'msj'       => 'Imagen subida correctamente',
                     'imagen'    => $file,
-                    'upload'     => TRUE, 
-                    'data'         => "OK",
-                    )
+                    'upload'    => TRUE, 
+                    'data'      => "OK",
+                )
             );
-
         }
     }
 

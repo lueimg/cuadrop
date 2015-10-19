@@ -15,7 +15,7 @@
 		@show
 		<title>
 			@section('titulo')
-				PSI 2.0
+				Telesup
 			@show
 		</title>
 
@@ -27,11 +27,10 @@
 			{{ HTML::script('lib/jquery-2.1.3.min.js') }}
 			{{ HTML::script('lib/jquery-ui-1.11.2/jquery-ui.min.js') }}
 			{{ HTML::script('lib/bootstrap-3.3.1/js/bootstrap.min.js') }}
-                        <!-- //code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css -->
-			<?php echo HTML::style('css/master/ionicons.min.css'); ?>
+
+			<?php echo HTML::style('//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'); ?>
 		    <?php echo HTML::style('lib/datatables-1.10.4/media/css/dataTables.bootstrap.css'); ?>
-            <?php echo HTML::style('css/admin/admin.css'); ?>
-		    <?php echo HTML::style('css/admin/horarios.css'); ?>
+		    <?php echo HTML::style('css/admin/admin.css'); ?>
 
 		    {{ HTML::script('lib/datatables-1.10.4/media/js/jquery.dataTables.js') }}
 		    {{ HTML::script('lib/datatables-1.10.4/media/js/dataTables.bootstrap.js') }}

@@ -1,15 +1,7 @@
 <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <!--
-                        <li>
-                            <a href="admin.inicio">
-                                <i class="fa fa-dashboard"></i> <span>{{ trans('greetings.menu_inicio') }}</span>
-                            </a>
-                        </li>
-                        -->
-
-                        @if (isset($menu))
-                            @foreach ( $menu as $key => $val)
+                        @if (isset($menus))
+                            @foreach ( $menus as $key => $val)
                                 <li class="treeview">
                                     <a href="#">
                                         <i class="fa {{ $val[0]->icon }}"></i> <span>{{ $key }}</span>
@@ -17,7 +9,7 @@
                                     </a>
                                     <ul class="treeview-menu">
                                         @foreach ( $val as $k)
-                                            <li><a href="admin.{{ $k->path }}"><i class="fa fa-angle-double-right"></i>{{ $k->submodulo }} </a></li>
+                                            <li><a href="admin.{{ $k->ruta }}"><i class="fa fa-angle-double-right"></i>{{ $k->opcion }} </a></li>
                                         @endforeach
                                     </ul>
                                 </li>
