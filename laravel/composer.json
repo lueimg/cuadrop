@@ -12,6 +12,9 @@
 		"codeception/codeception": "2.0.*"
 	},
 	"autoload": {
+		"psr-4": {
+			"Cuadrop\\": "app/Cuadrop"
+		},
 		"classmap": [
 			"app/commands",
 			"app/controllers",

@@ -2,14 +2,18 @@
 
 Route::get(
     '/', function () {
-        return View::make('login');
+        if (Session::has('accesos')) {
+            return Redirect::to('/admin.inicio');
+        } else {
+            return View::make('login');
+        }
     }
 );
 
 Route::get(
     'salir', function () {
         Auth::logout();
-
+        Session::flush();
         return Redirect::to('/');
     }
 );
@@ -38,11 +42,12 @@ Route::get(
                 $rutaBD == 'inicio' or $rutaBD=='mantenimiento.misdatos') {
                 return View::make($ruta)->with($valores);
             } else
-                return Redirect::to('/admin.inicio');
+                return Redirect::to('/');
         } else
             return Redirect::to('/');
-        }
-    )
+    })
 );
 
 Route::controller('usuario', 'UsuarioController');
+Route::controller('registrar_problema', 'RegistrarProblemaController');
+Route::controller('lista', 'ListaController');
