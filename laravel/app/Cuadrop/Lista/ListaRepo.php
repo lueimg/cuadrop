@@ -19,4 +19,16 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     {
         return TipoProblema::select('*')->get();
     }
+    public function getTipoCarrera()
+    {
+        return TipoCarrera::select('*')->get();
+    }
+    public function getCarrera()
+    {
+        return Carrera::select('*')->get();
+    }
+    public function getCiclo()
+    {
+        return Ciclo::select('*')->get();
+    }
 }

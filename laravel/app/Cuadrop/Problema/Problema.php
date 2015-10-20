@@ -1,5 +1,5 @@
 <?php
-namespace App\Cuadrop\Problema;
+namespace Cuadrop\Problema;
 use Cuadrop\Base\BaseEntity;
 
 class Problema extends BaseEntity

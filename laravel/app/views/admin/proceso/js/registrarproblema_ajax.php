@@ -1,10 +1,9 @@
 <script type="text/javascript">
-var File={
-    ConsultarQuiebre:function(form){
+var Alumno={
+    Cargar:function(evento){
         $.ajax({
-            url: "registrar_problema/consultarquiebre",
-            type: 'POST',
-            data: form,
+            url: "alumno/index",
+            type: 'GET',
             contentType: false,
             processData: false,
             cache: false,
@@ -14,55 +13,78 @@ var File={
             },
             success: function(respAjax) {
                 $(".overlay,.loading-img").remove();
-                if(respAjax){
-                    var strDatos = JSON.stringify(datos);
-                    var apellidos = (respAjax.apellidos)? respAjax.apellidos:'';
-                    var nombre = (respAjax.nombre)? respAjax.nombre:'';
-                    var tipocalle = (respAjax.tipocalle)? respAjax.tipocalle:'';
-                    var nomcalle = (respAjax.nomcalle)? respAjax.nomcalle:'';
-                    var numcalle = (respAjax.numcalle)? respAjax.numcalle:'';
-                        
-                    HTML = "<table class='table'><thead><tr>";
-                    HTML +="<th> Apellidos y nombres </th>";
-                    if (servicio=='provision')   HTML +="<th>direccion </th>";
-                    HTML +=HTMLcabecera;
-                    HTML +="</tr></thead>";
-                    HTML +="<tbody><tr>";
-                    HTML +="<td style='display: none' id='data' data='"+strDatos+"'></td>";
-                    HTML +="<td class='active'>";
-                    HTML +="<label>Ap.</label><input id='apellidos' class='form-control' value='"+apellidos+"'><br>";
-                    HTML +="<label>Nom.</label><input id='nombre' class='form-control' value='"+nombre+"'>";
-                    HTML +="</td>";
-                    
-                    if (servicio=='provision') {
-                        HTML +="<td class='active'>";
-                        HTML +="<label>Vía</label><input id='tipocalle' class='form-control' value='"+ tipocalle +"'>";
-                        HTML +="<label>Nom. </label><input id='nomcalle' class='form-control' value='"+ nomcalle +"'><br>";
-                        HTML +="<label>N°</label><input id='numcalle' class='form-control' value='"+ numcalle +"'>";
-                        HTML +="<label>Piso</label><input id='piso' class='form-control'>";
-                        HTML +="<label>Int.</label><input id='interior' class='form-control'>";
-                        HTML +="<label>Mzn.</label><input id='manzana' class='form-control'>";
-                        HTML +="<label>Lote</label><input id='lote' class='form-control'>";
-                        HTML +="</td>";
-                    }
-                    HTML +=HTMLregistro;
-                    HTML +="</tr></tbody></table>";
-                    //output.innerHTML = HTML;
-                    $("#fileOutput").html(HTML);
-                    $("#actividad").html("<p class='text-center text-uppercase bg-danger' >"+servicio+"</p>");
-
-                }
-                else{
-                    alert('ocurrio un error en la carga');
-                }
+                evento(respAjax.datos);
             },
             error: function(respAjax) {
                 $(".overlay,.loading-img").remove();
-                alert('ocurrio un error en la carga');
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
             }
         });
     },
-    cargar:function(form, url){
+    AgregarEditarArea:function(AE){
+        //var formData = new FormData($("#form_areas")[0]); 
+        //$("#form_areas input[name='h_imagenp']").remove();
+        //$("#form_areas").append("<input type='hidden' value='"+$("#imagenp")[0]+"' name='h_imagenp'>");
+
+        var datos=$("#form_alumno").serialize().split("txt_").join("").split("slct_").join("");
+        var accion="alumno/create";
+        if(AE==1){
+            accion="alumno/update";
+        }
+
+        $.ajax({
+            url         : accion,
+            type        : 'POST',
+            cache       : false,
+            dataType    : 'json',
+            data        : datos,
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success : function(obj) {
+                $(".overlay,.loading-img").remove();
+                if(obj.rst==1){
+                    Psi.mensaje('success', obj.msj, 6000);
+                    Alumno.Cargar(alumnosHTML);
+                    $('#alumnoModal .modal-footer [data-dismiss="modal"]').click();
+                } else { 
+                    $.each(obj.msj,function(index,datos){
+                        $("#error_"+index).attr("data-original-title",datos);
+                        $('#error_'+index).css('display','');
+                    });     
+                }
+            },
+            error: function(){
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
+            }
+        });
+        
+    },
+};
+var Problema={
+    Cargar:function(evento){
+        $.ajax({
+            url: "registrar_problema/cargar",
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: "json",
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success: function(respAjax) {
+                $(".overlay,.loading-img").remove();
+                evento(respAjax.datos);
+            },
+            error: function(respAjax) {
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
+            }
+        });
+    },
+    cargar2:function(form, url){
         $.ajax({
             url: url,
             type: 'POST',
