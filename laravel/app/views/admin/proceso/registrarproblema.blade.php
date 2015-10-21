@@ -23,7 +23,11 @@
 .table-bordered .selec {
     background-color: #9CD9DE;
 }
+/* Estilo por defecto para validacion */
+input:required:invalid {  border: 1px solid red;  }  input:required:valid {  border: 1px solid green;  }
 </style>
+
+
             <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
@@ -62,7 +66,7 @@
                                     <label class="control-label">Descripcion:</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <textarea id="descripcion" class="form-control" rows="2"></textarea>
+                                    <textarea id="descripcion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +140,7 @@
                                     <label class="control-label">DESCRIPCIÓN DEL DOCUMENTO SOLICITADO: ejm. CERTIFICADO DE EXPERTO EN COMP. E INFORMATICA:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="p_documento" class="form-control" rows="2"></textarea>
+                                    <textarea id="p_documento" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -144,7 +148,7 @@
                                     <label class="control-label">OBSERVACIONES:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="p_observacion" class="form-control" rows="2"></textarea>
+                                    <textarea id="p_observacion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +162,7 @@
                                     <label class="control-label">DESCRIPCIÓN DE LA CARRERA: ejm.COMP. E INFORMATICA</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_carrera" class="form-control" rows="2"></textarea>
+                                    <textarea id="t_carrera" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -166,7 +170,7 @@
                                     <label class="control-label">DESCRIPCIÓN DEL DOCUMENTO SOLICITADO: ejm. CERTIFICADO DE EXPERTO EN COMP. E INFORMÁTICA</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_documento" class="form-control" rows="2"></textarea>
+                                    <textarea id="t_documento" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -174,7 +178,7 @@
                                     <label class="control-label">OBSERVACIONES:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_observacion" class="form-control" rows="2"></textarea>
+                                    <textarea id="t_observacion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
 
@@ -183,7 +187,7 @@
                                     <label class="control-label">Nro de cursos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nro_cursos" id="nro_cursos" class="form-control" value="" required="required" title="">
+                                    <input type="text" name="nro_cursos" id="nro_cursos" class="form-control">
                                 </div>
 
                             </div>
@@ -191,7 +195,7 @@
                             <!-- Inicia contenido -->
                                 <div class="box">
                                     <div class="box-body table-responsive">
-                                        <table id="t_cursos" class="table table-bordered">
+                                        <table id="t_cursos" class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>N</th>
@@ -228,16 +232,17 @@
                                     <label class="control-label">Nro de pagos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nro_pagos" id="nro_pagos" class="form-control" value="" required="required" title="">
+                                    <input type="text" name="nro_pagos" id="nro_pagos" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                             <!-- Inicia contenido -->
                                 <div class="box">
                                     <div class="box-body table-responsive">
-                                        <table id="t_pagos" class="table table-bordered">
+                                        <table id="t_pagos" class="table table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>N</th>
                                                     <th>Cursos</th>
                                                     <th>N° Recibo</th>
                                                     <th>Monto</th>
@@ -246,6 +251,7 @@
                                             <tbody id="tb_pagos"></tbody>
                                             <tfoot>
                                                 <tr>
+                                                    <th>N</th>
                                                     <th>Cursos</th>
                                                     <th>N° Recibo</th>
                                                     <th>Monto</th>

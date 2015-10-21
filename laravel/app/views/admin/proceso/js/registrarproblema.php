@@ -1,7 +1,11 @@
 <script type="text/javascript">
 var AlumnosObj, alumno_id;
 $(document).ready(function() {
-
+    $('#guardar').click(function(event) {
+        if (Validar() ) {
+            Guardar();
+        }
+    });
     $('#div_tipo_carrera').css('display','none');
     $('#eventAlumno').css('display','none');
     $('#profesional').css('display','none');
@@ -13,6 +17,47 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/carrera','slct_carrera','simple',null);
     slctGlobal.listarSlct('lista/ciclo','slct_ciclo','simple',null);
     Alumno.Cargar(alumnosHTML);
+    //nro_pagos
+    var i, cant;
+    $('#nro_pagos').change(function(event) {
+        //t_pagos
+        var html='',j;
+        cant = $(this).val();
+        for (i = 0; i < cant; i++) {
+            j=i+1;
+            html+="<tr>"+
+                '<td>'+j+'</td>'+
+                '<td><input type="text" class="form-control" name="tp_curso_'+j+'" id="tp_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tp_recibo_'+j+'" id="tp_recibo_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tp_monto_'+j+'" id="tp_monto_'+j+'" value="" required="required"></td>';
+            html+="</tr>";
+        }
+        $("#tb_pagos").html(html);
+    });
+    //nro_cursos
+    $('#nro_cursos').change(function(event) {
+        //cagar registros en tabla  t_cursos
+        var html='';
+        cant = $(this).val();
+        for (i = 0; i < cant; i++) {
+            j=i+1;
+            html+="<tr>"+
+                '<td>'+j+'</td>'+
+                '<td><input type="text" class="form-control" name="tc_curso_'+j+'" id="tc_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_frecuencia_'+j+'" id="tc_frecuencia_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_hora_'+j+'" id="tc_hora_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_profesor_'+j+'" id="tc_profesor_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_ini_'+j+'" placeholder="AAAA-MM-DD" id="tc_fecha_ini_'+j+'" onfocus="blur()"/></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_fin_'+j+'" placeholder="AAAA-MM-DD" id="tc_fecha_fin_'+j+'" onfocus="blur()"/></td>'+
+                '<td><input type="text" class="form-control" name="tc_nota_'+j+'" id="tc_nota_'+j+'" value="" required="required"></td>';
+            html+="</tr>";
+        }
+        $("#tb_cursos").html(html);
+        $('.fecha').daterangepicker({
+            format: 'YYYY-MM-DD',
+            singleDatePicker: true
+        });
+    });
 
     $('#slct_tipo_problema').change(function(event) {
         if ( this.value =='3') {
@@ -103,6 +148,88 @@ $(document).ready(function() {
         modal.find('.modal-body input').val('');
     });
 });
+Validar=function(){
+    var tipo_problema=$('#slct_tipo_problema').val();
+    var tipo_carrera=$('#slct_tipo_carrera').val();
+    if (tipo_problema=='3') {
+        //constancia y certificado
+        if (isNaN(tipo_carrera) || tipo_carrera==='') {
+            Psi.mensaje('danger', 'Seleccione un tipo de carrera', 6000);
+            return false;
+        } else {
+            if (isNaN(alumno_id) || alumno_id==='') {
+                Psi.mensaje('danger', 'Seleccione un alumno', 6000);
+                return false;
+            }
+            //validar carera
+            if (tipo_carrera=='1' || tipo_carrera=='4') {
+                //escolar o tecnico
+                var t_carrera = $('#t_carrera').val();
+                var t_documento = $('#t_documento').val();
+                var t_observacion = $('#t_observacion').val();
+                //numero de cursos
+                //numero de pagos
+                if (t_carrera==='') {
+                    Psi.mensaje('danger', 'Ingrese descripcion de la carrera', 6000);
+                    return false;
+                }
+                if (t_documento==='') {
+                    Psi.mensaje('danger', 'Ingrese descripcion del documento  ', 6000);
+                    return false;
+                }
+                if (t_observacion==='') {
+                    Psi.mensaje('danger', 'Ingrese descripcion de la observacion', 6000);
+                    return false;
+                }
+                //guardar
+                return true;
+            } else if (tipo_carrera=='2' || tipo_carrera=='3') {
+                //profesional
+                var carrera =$('#slct_carrera').val();
+                var ciclo = $('#slct_ciclo').val();
+                var p_documento = $('#p_documento').val();
+                var p_observacion = $('#p_observacion').val();
+                if (isNaN(carrera) || carrera==='') {
+                    Psi.mensaje('danger', 'Seleccione carrera', 6000);
+                    return false;
+                }
+                if (isNaN(ciclo) || ciclo==='') {
+                    Psi.mensaje('danger', 'Seleccione ciclo', 6000);
+                    return false;
+                }
+                if (p_documento==='') {
+                    Psi.mensaje('danger', 'Ingrese descripcion del documento  ', 6000);
+                    return false;
+                }
+                if (p_observacion==='') {
+                    Psi.mensaje('danger', 'Ingrese  observacion', 6000);
+                    return false;
+                }
+                //guardar
+                return true;
+            }
+        }
+
+    } else if ( isNaN(tipo_problema) || tipo_problema==='' ){
+        //mensaje de seleccion
+        Psi.mensaje('danger', 'Seleccione un tipo de problema', 6000);
+        return false;
+    } else {
+        //debe rellenar descripcion
+        var descripcion=$('#descripcion').val();
+        if (descripcion==='') {
+            Psi.mensaje('danger', 'Ingrese la descripcion', 6000);
+            return false;
+        }
+        //guardar
+
+        return true;
+    }
+};
+Guardar=function(){
+    
+    Psi.mensaje('success', 'guardado', 6000);
+};
 Editar=function(){
     if(validaAlumnos()){
         Alumno.AgregarEditarArea(1);
