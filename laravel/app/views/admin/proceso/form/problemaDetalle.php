@@ -1,5 +1,5 @@
 <!-- /.modal -->
-<div class="modal fade" id="personaModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="problemaModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header logo">
@@ -9,123 +9,52 @@
         <h4 class="modal-title">New message</h4>
       </div>
       <div class="modal-body">
-        <form id="form_personas" name="form_personas" action="" method="post">
-          <fieldset>
-            <legend>Datos personales</legend>
+        <form id="form_problemas" name="form_problemas" action="" method="post">
             <div class="row form-group">
 
               <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">Nombre
-                      <a id="error_nombre" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Nombre">
-                          <i class="fa fa-exclamation"></i>
-                      </a>
+                <div class="col-sm-4">
+                  <label class="control-label">RESPONSABLE
                   </label>
-                  <input type="text" class="form-control" placeholder="Ingrese Nombre" name="txt_nombre" id="txt_nombre">
+                  <h4><?php echo strtoupper( Session::get('persona') ); ?></h4>
                 </div>
-                <div class="col-sm-6">
-                  <label class="control-label">Apellido Paterno
-                      <a id="error_paterno" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Apellido Paterno">
-                          <i class="fa fa-exclamation"></i>
-                      </a>
+                <div class="col-sm-4">
+                  <label class="control-label">SEDE
                   </label>
-                  <input type="text" class="form-control" placeholder="Ingrese Apellido Paterno" name="txt_paterno" id="txt_paterno">
+                  <h4 id="l_sede"></h4>
                 </div>
-              </div>
-
-              <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">Apellido Materno
-                      <a id="error_materno" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Apellido Materno">
-                          <i class="fa fa-exclamation"></i>
-                      </a>
+                <div class="col-sm-4">
+                  <label class="control-label">TIPO DE PROBLEMA:
                   </label>
-                  <input type="text" class="form-control" placeholder="Ingrese Apellido Materno" name="txt_materno" id="txt_materno">
-                </div>
-                <div class="col-sm-6">
-                  <label class="control-label">Fecha de Nacimiento
-                      <a id="error_fecha_nac" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Fecha de Nacimiento">
-                          <i class="fa fa-exclamation"></i>
-                      </a>
-                  </label>
-                  <input type="text" class="form-control" placeholder="AAAA-MM-DD" id="txt_fecha_nac" name="txt_fecha_nac" onfocus="blur()"/>
+                  <h4 id="l_tipo_problema"></h4>
                 </div>
               </div>
-
               <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">DNI
-                      <a id="error_dni" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese DNI">
+                <div class="col-sm-12">
+                  <label class="control-label">DESCRIPCIÓN DEL PROBLEMA: 
+                  </label>
+                  <h4 id="l_descripcion"></h4>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="col-sm-8">
+                  <label class="control-label">DESCRIPCIÓN DE LA SOLUCIÓN: 
+                      <a id="error_resultado" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese descripcion de solucion">
                           <i class="fa fa-exclamation"></i>
                       </a>
                   </label>
-                  <input type="text" class="form-control" placeholder="Ingrese DNI" name="txt_dni" id="txt_dni">
+                  <textarea id="resultado" name="resultado" class="form-control" rows="2" required placeholder="Ingrese descripcion de solucion"></textarea>
                 </div>
-                <div class="col-sm-6">
-                  <label class="control-label">Password
-                      <a id="error_password" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Password">
+                <div class="col-sm-4">
+                  <label class="control-label">FECHA SOLUCION:
+                      <a id="error_fecha_estado" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese descripcion de solucion">
                           <i class="fa fa-exclamation"></i>
                       </a>
                   </label>
-                  <input type="password" class="form-control" placeholder="Ingrese Password" name="txt_password" id="txt_password">
-                </div>
-              </div>
-
-              <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">Email
-                      <a id="error_email" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese email">
-                          <i class="fa fa-exclamation"></i>
-                      </a>
-                  </label>
-                  <input type="text" class="form-control" placeholder="Ingrese email" name="txt_email" id="txt_email">
-                </div>
-                <div class="col-sm-6">
-                  <label class="control-label">Sexo:
-                  </label>
-                  <select class="form-control" name="slct_sexo" id="slct_sexo">
-                      <option value='' style="display:none">.:Seleccione:.</option>
-                      <option value='F'>Femenino</option>
-                      <option value='M' selected>Masculino</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">Estado:
-                  </label>
-                  <select class="form-control" name="slct_estado" id="slct_estado">
-                      <option value='0'>Inactivo</option>
-                      <option value='1' selected>Activo</option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
-          </fieldset>
-          <fieldset id="f_areas_cargo">
-            <legend>Niveles de Acceso</legend>
-
-            <div class="row form-group">
-              <div class="col-sm-12">
-                <div class="col-sm-6">
-                  <label class="control-label">Roles:
-                  </label>
-                  <select class="form-control" name="slct_cargos" id="slct_cargos">
-                  </select>
-                </div>
-                <div class="col-sm-6">
-                    <br>
-                    <button type="button" class="btn btn-success" Onclick="AgregarArea();">
-                      <i class="fa fa-plus fa-sm"></i>
-                      &nbsp;Nuevo
-                    </button>
+                  <input type="text" class="form-control" placeholder="AAAA-MM-DD HH:mm" name="fecha_estado" id="fecha_estado" onfocus="blur()">
                 </div>
               </div>
             </div>
-            <ul class="list-group" id="t_cargoPersona"></ul>
-          </fieldset>
         </form>
       </div>
       <div class="modal-footer">

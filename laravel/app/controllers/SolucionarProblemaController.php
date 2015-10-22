@@ -1,15 +1,13 @@
 <?php
 use Cuadrop\Problema\ProblemaRepoInterface;
+use Cuadrop\ProblemaDetalle\ProblemaDetalleRepoInterface;
 
 class SolucionarProblemaController extends BaseController
 {
     protected $_rules = array(
-        //'descripcion'        => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
-        //'fecha_problema'    => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
-        'tipo_problema_id'  => 'required|numeric',
-        'sede_id'           => 'required|numeric',
-        //'email'             => 'required|email|unique:alumnos,email',
-        //'telefono'          => 'required|min:6'
+        'resultado'        => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
+        //'fecha_estado'    => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
+        'problema_id'  => 'required|numeric',
     );
     protected $_mensaje= array(
         'required'    => ':attribute Es requerido',
@@ -18,9 +16,12 @@ class SolucionarProblemaController extends BaseController
         'numeric'       => ':attribute Seleccione',
     );
     protected $problemaRepo;
-    public function __construct(ProblemaRepoInterface $problemaRepo)
+    protected $problemaDetalleRepo;
+    public function __construct(ProblemaRepoInterface $problemaRepo,
+        ProblemaDetalleRepoInterface $problemaDetalleRepo)
     {
         $this->problemaRepo = $problemaRepo;
+        $this->problemaDetalleRepo = $problemaDetalleRepo;
     }
     public function postCargar()
     {
@@ -36,6 +37,22 @@ class SolucionarProblemaController extends BaseController
      */
     public function postCreate()
     {
-        $data = Input::all();// dd($data);
+        $data = Input::all();
+        $data['estado_problema_id'] = 2;
+        $validator = Validator::make($data, $this->_rules, $this->_mensaje);
+        if ( $validator->passes() ) {
+            $problemaDetalle = $this->problemaDetalleRepo->create($data);
+            $rst=1;
+            $msj='Registro actualizado correctamente';
+        } else {
+            $rst=2;
+            $msj=$validator->messages();
+        }
+        return Response::json(
+            array(
+                    'rst'=>$rst,
+                    'msj'=>$msj,
+                )
+        );
     }
 }
