@@ -18,7 +18,7 @@ $(document).ready(function() {
         modal.find('.modal-title').text(titulo+' Persona');
         $('#form_personas [data-toggle="tooltip"]').css("display","none");
         $("#form_personas input[type='hidden']").remove();
-        slctGlobal.listarSlct('cargo','slct_cargos','simple');
+        //slctGlobal.listarSlct('cargo','slct_cargos','simple');
         if(titulo=='Nuevo'){
             
             modal.find('.modal-footer .btn-primary').text('Guardar');
@@ -27,7 +27,7 @@ $(document).ready(function() {
             $('#form_personas #txt_nombre').focus();
         }
         else{
-            Persona.CargarAreas(PersonaObj[persona_id].id); //no es multiselect
+            //Persona.CargarAreas(PersonaObj[persona_id].id); //no es multiselect
             modal.find('.modal-footer .btn-primary').text('Actualizar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
             //PersonaObj[persona_id]
