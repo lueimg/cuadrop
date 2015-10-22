@@ -22,17 +22,10 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
     public function getReporteSolucionProblemas()
     {
         $sql= "SELECT p.id, s.nombre AS sede, tp.nombre AS tipo_problema,
-                IF(p.tipo_problema_id=3,
-                    CONCAT('NOMBRE:',a.paterno,' ',a.materno,', ',a.nombre,
-                    ' - TELEFONO:',IFNULL(a.telefono,'NO'),' - EMAIL:',
-                    IFNULL(a.email,'NO'),' - TIPO DE CARRERA:', 
-                    IF(tc.id=2,'PROFECIONAL',IF(tc.id=3,'PROFECIONAL','TECNICO')),
-                    ' - DOCUMENTO SOLICITADO: ',ap.documento),
-                    p.descripcion
-                ) AS descripcion,
+                descripcion, ep.id AS estado_problema_id, ep.clase_boton,
                 p.tipo_problema_id, p.sede_id, p.fecha_problema,
                 pd.id AS problema_detalle_id, p.created_at AS fecha_registro,
-                pd.fecha_estado, pd.resultado, ep.nombre AS estado
+                pd.fecha_estado, pd.resultado, ep.nombre AS estado_problema
                 FROM problemas p
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
@@ -47,7 +40,8 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 LEFT JOIN alumnos a ON ap.alumno_id=a.id
                 LEFT JOIN carreras c ON ap.carrera_id = c.id
                 LEFT JOIN tipo_carrera tc ON c.tipo_carrera_id=tc.id
-                WHERE p.estado=1 AND pd.estado=1 ";
+                WHERE p.estado=1 AND pd.estado=1
+                ORDER BY p.created_at DESC";
         return DB::select($sql);
     }
 }

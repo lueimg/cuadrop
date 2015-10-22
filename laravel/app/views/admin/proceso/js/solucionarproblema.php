@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    Problemas.Cargar(activarTabla);
+    Problemas.Cargar();
     $('#problemaModal').on('show.bs.modal', function (event) {
         $('#fecha_estado').daterangepicker({
             singleDatePicker: true,
@@ -29,28 +29,48 @@ $(document).ready(function() {
         modal.find('.modal-body input').val('');
     });
 });
-activarTabla=function(){
-    $("#t_problemas").dataTable();
-};
 Agregar=function(){
+    var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
     Problemas.Crear();
 };
 HTMLCargar=function(datos){
     var html="";
     $('#t_problemas').dataTable().fnDestroy();
     $.each(datos,function(index,data){
+        //solo para estado en espera =1
+        estado_problema=data.estado_problema;
+        clase =data.clase_boton;
+        if (clase==='undefined' || clase===undefined) {
+            clase='default';
+        }
+        if(data.estado_problema_id==1){
+            estadohtml='<span onClick="CambiarEstado('+data.id+')" class="btn btn-'+clase+'">'+estado_problema+'</span>';
+        } else {
+            estadohtml='<span class="btn btn-'+clase+' disabled">'+estado_problema+'</span>';
+        }
         html+="<tr>"+
-            "<td >"+(index+1)+' '+"</td>"+
-            "<td >"+data.sede+' '+"</td>"+
-            "<td >"+data.tipo_problema+"</td>"+
-            "<td >"+data.descripcion+"</td>"+
-            "<td >"+data.fecha_registro+"</td>"+
-            "<td >"+data.estado+"</td>"+
+            "<td>"+(index+1)+' '+"</td>"+
+            "<td>"+data.sede+' '+"</td>"+
+            "<td>"+data.tipo_problema+"</td>"+
+            "<td>"+data.descripcion+"</td>"+
+            "<td>"+data.fecha_registro+"</td>"+
+            "<td>"+estadohtml+"</td>"+
             '<td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#problemaModal" data-id="'+index+'" data-titulo="Editar"><i class="fa fa-edit fa-lg"></i> </a></td>';
 
         html+="</tr>";
     });
     $("#tb_problemas").html(html);
-    activarTabla();
+    $("#t_problemas").dataTable();
+};
+CambiarEstado=function(id){
+    $("#form_problemas input[type='hidden']").remove();
+    f = new Date();
+    var fecha=f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate()+" "+f.getHours()+":"+f.getMinutes()+":00";
+    var resultado = "actualizado a atendido";
+    $("#form_problemas").append("<input type='hidden' value='"+resultado+"' name='resultado'>");
+    $("#form_problemas").append("<input type='hidden' value='"+id+"' name='problema_id'>");
+    $("#form_problemas").append("<input type='hidden' value='"+fecha+"' name='fecha_estado'>");
+    datos = $("#form_problemas").serialize();
+    Problemas.Crear(datos);
 };
 </script>
