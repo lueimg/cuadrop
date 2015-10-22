@@ -53,6 +53,13 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$carrera));
         }
     }
+    public function postCarreratipocarrera()
+    {
+        if (Request::ajax()) {
+            $carrera = $this->listaRepo->getCarreraTipoCarrera();
+            return Response::json(array('rst'=>1,'datos'=>$carrera));
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * POST /lista/ciclo
@@ -64,6 +71,13 @@ class ListaController extends \BaseController
         //si la peticion es ajax
         if ( Request::ajax() ) {
             $ciclo = $this->listaRepo->getCiclo();
+            return Response::json(array('rst'=>1,'datos'=>$ciclo));
+        }
+    }
+    public function postCiclotipocarrera()
+    {
+        if (Request::ajax()) {
+            $ciclo = $this->listaRepo->getCicloTipoCarrera();
             return Response::json(array('rst'=>1,'datos'=>$ciclo));
         }
     }

@@ -1,6 +1,6 @@
 <script type="text/javascript">
 var AlumnosObj, alumno_id;
-$(document).ready(function() {
+$(document).ready(function() { $("#form_problemas").validate();
     $('#fecha_problema').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
@@ -19,12 +19,13 @@ $(document).ready(function() {
     $('#tecnico').css('display','none');
     $('#tecnico_detalle').css('display','none');
     $('#div_descripcion').css('display','none');
-    var funciones = {success:successSede};
-    slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funciones);
+    var funcionesSede = {success:successSede};
+
+    slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
     slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','simple',null);
-    slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null);
-    slctGlobal.listarSlct('lista/carrera','slct_carrera_id','simple',null);
-    slctGlobal.listarSlct('lista/ciclo','slct_ciclo_id','simple',null);
+    slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','T');
+    slctGlobal.listarSlct('lista/carreratipocarrera','slct_carrera_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/ciclotipocarrera','slct_ciclo_id','simple',null,null,1);
     Alumno.Cargar(alumnosHTML);
     //nro_pagos
     var i, cant;
@@ -56,8 +57,8 @@ $(document).ready(function() {
                 '<td><input type="text" class="form-control" name="tc_frecuencia[]" id="tc_frecuencia_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tc_hora[]" id="tc_hora_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tc_profesor[]" id="tc_profesor_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control fecha" name="tc_fecha_ini[]" placeholder="AAAA-MM-DD" id="tc_fecha_ini_'+j+'" onfocus="blur()"/></td>'+
-                '<td><input type="text" class="form-control fecha" name="tc_fecha_fin[]" placeholder="AAAA-MM-DD" id="tc_fecha_fin_'+j+'" onfocus="blur()"/></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_ini[]" placeholder="AAAA-MM-DD" id="tc_fecha_ini_'+j+'" onfocus="blur()" required="required"/></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_fin[]" placeholder="AAAA-MM-DD" id="tc_fecha_fin_'+j+'" onfocus="blur()" required="required"/></td>'+
                 '<td><input type="number" class="form-control" name="tc_nota[]" id="tc_nota_'+j+'" value="" required="required" min="0" data-bind="value:replyNumber"></td>';
             html+="</tr>";
         }
@@ -216,8 +217,37 @@ Validar=function(){
                     Psi.mensaje('danger', 'Ingrese descripcion de la observacion', 6000);
                     return false;
                 }
-                //guardar
-                return true;
+                //si nro_cursos nro pagos son mayores que cero validar tablas
+                var nro_cursos = $('#nro_cursos').val();
+                var nro_pagos = $('#nro_pagos').val();
+                if (nro_cursos>0 || nro_pagos>0) {
+                    var val;
+                    $.each($('#tb_cursos input'), function (index, value) {
+                            if( !$(value).val() ) {
+                                val=false;
+                                return false;
+                            }
+                        });
+                    if (val===false) {
+                        Psi.mensaje('danger', 'Ingrese campo correctamente', 6000);
+                        return false;
+                    }
+                    $.each($('#tb_pagos input'), function (index, value) {
+                        if( !$(value).val() ) {
+                                val=false;
+                                return false;
+                            }
+                    });
+                    if (val===false) {
+                        Psi.mensaje('danger', 'Ingrese campo correctamente', 6000);
+                        return false;
+                    }
+                    return true;
+                    
+                } else {
+                    //guardar
+                    return true;
+                }
             } else if (tipo_carrera=='2' || tipo_carrera=='3') {
                 //profesional
                 carrera_id =$('#slct_carrera_id').val();

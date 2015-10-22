@@ -28,9 +28,44 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     {
         return Carrera::select('*')->get();
     }
+    public function getCarreraTipoCarrera()
+    {
+        return  DB::table('carreras as c')
+        ->select('c.id', 'c.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("T",tipo_carrera_id) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    ))
+        ->where('c.estado', '=', '1')
+        ->groupBy('c.id')
+        ->get();
+    }
     public function getCiclo()
     {
         return Ciclo::select('*')->get();
+    }
+    public function getCicloTipoCarrera()
+    {
+        return DB::table('ciclos as c')
+        ->select('c.id', 'c.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("T",tipo_carrera_id) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    ))
+        ->join(
+            'tipo_carrera_ciclo as tct',
+            'c.id','=','tct.ciclo_id'
+            )
+        ->where('c.estado', '=', '1')
+        ->where('tct.estado', '=', '1')
+        ->groupBy('c.id')
+        ->get();
     }
     public function getSede()
     {
