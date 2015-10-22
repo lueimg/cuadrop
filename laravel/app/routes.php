@@ -18,7 +18,6 @@ Route::get(
     }
 );
 
-
 Route::controller('check', 'LoginController');
 
 Route::get(
@@ -48,7 +47,7 @@ Route::get(
     })
 );
 
-Route::controller('usuario', 'UsuarioController');
-Route::controller('registrar_problema', 'RegistrarProblemaController');
 Route::controller('alumno', 'AlumnoController');
 Route::controller('lista', 'ListaController');
+Route::controller('registrar_problema', 'RegistrarProblemaController');
+Route::controller('usuario', 'UsuarioController');

@@ -1,6 +1,12 @@
 <script type="text/javascript">
 var AlumnosObj, alumno_id;
 $(document).ready(function() {
+    $('#fecha_problema').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        format: 'YYYY-MM-DD HH:mm'
+    });
     $('#guardar').click(function(event) {
         if (Validar() ) {
             Guardar();
@@ -8,14 +14,17 @@ $(document).ready(function() {
     });
     $('#div_tipo_carrera').css('display','none');
     $('#eventAlumno').css('display','none');
+    $('#profesional_tecnico').css('display','none');
     $('#profesional').css('display','none');
     $('#tecnico').css('display','none');
+    $('#tecnico_detalle').css('display','none');
     $('#div_descripcion').css('display','none');
-
-    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema','simple',null);
-    slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera','simple',null);
-    slctGlobal.listarSlct('lista/carrera','slct_carrera','simple',null);
-    slctGlobal.listarSlct('lista/ciclo','slct_ciclo','simple',null);
+    var funciones = {success:successSede};
+    slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funciones);
+    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','simple',null);
+    slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null);
+    slctGlobal.listarSlct('lista/carrera','slct_carrera_id','simple',null);
+    slctGlobal.listarSlct('lista/ciclo','slct_ciclo_id','simple',null);
     Alumno.Cargar(alumnosHTML);
     //nro_pagos
     var i, cant;
@@ -27,9 +36,9 @@ $(document).ready(function() {
             j=i+1;
             html+="<tr>"+
                 '<td>'+j+'</td>'+
-                '<td><input type="text" class="form-control" name="tp_curso_'+j+'" id="tp_curso_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control" name="tp_recibo_'+j+'" id="tp_recibo_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control" name="tp_monto_'+j+'" id="tp_monto_'+j+'" value="" required="required"></td>';
+                '<td><input type="text" class="form-control" name="tp_curso[]" id="tp_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tp_recibo[]" id="tp_recibo_'+j+'" value="" required="required"></td>'+
+                '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>';
             html+="</tr>";
         }
         $("#tb_pagos").html(html);
@@ -43,13 +52,13 @@ $(document).ready(function() {
             j=i+1;
             html+="<tr>"+
                 '<td>'+j+'</td>'+
-                '<td><input type="text" class="form-control" name="tc_curso_'+j+'" id="tc_curso_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control" name="tc_frecuencia_'+j+'" id="tc_frecuencia_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control" name="tc_hora_'+j+'" id="tc_hora_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control" name="tc_profesor_'+j+'" id="tc_profesor_'+j+'" value="" required="required"></td>'+
-                '<td><input type="text" class="form-control fecha" name="tc_fecha_ini_'+j+'" placeholder="AAAA-MM-DD" id="tc_fecha_ini_'+j+'" onfocus="blur()"/></td>'+
-                '<td><input type="text" class="form-control fecha" name="tc_fecha_fin_'+j+'" placeholder="AAAA-MM-DD" id="tc_fecha_fin_'+j+'" onfocus="blur()"/></td>'+
-                '<td><input type="text" class="form-control" name="tc_nota_'+j+'" id="tc_nota_'+j+'" value="" required="required"></td>';
+                '<td><input type="text" class="form-control" name="tc_curso[]" id="tc_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_frecuencia[]" id="tc_frecuencia_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_hora[]" id="tc_hora_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control" name="tc_profesor[]" id="tc_profesor_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_ini[]" placeholder="AAAA-MM-DD" id="tc_fecha_ini_'+j+'" onfocus="blur()"/></td>'+
+                '<td><input type="text" class="form-control fecha" name="tc_fecha_fin[]" placeholder="AAAA-MM-DD" id="tc_fecha_fin_'+j+'" onfocus="blur()"/></td>'+
+                '<td><input type="number" class="form-control" name="tc_nota[]" id="tc_nota_'+j+'" value="" required="required" min="0" data-bind="value:replyNumber"></td>';
             html+="</tr>";
         }
         $("#tb_cursos").html(html);
@@ -59,7 +68,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#slct_tipo_problema').change(function(event) {
+    $('#slct_tipo_problema_id').change(function(event) {
         if ( this.value =='3') {
             //constancia y certificado
             $('#div_tipo_carrera').css('display','');
@@ -68,12 +77,12 @@ $(document).ready(function() {
             //mostrar solo la descripcion
             $('#div_descripcion').css('display','');
             $('#div_tipo_carrera').css('display','none');
-            $('#slct_tipo_carrera').multiselect('deselectAll', false);
-            $('#slct_tipo_carrera').multiselect('refresh');
+            $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
+            $('#slct_tipo_carrera_id').multiselect('refresh');
         }
-        $('#slct_tipo_carrera').trigger('change');
+        $('#slct_tipo_carrera_id').trigger('change');
     });
-    $('#slct_tipo_carrera').change(function(event) {
+    $('#slct_tipo_carrera_id').change(function(event) {
 
         if (isNaN( this.value ) || this.value==='' ) {
             //mostrar la tabla de alumnos
@@ -87,20 +96,26 @@ $(document).ready(function() {
             //escolar o tecnico
             //alumno_problema, sin guardar ni carrer_id ni ciclo_id
             //pero habilitar registros para alumno_problema_nota, alumno_problema_pago
+            $('#profesional_tecnico').css('display','');
             $('#profesional').css('display','none');
             $('#collapseAlumno').css('display','');
             $('#tecnico').css('display','');
+            $('#tecnico_detalle').css('display','');
         } else if ( this.value =='2' || this.value=='3' ) {
             //profesional
             //cargar y registrar en  alumno_problema
+            $('#profesional_tecnico').css('display','');
             $('#profesional').css('display','');
             $('#collapseAlumno').css('display','');
             $('#tecnico').css('display','none');
+            $('#tecnico_detalle').css('display','none');
 
         } else {
             //oculatar todo
+            $('#profesional_tecnico').css('display','none');
             $('#profesional').css('display','none');
             $('#tecnico').css('display','none');
+            $('#tecnico_detalle').css('display','none');
             $('#collapseAlumno').css('display','none');
         }
     });
@@ -148,9 +163,28 @@ $(document).ready(function() {
         modal.find('.modal-body input').val('');
     });
 });
+successSede=function(){
+    var numSedes = $("#slct_sede_id option").length;
+    //if (numSedes==2) {
+        //seleccionar
+        $('#slct_sede_id option').each(function(index, el) {
+            //seleccionar index=1
+            if (index==1) {
+                $("#slct_sede_id").multiselect('select',index);
+                $("#slct_sede_id").multiselect('refresh');
+            }
+        });
+    //}
+};
 Validar=function(){
-    var tipo_problema=$('#slct_tipo_problema').val();
-    var tipo_carrera=$('#slct_tipo_carrera').val();
+    var tipo_problema=$('#slct_tipo_problema_id').val();
+    var tipo_carrera=$('#slct_tipo_carrera_id').val();
+    var fecha_problema=$('#fecha_problema').val();
+
+    if (fecha_problema==='') {
+        Psi.mensaje('danger', 'Seleccione fecha del problema', 6000);
+        return false;
+    }
     if (tipo_problema=='3') {
         //constancia y certificado
         if (isNaN(tipo_carrera) || tipo_carrera==='') {
@@ -162,22 +196,23 @@ Validar=function(){
                 return false;
             }
             //validar carera
+            var carrera, documento, observacion, carrera_id, ciclo_id;
             if (tipo_carrera=='1' || tipo_carrera=='4') {
                 //escolar o tecnico
-                var t_carrera = $('#t_carrera').val();
-                var t_documento = $('#t_documento').val();
-                var t_observacion = $('#t_observacion').val();
+                carrera = $('#carrera').val();
+                documento = $('#documento').val();
+                observacion = $('#observacion').val();
                 //numero de cursos
                 //numero de pagos
-                if (t_carrera==='') {
+                if (carrera==='') {
                     Psi.mensaje('danger', 'Ingrese descripcion de la carrera', 6000);
                     return false;
                 }
-                if (t_documento==='') {
+                if (documento==='') {
                     Psi.mensaje('danger', 'Ingrese descripcion del documento  ', 6000);
                     return false;
                 }
-                if (t_observacion==='') {
+                if (observacion==='') {
                     Psi.mensaje('danger', 'Ingrese descripcion de la observacion', 6000);
                     return false;
                 }
@@ -185,23 +220,23 @@ Validar=function(){
                 return true;
             } else if (tipo_carrera=='2' || tipo_carrera=='3') {
                 //profesional
-                var carrera =$('#slct_carrera').val();
-                var ciclo = $('#slct_ciclo').val();
-                var p_documento = $('#p_documento').val();
-                var p_observacion = $('#p_observacion').val();
-                if (isNaN(carrera) || carrera==='') {
+                carrera_id =$('#slct_carrera_id').val();
+                ciclo_id = $('#slct_ciclo_id').val();
+                documento = $('#documento').val();
+                observacion = $('#observacion').val();
+                if (isNaN(carrera_id) || carrera_id==='') {
                     Psi.mensaje('danger', 'Seleccione carrera', 6000);
                     return false;
                 }
-                if (isNaN(ciclo) || ciclo==='') {
+                if (isNaN(ciclo_id) || ciclo_id==='') {
                     Psi.mensaje('danger', 'Seleccione ciclo', 6000);
                     return false;
                 }
-                if (p_documento==='') {
+                if (documento==='') {
                     Psi.mensaje('danger', 'Ingrese descripcion del documento  ', 6000);
                     return false;
                 }
-                if (p_observacion==='') {
+                if (observacion==='') {
                     Psi.mensaje('danger', 'Ingrese  observacion', 6000);
                     return false;
                 }
@@ -227,17 +262,23 @@ Validar=function(){
     }
 };
 Guardar=function(){
-    
-    Psi.mensaje('success', 'guardado', 6000);
+    $("#form_problemas input[type='hidden']").remove();
+    if (alumno_id!==undefined && alumno_id!=='undefined' && alumno_id!=='') {
+        $("#form_problemas").append("<input type='hidden' value='"+alumno_id+"' name='alumno_id'>");
+    }
+    var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
+        
+    Problema.Crear(datos);
+    //Psi.mensaje('success', 'guardado', 6000);
 };
 Editar=function(){
     if(validaAlumnos()){
-        Alumno.AgregarEditarArea(1);
+        Alumno.AgregarEditar(1);
     }
 };
 Agregar=function(){
     if(validaAlumnos()){
-        Alumno.AgregarEditarArea(0);
+        Alumno.AgregarEditar(0);
     }
 };
 validaAlumnos=function(){
@@ -310,5 +351,31 @@ seleccionar=function(id,tr){
         $(trs[i]).removeClass("selec");
 
     $(tr).addClass( "selec" );
+};
+limpiar=function(){
+    $('#slct_tipo_problema_id').multiselect('deselectAll', false);
+    $('#slct_tipo_problema_id').multiselect('refresh');
+    $('#slct_tipo_problema_id').trigger('change');
+
+    $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
+    $('#slct_tipo_carrera_id').multiselect('refresh');
+    $('#slct_tipo_carrera_id').trigger('change');
+
+    $('#slct_carrera_id').multiselect('deselectAll', false);
+    $('#slct_carrera_id').multiselect('refresh');
+    $('#slct_carrera_id').trigger('change');
+
+    $('#slct_ciclo_id').multiselect('deselectAll', false);
+    $('#slct_ciclo_id').multiselect('refresh');
+    $('#slct_ciclo_id').trigger('change');
+
+    $('#fecha_problema').val('');
+    $('#descripcion').val('');
+    $('#div_descripcion').css('display','none');
+    $('#carrera').val('');
+    $('#documento').val('');
+    $('#observacion').val('');
+    $('#nro_cursos').val('');
+    $('#nro_pagos').val('');
 };
 </script>

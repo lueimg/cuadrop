@@ -1,6 +1,5 @@
 <?php
 namespace Cuadrop\Base;
-use Cuadrop\Lista\TipoProblema;
 
 abstract class BaseRepo
 {

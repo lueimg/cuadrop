@@ -13,7 +13,7 @@ class ListaController extends \BaseController
     }
     /**
      * Store a newly created resource in storage.
-     * POST /lista/dia
+     * POST /lista/tipoproblema
      *
      * @return Response
      */
@@ -27,7 +27,7 @@ class ListaController extends \BaseController
     }
     /**
      * Store a newly created resource in storage.
-     * POST /lista/dia
+     * POST /lista/tipocarrera
      *
      * @return Response
      */
@@ -41,7 +41,7 @@ class ListaController extends \BaseController
     }
     /**
      * Store a newly created resource in storage.
-     * POST /lista/dia
+     * POST /lista/carrera
      *
      * @return Response
      */
@@ -55,7 +55,7 @@ class ListaController extends \BaseController
     }
     /**
      * Store a newly created resource in storage.
-     * POST /lista/dia
+     * POST /lista/ciclo
      *
      * @return Response
      */
@@ -65,6 +65,20 @@ class ListaController extends \BaseController
         if ( Request::ajax() ) {
             $ciclo = $this->listaRepo->getCiclo();
             return Response::json(array('rst'=>1,'datos'=>$ciclo));
+        }
+    }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/sedepersona
+     *
+     * @return Response
+     */
+    public function postSedepersona()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $sede = $this->listaRepo->getSedePersona(Auth::user()->id);
+            return Response::json(array('rst'=>1,'datos'=>$sede));
         }
     }
 

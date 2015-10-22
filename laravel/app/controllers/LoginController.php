@@ -16,7 +16,9 @@ class LoginController extends BaseController
                             IF(LOCATE('.', o.ruta)>0,
                                 o.ruta,
                                 CONCAT(m.ruta,'.',o.ruta)
-                            ) as ruta, m.class_icono as icon
+                            ) as ruta, m.class_icono as icon,
+                            CONCAT(p.paterno, ' ', p.materno, ', ', p.nombre)
+                            as persona
                             FROM personas p
                             JOIN cargo_persona cp ON p.id=cp.persona_id
                             JOIN cargos c ON cp.cargo_id=c.id
@@ -34,6 +36,7 @@ class LoginController extends BaseController
                 $accesos = array();
                 foreach ($res as $data) {
                     $menu = $data->menu;
+                    $persona = $data->persona;
                     //$accesos[] = $data->ruta;
                     array_push($accesos, $data->ruta);
                     if (isset($menus[$menu])) {
@@ -47,6 +50,7 @@ class LoginController extends BaseController
                 Session::set('language_id', 'es');
                 Session::set('menus', $menus);
                 Session::set('accesos', $accesos);
+                Session::set('persona', $persona);
                 Lang::setLocale(Session::get('language_id'));
 
                 return Response::json(

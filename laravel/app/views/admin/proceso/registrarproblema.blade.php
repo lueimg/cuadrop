@@ -26,51 +26,66 @@
 /* Estilo por defecto para validacion */
 input:required:invalid {  border: 1px solid red;  }  input:required:valid {  border: 1px solid green;  }
 </style>
-
-
             <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Carga individual Digitalizaci&oacute;n
+                        Reportar problemas
                         <small> </small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
-                        <li><a href="#">Hist&oacute;rico</a></li>
-                        <li class="active">Carga individual</li>
+                        <li><a href="#">Proceso</a></li>
+                        <li class="active">Reportar problemas</li>
                     </ol>
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
-                    
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            <div class="col-sm-6">
-                                <label class="control-label">Tipo de problema</label>
-                                <select class="form-control" name="slct_tipo_problema" id="slct_tipo_problema">
-                                </select>
-                            </div>
-                            <div class="col-sm-6" id="div_tipo_carrera">
-                                <label class="control-label">Tipo de carrera</label>
-                                <select class="form-control" name="slct_tipo_carrera" id="slct_tipo_carrera">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div_descripcion">
-                        
+                    <form id="form_problemas" name="form_problemas" action="" method="post">
                         <div class="row form-group">
                             <div class="col-sm-12">
-                                <div class="col-sm-3">
-                                    <label class="control-label">Descripcion:</label>
+                                <div class="col-sm-6">
+                                    <label class="control-label">RESPONSABLE</label>
+                                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper( Session::get('persona') ) }} </h4>
                                 </div>
-                                <div class="col-sm-9">
-                                    <textarea id="descripcion" class="form-control" rows="2" required></textarea>
+                                <div class="col-sm-6">
+                                    <label class="control-label">SEDE</label>
+                                    <select class="form-control" name="slct_sede_id" id="slct_sede_id">
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <label class="control-label">Tipo de problema</label>
+                                    <select class="form-control" name="slct_tipo_problema_id" id="slct_tipo_problema_id">
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Fecha del problema:</label>
+                                    <input type="text" class="form-control" name="fecha_problema" placeholder="AAAA-MM-DD HH:mm" id="fecha_problema" onfocus="blur()"/>
+                                </div>
+                                <div class="col-sm-4" id="div_tipo_carrera">
+                                    <label class="control-label">Tipo de carrera</label>
+                                    <select class="form-control" name="slct_tipo_carrera_id" id="slct_tipo_carrera_id">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_descripcion">
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Descripcion:</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <textarea id="descripcion" name="descripcion" class="form-control" rows="2" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </form> -->
                     <div class="row form-group">
                         <div class="col-sm-12">
                             <a class='btn btn-default btn-sm' id="eventAlumno" role="button" data-toggle="collapse" href="#collapseAlumno" aria-expanded="false" aria-controls="collapseAlumno">
@@ -118,59 +133,43 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <!-- Finaliza contenido -->
                         </div>
                     </div>
-
+                    <!-- <form id="form_alumno_problema" name="form_alumno_problema" action="" method="post"> -->
                     <div id="profesional">
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">CARRERA:</label>
-                                    <select class="form-control" name="slct_carrera" id="slct_carrera">
+                                    <select class="form-control" name="slct_carrera_id" id="slct_carrera_id">
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">CICLO:</label>
-                                    <select class="form-control" name="slct_ciclo" id="slct_ciclo">
+                                    <select class="form-control" name="slct_ciclo_id" id="slct_ciclo_id">
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <label class="control-label">DESCRIPCIÓN DEL DOCUMENTO SOLICITADO: ejm. CERTIFICADO DE EXPERTO EN COMP. E INFORMATICA:</label>
-                                </div>
-                                <div class="col-sm-7">
-                                    <textarea id="p_documento" class="form-control" rows="2" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="col-sm-5">
-                                    <label class="control-label">OBSERVACIONES:</label>
-                                </div>
-                                <div class="col-sm-7">
-                                    <textarea id="p_observacion" class="form-control" rows="2" required></textarea>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                     <div id="tecnico">
-                        
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="col-sm-5">
                                     <label class="control-label">DESCRIPCIÓN DE LA CARRERA: ejm.COMP. E INFORMATICA</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_carrera" class="form-control" rows="2" required></textarea>
+                                    <textarea id="carrera" name="carrera" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div id="profesional_tecnico">
+                        <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="col-sm-5">
-                                    <label class="control-label">DESCRIPCIÓN DEL DOCUMENTO SOLICITADO: ejm. CERTIFICADO DE EXPERTO EN COMP. E INFORMÁTICA</label>
+                                    <label class="control-label">DESCRIPCIÓN DEL DOCUMENTO SOLICITADO: ejm. CERTIFICADO DE EXPERTO EN COMP. E INFORMATICA:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_documento" class="form-control" rows="2" required></textarea>
+                                    <textarea id="documento" name="documento" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -178,16 +177,19 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <label class="control-label">OBSERVACIONES:</label>
                                 </div>
                                 <div class="col-sm-7">
-                                    <textarea id="t_observacion" class="form-control" rows="2" required></textarea>
+                                    <textarea id="observacion" name="observacion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <div id="tecnico_detalle">
+                        <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="col-sm-3">
                                     <label class="control-label">Nro de cursos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nro_cursos" id="nro_cursos" class="form-control">
+                                    <input type="number" name="nro_cursos" id="nro_cursos" class="form-control">
                                 </div>
 
                             </div>
@@ -232,7 +234,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <label class="control-label">Nro de pagos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" name="nro_pagos" id="nro_pagos" class="form-control">
+                                    <input type="number" name="nro_pagos" id="nro_pagos" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -264,15 +266,15 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <!-- Finaliza contenido -->
                             </div>
                         </div>
-
                     </div>
+                    </form>
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            
-                            <a class="btn btn-danger btn-sm" id="guardar">
-                                <i class="fa fa-save fa-lg">  Guardar  </i>
-                            </a>
-                            
+                            <div class="col-sm-6">
+                                <a class="btn btn-danger btn-sm" id="guardar">
+                                    <i class="fa fa-save fa-lg">  Guardar  </i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section><!-- /.content -->
