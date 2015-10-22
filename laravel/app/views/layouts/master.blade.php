@@ -15,7 +15,7 @@
         @show
         <title>
             @section('titulo')
-                Telesup
+                Telesup - Cuadro Problema
             @show
         </title>
 
