@@ -15,7 +15,14 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     {
         $q->where('nombre', 'LIKE', "%$value%");
     }
-
+    public function getEstadoProblema()
+    {
+        return EstadoProblema::select('*')->get();
+    }
+    public function getEstadoProblemaEstado($estado)
+    {
+        return EstadoProblema::select('*')->where('estado_problema',$estado)->get();
+    }
     public function getTipoProblema()
     {
         return TipoProblema::select('*')->get();
