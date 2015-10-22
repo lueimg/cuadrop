@@ -50,4 +50,5 @@ Route::get(
 Route::controller('alumno', 'AlumnoController');
 Route::controller('lista', 'ListaController');
 Route::controller('registrar_problema', 'RegistrarProblemaController');
+Route::controller('solucionar_problema', 'SolucionarProblemaController');
 Route::controller('usuario', 'UsuarioController');

@@ -37,12 +37,6 @@ class RegistrarProblemaController extends BaseController
             $problemas = $this->problemaRepo->getProblema();
             return Response::json(array('rst'=>1,'datos'=>$problemas));
         }
-        return Response::json(
-            array(
-                'estado'=>true,
-                'msj'=>'Se realizo la carga con exito'
-            )
-        );
     }
     /**
      * nuevo problema

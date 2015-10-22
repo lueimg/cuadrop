@@ -29,13 +29,13 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
             <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Reportar problemas
+                        Registrar problemas
                         <small> </small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
                         <li><a href="#">Proceso</a></li>
-                        <li class="active">Reportar problemas</li>
+                        <li class="active">Registrar problemas</li>
                     </ol>
                 </section>
 
