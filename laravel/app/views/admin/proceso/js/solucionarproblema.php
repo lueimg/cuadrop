@@ -1,6 +1,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
     Problemas.Cargar();
+    //slct_estado_problema_id
+    var ids={estado_problema: 0};
+    slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado_problema_id','simple',null,ids);
     $('#problemaModal').on('show.bs.modal', function (event) {
         $('#fecha_estado').daterangepicker({
             singleDatePicker: true,
@@ -27,24 +30,32 @@ $(document).ready(function() {
     $('#problemaModal').on('hide.bs.modal', function (event) {
         var modal = $(this);
         modal.find('.modal-body input').val('');
+        $('#form_problemas #slct_estado_problema_id').multiselect('deselectAll', false);
+        $('#form_problemas #slct_estado_problema_id').multiselect('rebuild');
+        $('#form_problemas #slct_estado_problema_id').multiselect('refresh');
     });
 });
 Agregar=function(){
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
-    Problemas.Crear();
+    Problemas.Crear(datos);
 };
 HTMLCargar=function(datos){
     var html="";
     $('#t_problemas').dataTable().fnDestroy();
     $.each(datos,function(index,data){
-        //solo para estado en espera =1
         estado_problema=data.estado_problema;
         clase =data.clase_boton;
+        //habilitar la solucion para atendido (2)
+        var modal='class="btn btn-primary disabled"';
+        if (data.estado_problema_id==2) {
+            modal='class="btn btn-primary" data-toggle="modal" data-target="#problemaModal"';
+        }
+        //solo para estado en espera (1)
         if (clase==='undefined' || clase===undefined) {
             clase='default';
         }
         if(data.estado_problema_id==1){
-            estadohtml='<span onClick="CambiarEstado('+data.id+')" class="btn btn-'+clase+'">'+estado_problema+'</span>';
+            estadohtml='<span onClick="CambiarEstado('+data.id+')" class="texto btn btn-'+clase+'">'+estado_problema+'</span>';
         } else {
             estadohtml='<span class="btn btn-'+clase+' disabled">'+estado_problema+'</span>';
         }
@@ -55,8 +66,7 @@ HTMLCargar=function(datos){
             "<td>"+data.descripcion+"</td>"+
             "<td>"+data.fecha_registro+"</td>"+
             "<td>"+estadohtml+"</td>"+
-            '<td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#problemaModal" data-id="'+index+'" data-titulo="Editar"><i class="fa fa-edit fa-lg"></i> </a></td>';
-
+            '<td><a '+modal+' data-id="'+index+'">Solucionar </a></td>';
         html+="</tr>";
     });
     $("#tb_problemas").html(html);
@@ -70,6 +80,7 @@ CambiarEstado=function(id){
     $("#form_problemas").append("<input type='hidden' value='"+resultado+"' name='resultado'>");
     $("#form_problemas").append("<input type='hidden' value='"+id+"' name='problema_id'>");
     $("#form_problemas").append("<input type='hidden' value='"+fecha+"' name='fecha_estado'>");
+    $("#form_problemas").append("<input type='hidden' value='2' name='estado_problema_id'>");//atendido
     datos = $("#form_problemas").serialize();
     Problemas.Crear(datos);
 };

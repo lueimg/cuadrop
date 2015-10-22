@@ -25,6 +25,14 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$tipoProblema));
         }
     }
+    public function postEstadoproblemaestado()
+    {
+        if ( Request::ajax() ) {
+            $estado=Input::get('estado_problema','0');
+            $tipoProblema = $this->listaRepo->getEstadoProblemaEstado($estado);
+            return Response::json(array('rst'=>1,'datos'=>$tipoProblema));
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * POST /lista/tipocarrera

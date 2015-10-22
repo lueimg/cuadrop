@@ -8,6 +8,7 @@ class SolucionarProblemaController extends BaseController
         'resultado'        => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
         //'fecha_estado'    => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
         'problema_id'  => 'required|numeric',
+        'estado_problema_id'  => 'required|numeric',
     );
     protected $_mensaje= array(
         'required'    => ':attribute Es requerido',
@@ -38,7 +39,7 @@ class SolucionarProblemaController extends BaseController
     public function postCreate()
     {
         $data = Input::all();
-        $data['estado_problema_id'] = 2;
+        //$data['estado_problema_id'] = 2;
         $validator = Validator::make($data, $this->_rules, $this->_mensaje);
         if ( $validator->passes() ) {
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
