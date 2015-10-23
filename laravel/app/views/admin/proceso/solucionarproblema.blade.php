@@ -32,6 +32,23 @@
 
                 <!-- Main content -->
                 <section class="content">
+
+                    <div class="row  form-group">
+                        <div class="col-xs-12">
+                            <div class="col-sm-3">
+                                <label class="control-label">Sede:
+                                </label>
+                                <select class="form-control" name="slct_sede[]" id="slct_sede" multiple>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Tipo problema:
+                                </label>
+                                <select class="form-control" name="slct_tipo_problema[]" id="slct_tipo_problema" multiple>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- Inicia contenido -->

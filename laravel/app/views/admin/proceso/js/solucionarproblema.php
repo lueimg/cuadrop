@@ -3,6 +3,11 @@ $(document).ready(function() {
     Problemas.Cargar();
     //slct_estado_problema_id
     var ids={estado_problema: 0};
+    var funcionSede={ change:SedeChange};
+    var funcionTipo={ change:TipoChange};
+    slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple',null,ids,null,null,null,null,null,funcionSede);
+    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema','multiple',null,ids,null,null,null,null,null,funcionTipo);
+
     slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado_problema_id','simple',null,ids);
     $('#problemaModal').on('show.bs.modal', function (event) {
         $('#fecha_estado').daterangepicker({
@@ -16,8 +21,8 @@ $(document).ready(function() {
         var id = button.data('id');
         var problema_id= ProblemaObj[id].id;
         var estado_problema_id= ProblemaObj[id].estado_problema_id;
-
-
+        var datos={problema_id:problema_id}
+        Problemas.CargarDetalle(datos);
 
         var modal = $(this); //captura el modal
         modal.find('.modal-title').text(' Solucion');
@@ -50,6 +55,21 @@ $(document).ready(function() {
         $('#form_problemas #slct_estado_problema_id').multiselect('refresh');
     });
 });
+SedeChange=function(){
+    var selec_sede = $('#slct_sede').val();
+    var selec_tipo = $('#slct_tipo_problema').val();
+    filtrarProblemas(selec_sede, selec_tipo);
+};
+TipoChange=function(){
+    var selec_sede = $('#slct_sede').val();
+    var selec_tipo = $('#slct_tipo_problema').val();
+    filtrarProblemas(selec_sede, selec_tipo);
+};
+filtrarProblemas=function(sede, tipo)
+{
+    var data={sede:sede,tipo:tipo};
+    Problemas.Filtro(data);
+};
 Agregar=function(){
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
     Problemas.Crear(datos);
@@ -91,6 +111,63 @@ HTMLCargar=function(datos){
     $("#tb_problemas").html(html);
     $("#t_problemas").dataTable();
 };
+HTMLCargarDetalle=function(datos){
+    var html='';
+    if (datos.detalle!==undefined && datos.detalle!=='undefined') {
+        $.each(datos.detalle, function(index, val) {
+            html+="<tr><td>"+(index+1)+"</td>";
+            html+="<td>"+val.resultado+"</td>";
+            html+="<td><span class='btn btn-"+val.clase_boton+" disabled'>"+val.estado+"</span></td>";
+            html+="<td>"+val.fecha_estado+"</td>";
+            html+="<td>"+val.created_at+"</td>";
+            html+="</tr>";
+        });
+    }
+    $('#tb_detalle').html(html);
+    html='';
+    if (datos.alumno!==undefined && datos.alumno!=='undefined') {
+        $.each(datos.alumno, function(index, val) {
+
+            html+="<div class='col-sm-12'>";
+            html+="<div class='col-sm-6'><label>Alumno: &nbsp</label>"+val.alumno+"</div>";
+            html+="<div class='col-sm-4'><label>Carrera: &nbsp</label>"+val.carrera+"</div>";
+            html+="<div class='col-sm-2'><label>Ciclo: &nbsp</label>"+val.ciclo+"</div>";
+            html+="</div>";
+            html+="<div class='col-sm-12'>";
+            html+="<div class='col-sm-6'><label>Obervacion: &nbsp</label>"+val.observacion+"</div>";
+            html+="<div class='col-sm-6'><label>Documento: &nbsp</label>"+val.documento+"</div>";
+            html+="</div>";
+        });
+    }
+    $('#alumno').html(html);
+    html='';
+    if (datos.nota!==undefined && datos.nota!=='undefined') {
+        $.each(datos.nota, function(index, val) {
+            //val.  console.log();
+            html+="<tr><td>"+(index+1)+"</td>";
+            html+="<td>"+val.curso+"</td>";
+            html+="<td>"+val.frecuencia+"</td>";
+            html+="<td>"+val.hora+"</td>";
+            html+="<td>"+val.profesor+"</td>";
+            html+="<td>"+val.fecha_inicio+'-'+val.fecha_fin+"</td>";
+            html+="<td>"+val.nota+"</td>";
+            html+="</tr>";
+        });
+    }
+    $('#tb_notas').html(html);
+    html='';
+    if (datos.pago!==undefined && datos.pago!=='undefined') {
+        $.each(datos.pago, function(index, val) {
+            //val.   console.log();
+            html+="<tr><td>"+(index+1)+"</td>";
+            html+="<td>"+val.curso+"</td>";
+            html+="<td>"+val.recibo+"</td>";
+            html+="<td>"+val.monto+"</td>";
+            html+="</tr>";
+        });
+    }
+    $('#tb_pagos').html(html);
+}
 CambiarEstado=function(id){
     $("#form_problemas input[type='hidden']").remove();
     f = new Date();

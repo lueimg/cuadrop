@@ -1,6 +1,7 @@
 <?php
 use Cuadrop\Problema\ProblemaRepoInterface;
 use Cuadrop\ProblemaDetalle\ProblemaDetalleRepoInterface;
+use Cuadrop\AlumnoProblema\AlumnoProblemaRepoInterface;
 
 class SolucionarProblemaController extends BaseController
 {
@@ -18,12 +19,21 @@ class SolucionarProblemaController extends BaseController
     );
     protected $problemaRepo;
     protected $problemaDetalleRepo;
+    protected $alumnoProblemaRepo;
     public function __construct(ProblemaRepoInterface $problemaRepo,
-        ProblemaDetalleRepoInterface $problemaDetalleRepo)
+                            ProblemaDetalleRepoInterface $problemaDetalleRepo,
+                            AlumnoProblemaRepoInterface $alumnoProblemaRepo
+    )
     {
         $this->problemaRepo = $problemaRepo;
         $this->problemaDetalleRepo = $problemaDetalleRepo;
+        $this->alumnoProblemaRepo = $alumnoProblemaRepo;
     }
+    /**
+     * cargar problemas
+     * solucionar_problema/cargar
+     * @return Response
+     */
     public function postCargar()
     {
         if ( Request::ajax() ) {
@@ -32,8 +42,22 @@ class SolucionarProblemaController extends BaseController
         }
     }
     /**
+     * cargar problemas
+     * solucionar_problema/cargar
+     * @return Response
+     */
+    public function postCargarfiltro()
+    {
+        if ( Request::ajax() ) {
+            $sede = Input::get('sede', array());
+            $tipo = Input::get('tipo', array());
+            $problemas = $this->problemaRepo->getReporteSolucionProblemasFiltro($sede, $tipo);
+            return Response::json(array('rst'=>1,'datos'=>$problemas));
+        }
+    }
+    /**
      * nuevo problema
-     *
+     * solucionar_problema/create
      * @return Response
      */
     public function postCreate()
@@ -55,5 +79,35 @@ class SolucionarProblemaController extends BaseController
                     'msj'=>$msj,
                 )
         );
+    }
+    /**
+     * retornar daata de un problema
+     * solucionar_problema/cargardetalle
+     * @return Response
+     */
+    public function postCargardetalle()
+    {
+        $data=array();
+        if (Input::has('problema_id')) {
+            $problemaId = Input::get('problema_id');
+            $problemaDetalle = $this->problemaDetalleRepo->getProblemaDetalleProblema($problemaId);
+            if (isset($problemaDetalle) && count($problemaDetalle) > 0 ) {
+                $data['detalle'] = $problemaDetalle;
+            }
+            $alumnoProblema = $this->alumnoProblemaRepo->getAlumnoProblemaProblema($problemaId);
+            if (isset($alumnoProblema) && count($alumnoProblema) > 0 ) {
+                $data['alumno']=$alumnoProblema;
+                $alumnoProblemaId=$alumnoProblema[0]->id;
+                $pago=$this->alumnoProblemaRepo->getAlumnoProblemaPagoProblema($alumnoProblemaId);
+                $nota=$this->alumnoProblemaRepo->getAlumnoProblemaNotaProblema($alumnoProblemaId);
+                if (isset($pago) && count($pago) >0 ) {
+                    $data['pago']=$pago;
+                }
+                if (isset($nota) && count($nota) >0 ) {
+                    $data['nota']=$nota;
+                }
+            }
+        }
+        return Response::json(array('rst'=>1,'datos'=>$data));
     }
 }
