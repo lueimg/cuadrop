@@ -14,6 +14,8 @@ $(document).ready(function() {
         var button = $(event.relatedTarget);
         //var titulo = button.data('titulo');
         var id = button.data('id');
+        var problema_id= ProblemaObj[id].id;
+        //cargar tablas
         var modal = $(this); //captura el modal
         modal.find('.modal-title').text(' Solucion');
         $('#form_problemas [data-toggle="tooltip"]').css("display","none");
@@ -25,7 +27,7 @@ $(document).ready(function() {
         $('#form_problemas #l_sede').html( ProblemaObj[id].sede );
         $('#form_problemas #l_tipo_problema').html( ProblemaObj[id].tipo_problema );
         $('#form_problemas #l_descripcion').html( ProblemaObj[id].descripcion );
-        $("#form_problemas").append("<input type='hidden' value='"+ProblemaObj[id].id+"' name='problema_id'>");
+        $("#form_problemas").append("<input type='hidden' value='"+problema_id+"' name='problema_id'>");
     });
     $('#problemaModal').on('hide.bs.modal', function (event) {
         var modal = $(this);

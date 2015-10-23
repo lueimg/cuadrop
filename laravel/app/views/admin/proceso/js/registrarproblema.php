@@ -295,7 +295,7 @@ Agregar=function(){
 validaAlumnos=function(){
     $('#form_alumno [data-toggle="tooltip"]').css("display","none");
     var a=[];
-    a[0]=valida("txt","nombre","");
+    a[0]=validaA("txt","nombre","");
     var rpta=true;
 
     for(i=0;i<a.length;i++){
@@ -306,8 +306,7 @@ validaAlumnos=function(){
     }
     return rpta;
 };
-
-valida=function(inicial,id,v_default){
+validaA=function(inicial,id,v_default){
     var texto="Seleccione";
     if(inicial=="txt"){
         texto="Ingrese";

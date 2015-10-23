@@ -17,23 +17,26 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     }
     public function getEstadoProblema()
     {
-        return EstadoProblema::select('*')->get();
+        return EstadoProblema::select('*')->where('estado',1)->get();
     }
     public function getEstadoProblemaEstado($estado)
     {
-        return EstadoProblema::select('*')->where('estado_problema',$estado)->get();
+        return EstadoProblema::select('*')
+        ->where('estado_problema',$estado)
+        ->where('estado',1)
+        ->get();
     }
     public function getTipoProblema()
     {
-        return TipoProblema::select('*')->get();
+        return TipoProblema::select('*')->where('estado',1)->get();
     }
     public function getTipoCarrera()
     {
-        return TipoCarrera::select('*')->get();
+        return TipoCarrera::select('*')->where('estado',1)->get();
     }
     public function getCarrera()
     {
-        return Carrera::select('*')->get();
+        return Carrera::select('*')->where('estado',1)->get();
     }
     public function getCarreraTipoCarrera()
     {
@@ -52,19 +55,19 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     }
     public function getCiclo()
     {
-        return Ciclo::select('*')->get();
+        return Ciclo::select('*')->where('estado',1)->get();
     }
     public function getCicloTipoCarrera()
     {
         return DB::table('ciclos as c')
         ->select('c.id', 'c.nombre',
-                    DB::raw(
-                        'CONCAT(
-                            GROUP_CONCAT( DISTINCT(CONCAT("T",tipo_carrera_id) )
-                                SEPARATOR "|,|"
-                            )
-                        ) as relation'
-                    ))
+            DB::raw(
+                'CONCAT(
+                    GROUP_CONCAT( DISTINCT(CONCAT("T",tipo_carrera_id) )
+                        SEPARATOR "|,|"
+                    )
+                ) as relation'
+            ))
         ->join(
             'tipo_carrera_ciclo as tct',
             'c.id','=','tct.ciclo_id'
@@ -76,17 +79,17 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     }
     public function getSede()
     {
-        return Sede::select('*')->get();
+        return Sede::select('*')->where('estado',1)->get();
     }
     public function getSedePersona($personaId)
     {
         $sql = "SELECT s.id, s.estado, s.nombre
-                    FROM personas p 
-                    JOIN `cargo_persona` cp ON p.`id`=cp.`persona_id`
-                    JOIN `sede_cargo_persona` scp ON cp.id=scp.cargo_persona_id
-                    JOIN `sedes` s ON scp.`sede_id`=s.id
-                    WHERE p.estado=1 AND cp.estado=1 AND scp.estado=1
-                    AND s.estado=1 AND p.id=? ";
+                FROM personas p 
+                JOIN cargo_persona cp ON p.id=cp.persona_id
+                JOIN sede_cargo_persona scp ON cp.id=scp.cargo_persona_id
+                JOIN sedes s ON scp.sede_id=s.id
+                WHERE p.estado=1 AND cp.estado=1 AND scp.estado=1
+                AND s.estado=1 AND p.id=? ";
         return DB::select($sql, array($personaId));
     }
 }
