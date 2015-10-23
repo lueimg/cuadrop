@@ -41,6 +41,65 @@
                   <h4 id="l_fecha_problema"></h4>
                 </div>
               </div>
+              <div class="col-sm-12">
+                  <div class="col-sm-12">
+                      <div class="box-body table-responsive">
+                          <table id="t_detalle" class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>N</th>
+                                      <th>Descripcion</th>
+                                      <th>Estado</th>
+                                      <th>Fecha del estado</th>
+                                      <th>Fecha registro</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="tb_detalle"></tbody>
+                          </table>
+                      </div><!-- /.box-body -->
+                  </div>
+              </div>
+              <div class="col-sm-12" id="alumno">
+                  
+              </div>
+              <div class="col-sm-12" id="div_notas">
+                  <div class="col-sm-12">
+                      <div class="box-body table-responsive">
+                          <table id="t_notas" class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>N</th>
+                                      <th>Curso</th>
+                                      <th>Frecuencia</th>
+                                      <th>Hora</th>
+                                      <th>Profesor</th>
+                                      <th>Fecha inicial</th>
+                                      <th>Fecha fin</th>
+                                      <th>Nota</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="tb_notas"></tbody>
+                          </table>
+                      </div><!-- /.box-body -->
+                  </div>
+              </div>
+              <div class="col-sm-12"  id="div_pagos">
+                  <div class="col-sm-12">
+                      <div class="box-body table-responsive">
+                          <table id="t_pagos" class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>N</th>
+                                      <th>Curso</th>
+                                      <th>Recibo</th>
+                                      <th>Monto</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="tb_pagos"></tbody>
+                          </table>
+                      </div><!-- /.box-body -->
+                  </div>
+              </div>
               <div id="campos_editables">
                 <div class="col-sm-12">
                   <div class="col-sm-6">
@@ -69,64 +128,6 @@
                     </select>
                   </div>
                 </div>
-              </div>
-              <div class="col-sm-12">
-                  <div class="col-sm-12">
-                      <div class="box-body table-responsive">
-                          <table id="t_detalle" class="table table-bordered">
-                              <thead>
-                                  <tr>
-                                      <th>N</th>
-                                      <th>Descripcion</th>
-                                      <th>Estado</th>
-                                      <th>Fecha problema</th>
-                                      <th>Fecha registro</th>
-                                  </tr>
-                              </thead>
-                              <tbody id="tb_detalle"></tbody>
-                          </table>
-                      </div><!-- /.box-body -->
-                  </div>
-              </div>
-              <div class="col-sm-12" id="alumno">
-                  
-              </div>
-              <div class="col-sm-12">
-                  <div class="col-sm-12">
-                      <div class="box-body table-responsive">
-                          <table id="t_notas" class="table table-bordered">
-                              <thead>
-                                  <tr>
-                                      <th>N</th>
-                                      <th>Curso</th>
-                                      <th>Frecuencia</th>
-                                      <th>Hora</th>
-                                      <th>Profesor</th>
-                                      <th>Fecha</th>
-                                      <th>Nota</th>
-                                  </tr>
-                              </thead>
-                              <tbody id="tb_notas"></tbody>
-                          </table>
-                      </div><!-- /.box-body -->
-                  </div>
-              </div>
-              <div class="col-sm-12">
-                  <div class="col-sm-12">
-                      <div class="box-body table-responsive">
-                          <table id="t_pagos" class="table table-bordered">
-                              <thead>
-                                  <tr>
-                                      <th>N</th>
-                                      <th>Curso</th>
-                                      <th>Recibo</th>
-                                      <th>Monto</th>
-                                  </tr>
-                              </thead>
-                              <tbody id="tb_pagos"></tbody>
-                          </table>
-                      </div><!-- /.box-body -->
-                  </div>
               </div>
             </div>
         </form>

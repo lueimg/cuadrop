@@ -386,5 +386,6 @@ limpiar=function(){
     $('#observacion').val('');
     $('#nro_cursos').val('');
     $('#nro_pagos').val('');
+    alumno_id=undefined;
 };
 </script>

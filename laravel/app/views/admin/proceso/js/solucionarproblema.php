@@ -21,7 +21,7 @@ $(document).ready(function() {
         var id = button.data('id');
         var problema_id= ProblemaObj[id].id;
         var estado_problema_id= ProblemaObj[id].estado_problema_id;
-        var datos={problema_id:problema_id}
+        var datos={problema_id:problema_id};
         Problemas.CargarDetalle(datos);
 
         var modal = $(this); //captura el modal
@@ -104,6 +104,7 @@ HTMLCargar=function(datos){
             "<td>"+data.tipo_problema+"</td>"+
             "<td>"+data.descripcion+"</td>"+
             "<td>"+data.fecha_problema+"</td>"+
+            "<td>"+data.fecha_registro+"</td>"+
             "<td>"+estadohtml+"</td>"+
             '<td>'+modal+'</td>';
         html+="</tr>";
@@ -138,6 +139,9 @@ HTMLCargarDetalle=function(datos){
             html+="<div class='col-sm-6'><label>Documento: &nbsp</label>"+val.documento+"</div>";
             html+="</div>";
         });
+        $('#alumno').css('display','');
+    } else {
+        $('#alumno').css('display','none');
     }
     $('#alumno').html(html);
     html='';
@@ -149,10 +153,14 @@ HTMLCargarDetalle=function(datos){
             html+="<td>"+val.frecuencia+"</td>";
             html+="<td>"+val.hora+"</td>";
             html+="<td>"+val.profesor+"</td>";
-            html+="<td>"+val.fecha_inicio+'-'+val.fecha_fin+"</td>";
+            html+="<td>"+val.fecha_inicio+"</td>";
+            html+="<td>"+val.fecha_fin+"</td>";
             html+="<td>"+val.nota+"</td>";
             html+="</tr>";
         });
+        $('#div_notas').css('display','');
+    } else {
+        $('#div_notas').css('display','none');
     }
     $('#tb_notas').html(html);
     html='';
@@ -165,9 +173,12 @@ HTMLCargarDetalle=function(datos){
             html+="<td>"+val.monto+"</td>";
             html+="</tr>";
         });
+        $('#div_pagos').css('display','');
+    } else {
+        $('#div_pagos').css('display','none');
     }
     $('#tb_pagos').html(html);
-}
+};
 CambiarEstado=function(id){
     $("#form_problemas input[type='hidden']").remove();
     f = new Date();

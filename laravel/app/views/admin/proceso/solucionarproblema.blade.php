@@ -64,7 +64,8 @@
                                                 <th>Sede</th>
                                                 <th>Tipo</th>
                                                 <th>Descripcion</th>
-                                                <th>Fecha</th>
+                                                <th>Fecha problema</th>
+                                                <th>Fecha registro</th>
                                                 <th>Estado problema</th>
                                                 <th> [ ] </th>
                                             </tr>
@@ -78,7 +79,8 @@
                                                 <th>Sede</th>
                                                 <th>Tipo</th>
                                                 <th>Descripcion</th>
-                                                <th>Fecha</th>
+                                                <th>Fecha problema</th>
+                                                <th>Fecha registro</th>
                                                 <th>Estado problema</th>
                                                 <th> [ ] </th>
                                             </tr>
