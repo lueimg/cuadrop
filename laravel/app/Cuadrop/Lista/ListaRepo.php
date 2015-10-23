@@ -22,7 +22,7 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     public function getEstadoProblemaEstado($estado)
     {
         return EstadoProblema::select('*')
-        ->where('estado_problema',$estado)
+        ->whereIn('estado_problema',$estado)
         ->where('estado',1)
         ->get();
     }

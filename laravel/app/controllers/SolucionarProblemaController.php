@@ -49,11 +49,27 @@ class SolucionarProblemaController extends BaseController
     public function postCargarfiltro()
     {
         if ( Request::ajax() ) {
-            $sede = Input::get('sede', array('0'));
-            $tipo = Input::get('tipo', array('0'));
-            $sede = ($sede=='') ? array('0') : $sede ;
-            $tipo = ($tipo=='') ? array('0') : $tipo ;
-            $problemas = $this->problemaRepo->getReporteSolucionProblemasFiltro($sede, $tipo);
+            $datos=array();
+            $datos['sede'] = Input::get('sede', array('0'));
+            if ( Input::has('tipo') ){
+                $datos['tipo'] = Input::get('tipo', array('0'));
+            }
+            else{
+                $datos['tipo'] = Input::get('tipo_problema', array('0'));
+            }
+
+            if ( Input::has('estado') ){
+                $datos['estado'] = Input::get('estado');
+            }
+
+            if ( Input::has('fecha_ini') and Input::has('fecha_fin') ){
+                $datos['fecha_ini'] = Input::get('fecha_ini');
+                $datos['fecha_fin'] = Input::get('fecha_fin');
+            }
+
+            $datos['sede'] = ($datos['sede']=='') ? array('0') : $datos['sede'] ;
+            $datos['tipo'] = ($datos['tipo']=='') ? array('0') : $datos['tipo'] ;
+            $problemas = $this->problemaRepo->getReporteSolucionProblemasFiltro($datos);
             return Response::json(array('rst'=>1,'datos'=>$problemas));
         }
     }

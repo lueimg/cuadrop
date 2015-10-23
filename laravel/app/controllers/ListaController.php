@@ -28,7 +28,10 @@ class ListaController extends \BaseController
     public function postEstadoproblemaestado()
     {
         if ( Request::ajax() ) {
-            $estado=Input::get('estado_problema','0');
+            $estado=array('0','1');
+            if( !Input::has('estado') ){
+            $estado=array('0');
+            }
             $tipoProblema = $this->listaRepo->getEstadoProblemaEstado($estado);
             return Response::json(array('rst'=>1,'datos'=>$tipoProblema));
         }

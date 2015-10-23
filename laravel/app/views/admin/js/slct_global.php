@@ -47,10 +47,6 @@ htmlListarSlct=function(obj,slct,tipo,valarray,afectado,afectados,slct_id,slctan
                 html += "<option "+rel+rel2+rel3+x+y+direccion+" value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
             
         }); 
-        
-        if(slct=='slct_estado'){
-            html += "<option value=\"-1\">Temporal</option>";
-        }
     }      
     $("#"+slct).html(html);
     

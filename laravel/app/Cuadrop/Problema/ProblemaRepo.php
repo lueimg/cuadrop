@@ -44,10 +44,20 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 ORDER BY p.fecha_problema DESC";
         return DB::select($sql);
     }
-    public function getReporteSolucionProblemasFiltro($sede =array('0'), $tipo=array('0'))
+    public function getReporteSolucionProblemasFiltro($datos)
     {
-        $sede= implode($sede,',');
-        $tipo= implode($tipo,',');
+        $sede= implode($datos['sede'],',');
+        $tipo= implode($datos['tipo'],',');
+        $estado='';$fecha='';
+
+        if( isset($datos['fecha_ini']) AND isset($datos['fecha_fin']) ){
+            $fecha=" AND DATE(p.created_at) BETWEEN '".$datos['fecha_ini']."' AND '".$datos['fecha_fin']."' ";
+        }
+
+        if( isset($datos['estado']) ){
+            $estado=" AND ep.id IN (".implode(",",$datos['estado']).") ";
+        }
+
         $sql= "SELECT p.id, s.nombre AS sede, tp.nombre AS tipo_problema,
                 descripcion, ep.id AS estado_problema_id, ep.clase_boton,
                 p.tipo_problema_id, p.sede_id, p.fecha_problema,
@@ -69,6 +79,7 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 LEFT JOIN tipo_carrera tc ON c.tipo_carrera_id=tc.id
                 WHERE p.estado=1 AND pd.estado=1 and p.sede_id in ($sede)
                 and p.tipo_problema_id in ($tipo)
+                $estado $fecha
                 ORDER BY p.fecha_problema DESC";
         return DB::select($sql);
     }
