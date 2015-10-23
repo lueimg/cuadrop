@@ -49,8 +49,10 @@ class SolucionarProblemaController extends BaseController
     public function postCargarfiltro()
     {
         if ( Request::ajax() ) {
-            $sede = Input::get('sede', array());
-            $tipo = Input::get('tipo', array());
+            $sede = Input::get('sede', array('0'));
+            $tipo = Input::get('tipo', array('0'));
+            $sede = ($sede=='') ? array('0') : $sede ;
+            $tipo = ($tipo=='') ? array('0') : $tipo ;
             $problemas = $this->problemaRepo->getReporteSolucionProblemasFiltro($sede, $tipo);
             return Response::json(array('rst'=>1,'datos'=>$problemas));
         }

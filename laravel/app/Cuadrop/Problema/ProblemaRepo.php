@@ -44,7 +44,7 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 ORDER BY p.fecha_problema DESC";
         return DB::select($sql);
     }
-    public function getReporteSolucionProblemasFiltro($sede =array(), $tipo=array())
+    public function getReporteSolucionProblemasFiltro($sede =array('0'), $tipo=array('0'))
     {
         $sede= implode($sede,',');
         $tipo= implode($tipo,',');
