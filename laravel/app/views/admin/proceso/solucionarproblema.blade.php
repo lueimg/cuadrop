@@ -48,7 +48,7 @@
                                                 <th>Tipo</th>
                                                 <th>Descripcion</th>
                                                 <th>Fecha</th>
-                                                <th>Estado</th>
+                                                <th>Estado problema</th>
                                                 <th> [ ] </th>
                                             </tr>
                                         </thead>
@@ -62,7 +62,7 @@
                                                 <th>Tipo</th>
                                                 <th>Descripcion</th>
                                                 <th>Fecha</th>
-                                                <th>Estado</th>
+                                                <th>Estado problema</th>
                                                 <th> [ ] </th>
                                             </tr>
                                         </tfoot>

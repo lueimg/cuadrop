@@ -15,7 +15,10 @@ $(document).ready(function() {
         //var titulo = button.data('titulo');
         var id = button.data('id');
         var problema_id= ProblemaObj[id].id;
-        //cargar tablas
+        var estado_problema_id= ProblemaObj[id].estado_problema_id;
+
+
+
         var modal = $(this); //captura el modal
         modal.find('.modal-title').text(' Solucion');
         $('#form_problemas [data-toggle="tooltip"]').css("display","none");
@@ -27,7 +30,17 @@ $(document).ready(function() {
         $('#form_problemas #l_sede').html( ProblemaObj[id].sede );
         $('#form_problemas #l_tipo_problema').html( ProblemaObj[id].tipo_problema );
         $('#form_problemas #l_descripcion').html( ProblemaObj[id].descripcion );
+        $('#form_problemas #l_fecha_problema').html( ProblemaObj[id].fecha_problema );
         $("#form_problemas").append("<input type='hidden' value='"+problema_id+"' name='problema_id'>");
+        //cargar tablas
+        if (estado_problema_id==2) {//atendiendo
+            $('#campos_editables').css('display','');
+            $('#b_footer').css('display','');
+        } else {
+            //ocultar edicion
+            $('#campos_editables').css('display','none');
+            $('#b_footer').css('display','none');
+        }
     });
     $('#problemaModal').on('hide.bs.modal', function (event) {
         var modal = $(this);
@@ -48,9 +61,13 @@ HTMLCargar=function(datos){
         estado_problema=data.estado_problema;
         clase =data.clase_boton;
         //habilitar la solucion para atendido (2)
-        var modal='class="btn btn-primary disabled"';
-        if (data.estado_problema_id==2) {
-            modal='class="btn btn-primary" data-toggle="modal" data-target="#problemaModal"';
+        var modal;
+        if (data.estado_problema_id==1) {
+            modal='<a class="btn btn-primary disabled" data-id="'+index+'">Solucionar </a></td>';
+        } else if (data.estado_problema_id==2) {//atendido
+            modal='<a class="btn btn-primary" data-toggle="modal" data-target="#problemaModal" data-id="'+index+'">Solucionar </a></td>';
+        } else {
+            modal='<a class="btn btn-primary" data-toggle="modal" data-target="#problemaModal" data-id="'+index+'"> Ver </a></td>';
         }
         //solo para estado en espera (1)
         if (clase==='undefined' || clase===undefined) {
@@ -66,9 +83,9 @@ HTMLCargar=function(datos){
             "<td>"+data.sede+' '+"</td>"+
             "<td>"+data.tipo_problema+"</td>"+
             "<td>"+data.descripcion+"</td>"+
-            "<td>"+data.fecha_registro+"</td>"+
+            "<td>"+data.fecha_problema+"</td>"+
             "<td>"+estadohtml+"</td>"+
-            '<td><a '+modal+' data-id="'+index+'">Solucionar </a></td>';
+            '<td>'+modal+'</td>';
         html+="</tr>";
     });
     $("#tb_problemas").html(html);
