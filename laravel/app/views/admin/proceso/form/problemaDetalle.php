@@ -103,7 +103,7 @@
               <div id="campos_editables">
                 <div class="col-sm-12">
                   <div class="col-sm-6">
-                    <label class="control-label">DESCRIPCIÓN DE LA SOLUCIÓN: 
+                    <label class="control-label">DESCRIPCIÓN DE LA ATENCIÓN: 
                         <a id="error_resultado" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese descripcion de solucion">
                             <i class="fa fa-exclamation"></i>
                         </a>
@@ -111,7 +111,7 @@
                     <textarea id="resultado" name="resultado" class="form-control" rows="2" required placeholder="Ingrese descripcion de solucion"></textarea>
                   </div>
                   <div class="col-sm-3">
-                    <label class="control-label">FECHA SOLUCION:
+                    <label class="control-label">FECHA ATENCIÓN:
                         <a id="error_fecha_estado" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese descripcion de solucion">
                             <i class="fa fa-exclamation"></i>
                         </a>

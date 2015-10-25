@@ -1,7 +1,7 @@
 <script type="text/javascript">
 var persona_id, cargos_selec=[], ProblemaObj;
 var Problemas={
-    Crear:function(datos){
+    Crear:function(evento,datos){
         $.ajax({
             url         : 'solucionar_problema/create',
             type        : 'POST',
@@ -14,7 +14,7 @@ var Problemas={
             success : function(obj) {
                 $(".overlay,.loading-img").remove();
                 if(obj.rst==1){
-                    Problemas.Cargar();
+                    evento();
                     $('#problemaModal .modal-footer [data-dismiss="modal"]').click();
                     Psi.mensaje('success', obj.msj, 6000);
                 }
@@ -53,7 +53,7 @@ var Problemas={
             }
         });
     },
-    Filtro:function(datos){
+    Filtro:function(evento,datos){
         $.ajax({
             url         : 'solucionar_problema/cargarfiltro',
             type        : 'POST',
@@ -65,7 +65,7 @@ var Problemas={
             },
             success : function(obj) {
                 if(obj.rst==1){
-                    HTMLCargar(obj.datos);
+                    evento(obj.datos);
                     ProblemaObj=obj.datos;
                 }
                 $(".overlay,.loading-img").remove();

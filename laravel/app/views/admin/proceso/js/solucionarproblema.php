@@ -1,19 +1,33 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    Problemas.Cargar();
+    $('.fecha').daterangepicker({
+        format: 'YYYY-MM-DD',
+        singleDatePicker: true
+    });
+
+    data={estado:1};
+
+    slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple');
+    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema','multiple');
+    slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado','multiple',null,data);
+
+    data={estado_problema: 0};
+
+    $("#buscar").click(mostrar);
+    /*//Problemas.Cargar();
     //slct_estado_problema_id
-    var ids={estado_problema: 0};
+    
     var funcionSede={ change:SedeChange};
     var funcionTipo={ change:TipoChange};
     slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple',null,ids,null,null,null,null,null,funcionSede);
     slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema','multiple',null,ids,null,null,null,null,null,funcionTipo);
-
-    slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado_problema_id','simple',null,ids);
+    */
+    slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado_problema_id','simple',null,data);
     $('#problemaModal').on('show.bs.modal', function (event) {
         $('#fecha_estado').daterangepicker({
             singleDatePicker: true,
             timePicker: true,
-            timePicker24Hour: true,
+            timePicker24Hour: false,
             format: 'YYYY-MM-DD HH:mm'
         });
         var button = $(event.relatedTarget);
@@ -25,9 +39,10 @@ $(document).ready(function() {
         Problemas.CargarDetalle(datos);
 
         var modal = $(this); //captura el modal
-        modal.find('.modal-title').text(' Solucion');
+        modal.find('.modal-title').text(' Atencion');
         $('#form_problemas [data-toggle="tooltip"]').css("display","none");
         $("#form_problemas input[type='hidden']").remove();
+        $("#form_problemas input[type='text'],#form_problemas textarea").val('');
         //create
         modal.find('.modal-footer .btn-primary').text('Actualizar');
         modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
@@ -55,7 +70,12 @@ $(document).ready(function() {
         $('#form_problemas #slct_estado_problema_id').multiselect('refresh');
     });
 });
-SedeChange=function(){
+
+mostrar=function(){
+    var datos=$("#solucion").serialize().split("txt_").join("").split("slct_").join("");
+    Problemas.Filtro(HTMLCargar,datos);
+}
+/*SedeChange=function(){
     var selec_sede = $('#slct_sede').val();
     var selec_tipo = $('#slct_tipo_problema').val();
     filtrarProblemas(selec_sede, selec_tipo);
@@ -69,10 +89,10 @@ filtrarProblemas=function(sede, tipo)
 {
     var data={sede:sede,tipo:tipo};
     Problemas.Filtro(data);
-};
+};*/
 Agregar=function(){
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
-    Problemas.Crear(datos);
+    Problemas.Crear(mostrar,datos);
 };
 HTMLCargar=function(datos){
     var html="";
@@ -179,6 +199,7 @@ HTMLCargarDetalle=function(datos){
     }
     $('#tb_pagos').html(html);
 };
+
 CambiarEstado=function(id){
     $("#form_problemas input[type='hidden']").remove();
     f = new Date();
@@ -189,6 +210,6 @@ CambiarEstado=function(id){
     $("#form_problemas").append("<input type='hidden' value='"+fecha+"' name='fecha_estado'>");
     $("#form_problemas").append("<input type='hidden' value='2' name='estado_problema_id'>");//atendido
     datos = $("#form_problemas").serialize();
-    Problemas.Crear(datos);
+    Problemas.Crear(mostrar,datos);
 };
 </script>

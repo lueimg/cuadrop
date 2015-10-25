@@ -32,7 +32,7 @@
 
                 <!-- Main content -->
                 <section class="content">
-
+            <form id="solucion" name="solucion" action="">
                     <div class="row  form-group">
                         <div class="col-xs-12">
                             <div class="col-sm-3">
@@ -47,8 +47,36 @@
                                 <select class="form-control" name="slct_tipo_problema[]" id="slct_tipo_problema" multiple>
                                 </select>
                             </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Estados:
+                                </label>
+                                <select class="form-control" name="slct_estado[]" id="slct_estado" multiple>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                    <div class="row  form-group">
+                        <div class="col-xs-12">
+                            <div class="col-sm-2">
+                                <label class="control-label">Fecha Registro Inicio:
+                                <input type="text" class="form-control fecha" name="txt_fecha_ini" placeholder="AAAA-MM-DD" id="txt_fecha_ini" onfocus="blur()" required="required"/>
+                            </div>
+                            <div class="col-sm-1">
+                                &nbsp;
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Fecha Registro Fin:
+                                <input type="text" class="form-control fecha" name="txt_fecha_fin" placeholder="AAAA-MM-DD" id="txt_fecha_fin" onfocus="blur()" required="required"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <br>
+                                <a class="btn btn-info btn-sm" id="buscar">
+                                    <i class="fa fa-search fa-lg">  Buscar  </i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </form>
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- Inicia contenido -->
