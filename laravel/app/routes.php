@@ -59,3 +59,4 @@ Route::controller('menu', 'MenuController');
 Route::controller('opcion', 'OpcionController');
 Route::controller('tipoproblema', 'TipoProblemaController');
 Route::controller('carrera', 'CarreraController');
+Route::controller('reporte', 'ReporteController');

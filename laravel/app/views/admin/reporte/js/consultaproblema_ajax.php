@@ -23,5 +23,24 @@ var ConsultaProblema={
             }
         });
     },
+    exportar:function(datos){
+        $.ajax({
+            url         : 'reporte/listadoproblema',
+            type        : 'POST',
+            cache       : false,
+            dataType    : 'json',
+            data        : datos,
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success : function(obj) {
+                $(".overlay,.loading-img").remove();
+            },
+            error: function(){
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'Ocurrio una interrupción en el proceso,Favor de intentar nuevamente.', 6000);
+            }
+        });
+    },
 };
 </script>

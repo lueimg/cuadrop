@@ -88,7 +88,11 @@
                                     <table id="t_problemas" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Nº</th>
+                                                <th>Nº
+                                                    <a id="btnExportar" class="btn btn-success btn-sm">
+                                                        <img src="img/user/excel.jpg" style=" width: 25px; height='25px;'"  class="img-circle" alt="Exportar" />
+                                                    </a>
+                                                </th>
                                                 <th>Sede</th>
                                                 <th>Tipo</th>
                                                 <th>Descripcion</th>

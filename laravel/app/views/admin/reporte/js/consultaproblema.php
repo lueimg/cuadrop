@@ -12,19 +12,18 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado','multiple',null,data);
 
     $("#buscar").click(mostrar);
+
+    $("#btnExportar").click(exportar);
 });
 
+exportar=function(){
+    var datos=$("#reporte").serialize().split("txt_").join("").split("slct_").join("");
+    ConsultaProblema.exportar(datos);
+}
+
 mostrar=function(){
-    if( $("#tc_fecha_ini").val()=='' ){
-        Psi.mensaje('warning', 'Ingrese Fecha de inicio', 3000);
-    }
-    else if( $("#tc_fecha_fin").val()=='' ){
-        Psi.mensaje('warning', 'Ingrese Fecha de Fin', 3000);
-    }
-    else{
-        var datos=$("#reporte").serialize().split("txt_").join("").split("slct_").join("");
-        ConsultaProblema.reporte(HTMLreporte,datos);
-    }
+    var datos=$("#reporte").serialize().split("txt_").join("").split("slct_").join("");
+    ConsultaProblema.reporte(HTMLreporte,datos);
 }
 
 HTMLreporte=function(datos){
