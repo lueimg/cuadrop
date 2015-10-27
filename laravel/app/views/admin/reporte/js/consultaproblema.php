@@ -17,8 +17,10 @@ $(document).ready(function() {
 });
 
 exportar=function(){
-    var datos=$("#reporte").serialize().split("txt_").join("").split("slct_").join("");
-    ConsultaProblema.exportar(datos);
+    /*var datos=$("#reporte").serialize().split("txt_").join("").split("slct_").join("");
+    ConsultaProblema.exportar(datos);*/
+    $("#reporte").submit();
+    //window.location='reporte/listadoproblema';
 }
 
 mostrar=function(){

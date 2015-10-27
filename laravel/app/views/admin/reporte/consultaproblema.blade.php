@@ -32,7 +32,7 @@
 
                 <!-- Main content -->
                 <section class="content">
-            <form id="reporte" name="reporte" action="">
+            <form id="reporte" name="reporte" method="POST" action="reporte/listadoproblema">
                     <div class="row  form-group">
                         <div class="col-xs-12">
                             <div class="col-sm-3">
