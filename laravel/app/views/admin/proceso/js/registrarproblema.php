@@ -1,6 +1,7 @@
 <script type="text/javascript">
 var AlumnosObj, alumno_id;
 $(document).ready(function() { $("#form_problemas").validate();
+    $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
     $('#fecha_problema').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
@@ -381,7 +382,7 @@ limpiar=function(){
     $('#slct_ciclo_id').multiselect('refresh');
     $('#slct_ciclo_id').trigger('change');
 
-    $('#fecha_problema').val('');
+    $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
     $('#descripcion').val('');
     $('#carrera').val('');
     $('#documento').val('');
