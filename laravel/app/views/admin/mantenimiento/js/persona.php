@@ -3,10 +3,11 @@ $(document).ready(function() {
     Persona.CargarPersonas(activarTabla);
 
     $('#personaModal').on('show.bs.modal', function (event) {
-        
+
         $('#txt_fecha_nac').daterangepicker({
             format: 'YYYY-MM-DD',
-            singleDatePicker: true
+            singleDatePicker: true,
+            showDropdowns: true
         });
 
         var button = $(event.relatedTarget); // captura al boton
