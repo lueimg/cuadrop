@@ -2,7 +2,8 @@
 $(document).ready(function() {
     $('.fecha').daterangepicker({
         format: 'YYYY-MM-DD',
-        singleDatePicker: true
+        singleDatePicker: true,
+        showDropdowns: true
     });
 
     data={estado:1};
@@ -74,7 +75,7 @@ $(document).ready(function() {
 mostrar=function(){
     var datos=$("#solucion").serialize().split("txt_").join("").split("slct_").join("");
     Problemas.Filtro(HTMLCargar,datos);
-}
+};
 /*SedeChange=function(){
     var selec_sede = $('#slct_sede').val();
     var selec_tipo = $('#slct_tipo_problema').val();

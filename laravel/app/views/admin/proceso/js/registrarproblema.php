@@ -5,7 +5,8 @@ $(document).ready(function() { $("#form_problemas").validate();
         singleDatePicker: true,
         timePicker: true,
         timePicker24Hour: true,
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'YYYY-MM-DD HH:mm',
+        showDropdowns: true
     });
     $('#guardar').click(function(event) {
         if (Validar() ) {
