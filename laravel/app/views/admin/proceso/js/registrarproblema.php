@@ -65,7 +65,8 @@ $(document).ready(function() { $("#form_problemas").validate();
         $("#tb_cursos").html(html);
         $('.fecha').daterangepicker({
             format: 'YYYY-MM-DD',
-            singleDatePicker: true
+            singleDatePicker: true,
+            showDropdowns: true
         });
     });
 

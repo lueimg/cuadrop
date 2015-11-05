@@ -29,7 +29,8 @@ $(document).ready(function() {
             singleDatePicker: true,
             timePicker: true,
             timePicker24Hour: false,
-            format: 'YYYY-MM-DD HH:mm'
+            format: 'YYYY-MM-DD HH:mm',
+            showDropdowns: true
         });
         var button = $(event.relatedTarget);
         //var titulo = button.data('titulo');
