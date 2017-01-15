@@ -21,8 +21,10 @@ $(document).ready(function() {
             $('#form_sedes #slct_modalidad_id').val(0);
             $('#form_sedes #txt_nombre').focus();
         }
-        else{
+        else {
+            //enviar peticion de las carreras y ciclos asociados a este instituto
             var id = SedeObj[sede_id].id;
+            Sedes.ConsultarCarrerasCiclos(id);
 
             modal.find('.modal-footer .btn-primary').text('Actualizar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
@@ -38,12 +40,29 @@ $(document).ready(function() {
         modal.find('.modal-body input').val(''); // busca un input para copiarle texto
     });
 });
-cargarModalidades=function(){
+cargarModalidades=function(Obj){
     var html="";
-    $.each(ModalidadObj,function(index,data){
+    $.each(Obj,function(index,data){
         html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
     });
     $("#slct_modalidad_id").html(html);
+};
+cargarCiclos=function(Obj){
+    var html="";
+    $.each(Obj,function(index,data){
+        html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
+    });
+    $("#slct_ciclos").html(html);
+    
+    slctGlobalHtml("slct_ciclos",'multiple');
+};
+cargarCarreras=function(Obj){
+    var html="";
+    $.each(Obj,function(index,data){
+        html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
+    });
+    $("#slct_carreras").html(html);
+    slctGlobalHtml("slct_carreras",'multiple');
 };
 beforeSubmit=function (){};
         success=function (){};

@@ -19,7 +19,10 @@ class Carrera extends Base
     {
         return $this->hasMany('Ruta');
     }
-
+    public function institutos()
+    {
+        return $this->belongsToMany('Instituto');
+    }
     public static function getCarrera(){
         $carrera=DB::table('carreras as c')
                 ->join(

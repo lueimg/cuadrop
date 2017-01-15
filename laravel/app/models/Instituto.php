@@ -20,6 +20,14 @@ class Instituto extends Base
     {
         return $this->hasMany('Modalidad');
     }
+    public function ciclos()
+    {
+        return $this->belongsToMany('Ciclo');
+    }
+    public function carreras()
+    {
+        return $this->belongsToMany('Carrera');
+    }
 
     public function getInstituto(){
         $sede=DB::table('institutos')

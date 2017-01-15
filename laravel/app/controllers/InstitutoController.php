@@ -13,9 +13,34 @@ class InstitutoController extends \BaseController
     {
         //si la peticion es ajax
         if ( Request::ajax() ) {
+            //consultar las carreras y los ciclos
+            $carreras = Carrera::get(['estado',1]);
+            $ciclos = Ciclo::get(['estado',1]);
             $modalidades = Modalidad::get();
             $institutos = Instituto::get(Input::all());
-            return Response::json(['rst'=>1,'datos'=>$institutos,'modalidades'=>$modalidades]);
+            return Response::json([
+                'rst'=>1,
+                'datos'=>$institutos,
+                'modalidades'=>$modalidades,
+                'carreras'=>$carreras,
+                'ciclos'=>$ciclos
+            ]);
+        }
+    }
+    /**
+     * cargar institutos, mantenimiento
+     * POST /instituto/consultarcarrerasciclo
+     *
+     * @return Response
+     */
+    public function postConsultarcarrerasciclos()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $instituto = Instituto::find(Input::get('id'));
+            $carreras = $instituto->carreras;
+            $ciclos = $instituto->ciclos;
+            return Response::json(['rst'=>1,'carreras'=>$carreras,'ciclos'=>$ciclos]);
         }
     }
     /**

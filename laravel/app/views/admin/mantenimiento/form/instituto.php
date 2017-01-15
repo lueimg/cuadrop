@@ -25,6 +25,18 @@
             </select>
           </div>
           <div class="form-group">
+            <label class="control-label">Carreras:
+            </label>
+            <select class="form-control" multiple='multiple' name="slct_carreras[]" id="slct_carreras">
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Ciclos:
+            </label>
+            <select class="form-control" multiple='multiple' name="slct_ciclos[]" id="slct_ciclos">
+            </select>
+          </div>
+          <div class="form-group">
             <label class="control-label">Estado:
             </label>
             <select class="form-control" name="slct_estado" id="slct_estado">
