@@ -21,16 +21,16 @@
 
 
         @section('includes')
-            <?php echo HTML::style('lib/bootstrap-3.3.1/css/bootstrap.min.css'); ?>
-            <?php echo HTML::style('lib/font-awesome-4.2.0/css/font-awesome.min.css'); ?>
+            {{ HTML::style('lib/bootstrap-3.3.1/css/bootstrap.min.css') }}
+            {{ HTML::style('lib/font-awesome-4.2.0/css/font-awesome.min.css') }}
 
             {{ HTML::script('lib/jquery-2.1.3.min.js') }}
             {{ HTML::script('lib/jquery-ui-1.11.2/jquery-ui.min.js') }}
             {{ HTML::script('lib/bootstrap-3.3.1/js/bootstrap.min.js') }}
 
-            <?php echo HTML::style('//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'); ?>
-            <?php echo HTML::style('lib/datatables-1.10.4/media/css/dataTables.bootstrap.css'); ?>
-            <?php echo HTML::style('css/admin/admin.css'); ?>
+            {{ HTML::style('//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css') }}
+            {{ HTML::style('lib/datatables-1.10.4/media/css/dataTables.bootstrap.css') }}
+            {{ HTML::style('css/admin/admin.css') }}
 
             {{ HTML::script('lib/datatables-1.10.4/media/js/jquery.dataTables.js') }}
             {{ HTML::script('lib/datatables-1.10.4/media/js/dataTables.bootstrap.js') }}
@@ -54,14 +54,13 @@
 
        @yield('formulario')
     </body>
-
-<?php echo '<script type="text/javascript">';
-        echo     "$('ul.sidebar-menu li').each(function(indice, elemento) {
-                    htm=$(elemento).html();
-                    if(htm.split('<a href=".'"'.$valida_ruta_url.'"'.">').length>1){
-                        $(elemento).addClass('active');
-                    }
-                });";
-      echo '</script>';
-?>
+    <script type="text/javascript">
+    $('ul.sidebar-menu li').each(function(indice, elemento) {
+        htm=$(elemento).html();
+        var link='<a href="<?php echo $valida_ruta_url; ?>">';
+        if(htm.split(link).length>1){
+            $(elemento).addClass('active');
+        }
+    });
+    </script>
 </html>

@@ -55,6 +55,7 @@ Route::controller('usuario', 'UsuarioController');
 Route::controller('persona', 'PersonaController');
 Route::controller('cargo', 'CargoController');
 Route::controller('sede', 'SedeController');
+Route::controller('instituto', 'InstitutoController');
 Route::controller('menu', 'MenuController');
 Route::controller('opcion', 'OpcionController');
 Route::controller('tipoproblema', 'TipoProblemaController');

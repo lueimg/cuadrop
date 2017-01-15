@@ -5,7 +5,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">                        
                         <div class="pull-left image" data-toggle="modal" data-target="#imagenModal">
-                            <img src="img/user/<?= md5('u'.Auth::user()->id).'/'.Auth::user()->imagen; ?>" class="img-circle" alt="User Image" />
+                            <img src="img/user/<?= md5('u'.Auth::id()).'/'.Auth::user()->imagen; ?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p>Hello, {{ Auth::user()->nombre }}</p>
