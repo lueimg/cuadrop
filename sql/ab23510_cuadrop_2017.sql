@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2017-01-15 17:16:43
+Date: 2017-01-15 17:43:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -535,7 +535,7 @@ DROP TABLE IF EXISTS `institutos_ciclos`;
 CREATE TABLE `institutos_ciclos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `instituto_id` int(11) DEFAULT NULL,
-  `ciclo` varchar(20) DEFAULT NULL,
+  `ciclo_id` int(11) DEFAULT NULL,
   `estado` int(1) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
