@@ -106,13 +106,14 @@ protected $table = '';
                 ap.documento,ap.observacion,
                 apnf.nota,appf.pago,DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle
@@ -149,13 +150,14 @@ protected $table = '';
                 p.created_at AS fecha_registro,
                 pd.fecha_estado, pd.resultado,DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle
@@ -179,13 +181,14 @@ protected $table = '';
                 ap.documento,ap.observacion,
                 apnf.nota,appf.pago,DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle
@@ -224,13 +227,14 @@ protected $table = '';
                 ap.cantidad art_cantidad,ta.nombre tipo_articulo,
                 DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle
@@ -254,13 +258,14 @@ protected $table = '';
                 pd.fecha_estado, pd.resultado,
                 DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle
@@ -281,13 +286,14 @@ protected $table = '';
                 pd.fecha_estado, pd.resultado,
                 DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
-                tpc.nombre categoria
+                tpc.nombre categoria,m.nombre modalidad
                 FROM problemas p
                 JOIN personas per ON per.id=p.usuario_created_at
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN institutos i ON i.id=p.instituto_id
+                JOIN modalidades m ON m.id=i.modalidad_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle

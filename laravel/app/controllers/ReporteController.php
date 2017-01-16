@@ -200,7 +200,7 @@ class ReporteController extends BaseController
         'BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ','CA','CB','CC','CD','CE','CF',
         'CG','CH','CI','CJ','CK','CL','CM','CN','CO','CP','CQ','CR','CS','CT','CU','CV','CW','CX','CY','CZ','DA','DB','DC','DD','DE','DF','DG',
         'DH','DI','DJ','DK','DL','DM','DN','DO','DP','DQ','DR','DS','DT','DU','DV','DW','DX','DY','DZ');
-        $azcount=array(5,40,15,17,18,21,20,40,12,18.5,18.5,18.5,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+        $azcount=array(5,40,15,17,18,20,21,20,40,12,18.5,18.5,18.5,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
@@ -227,30 +227,30 @@ class ReporteController extends BaseController
         $cabecera=array('');
         if( $datos['tipo']=='' ){
 
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
                             'Paterno','Materno','Nombre','Email','Telefono','Carrera','Tipo Carrera','Ciclo','Documento','Observación',
                             'Curso Nota','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
                             'Curso Pago','Recibo','Monto','Resultado'
                         );
         }
         elseif( $datos['tipo']=='5' ){
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
         elseif( $datos['tipo']=='4' ){
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
                             'Paterno','Materno','Nombre','Email','Telefono','Carrera','Tipo Carrera','Ciclo','Documento','Observación',
                             'Curso Nota','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
                             'Curso Pago','Recibo','Monto','Resultado'
                         );
         }
         elseif( $datos['tipo']=='3' ){
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Tipo Artículo','Artículo','Descripción','Cantidad','Resultado');
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Tipo Artículo','Artículo','Descripción','Cantidad','Resultado');
         }
         elseif( $datos['tipo']=='2' ){
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
         elseif( $datos['tipo']=='1' ){
-            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
+            $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
 
         for($i=0;$i<count($cabecera);$i++){
@@ -282,6 +282,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
@@ -352,6 +353,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
@@ -377,6 +379,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
@@ -446,6 +449,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
@@ -475,6 +479,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
@@ -500,6 +505,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->sede);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->instituto);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->modalidad);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->categoria);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;

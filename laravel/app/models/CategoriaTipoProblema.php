@@ -41,6 +41,9 @@ class CategoriaTipoProblema extends Base
                         if ( Input::get('tipo_problema_id') ) {
                             $query->where('tipo_problema_id','=',Input::get('tipo_problema_id'));
                         }
+                        if ( Input::get('porusuario') ) {
+                            $query->whereRaw('FIND_IN_SET(id,"'.Auth::user()->tipo_problema_ids.'")');
+                        }
                     }
                 )
                 ->orderBy('nombre')

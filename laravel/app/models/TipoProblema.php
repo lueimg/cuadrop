@@ -21,19 +21,22 @@ class TipoProblema extends Base
     }
 
     public function getTipoProblema(){
-        $tipoproblema=DB::table('tipo_problema')
-                ->select('id','nombre','estado')
+        $tipoproblema=DB::table('tipo_problema as tp')
+                ->join('tipo_problema_categorias as tpc','tp.id','=','tpc.tipo_problema_id')
+                ->select('tp.id','tp.nombre','tp.estado')
                 ->where( 
                     function($query){
                         if ( Input::get('estado') ) {
-                            $query->where('estado','=','1');
+                            $query->where('tp.estado','=','1')
+                                ->where('tpc.estado','=','1');
                         }
                         if ( Input::has('porusuario') ) {
-                            $query->whereRaw('FIND_IN_SET(id,"'.Auth::user()->tipo_problema_ids.'")');
+                            $query->whereRaw('FIND_IN_SET(tpc.id,"'.Auth::user()->tipo_problema_ids.'")');
                         }
                     }
                 )
-                ->orderBy('nombre')
+                ->groupBy('tp.id')
+                ->orderBy('tp.nombre')
                 ->get();
                 
         return $tipoproblema;

@@ -102,7 +102,7 @@ $(document).ready(function() { $("#form_problemas").validate();
             $('#slct_tipo_carrera_id').multiselect('refresh');
         }
         $("#slct_categoria_tipo_problema_id").multiselect('destroy');
-        var data={estado:1,tipo_problema_id:this.value}
+        var data={estado:1,porusuario:1,tipo_problema_id:this.value};
         slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);
         $('#slct_tipo_carrera_id').trigger('change');
     });
