@@ -76,6 +76,8 @@ var Sedes={
                     SedeObj = obj.datos;
                     //ModalidadObj = obj.modalidades;
                     cargarModalidades(obj.modalidades);
+                    cargarCarreras(obj.carreras);
+                    cargarCiclos(obj.ciclos);
                 }
                 $(".overlay,.loading-img").remove();
             },
@@ -101,9 +103,25 @@ var Sedes={
             },
             success : function(obj) {
                 if(obj.rst==1){
-                    //cargarModalidades();
-                    cargarCarreras(obj.carreras);
-                    cargarCiclos(obj.ciclos);
+                    //seleccionar ciclos y carreras
+                    var selec=[];
+                    $.each(obj.carreras,function(index,data){
+                        selec.push(data.id);
+                    });
+                    $("#slct_carreras").multiselect('deselectAll', false);
+                    $('#slct_carreras').multiselect('rebuild');
+                    $("#slct_carreras").multiselect('refresh');
+
+                    $("#slct_carreras").multiselect('select', selec);
+                    selec=[];
+                    $.each(obj.ciclos,function(index,data){
+                        selec.push(data.id);
+                    });
+                    $("#slct_ciclos").multiselect('deselectAll', false);
+                    $('#slct_ciclos').multiselect('rebuild');
+                    $("#slct_ciclos").multiselect('refresh');
+
+                    $("#slct_ciclos").multiselect('select', selec);
                 }
                 $(".overlay,.loading-img").remove();
             },

@@ -104,6 +104,13 @@ class InstitutoController extends \BaseController
             $instituto->usuario_created_at = Auth::user()->id;
             $instituto->save();
 
+            //guardar en carreras y ciclos
+            if (Input::has('carreras')) {
+                $instituto->carreras()->attach(Input::get('carreras'));
+            }
+            if (Input::has('ciclos')) {
+                $instituto->ciclos()->attach(Input::get('ciclos'));
+            }
             return Response::json(
                 array(
                 'rst'=>1,
@@ -153,6 +160,14 @@ class InstitutoController extends \BaseController
             $instituto->modalidad_id = Input::get('modalidad_id');
             $instituto->usuario_updated_at = Auth::user()->id;
             $instituto->save();
+
+            //guardar en carreras y ciclos
+            if (Input::has('carreras')) {
+                $instituto->carreras()->sync(Input::get('carreras'));
+            }
+            if (Input::has('ciclos')) {
+                $instituto->ciclos()->sync(Input::get('ciclos'));
+            }
             if (Input::get('estado') == 0) {
                 /*DB::table('sede_cargo_persona')
                     ->where('sede_id','=',$institutoId)

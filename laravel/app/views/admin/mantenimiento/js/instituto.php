@@ -15,6 +15,14 @@ $(document).ready(function() {
 
         if(titulo=='Nuevo'){
 
+            $("#slct_carreras").multiselect('deselectAll', false);
+            $('#slct_carreras').multiselect('rebuild');
+            $("#slct_carreras").multiselect('refresh');
+
+            $("#slct_ciclos").multiselect('deselectAll', false);
+            $('#slct_ciclos').multiselect('rebuild');
+            $("#slct_ciclos").multiselect('refresh');
+
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form_sedes #slct_estado').val(1);
@@ -53,7 +61,6 @@ cargarCiclos=function(Obj){
         html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
     });
     $("#slct_ciclos").html(html);
-    
     slctGlobalHtml("slct_ciclos",'multiple');
 };
 cargarCarreras=function(Obj){
