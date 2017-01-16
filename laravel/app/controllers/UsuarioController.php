@@ -10,6 +10,18 @@ class UsuarioController extends BaseController
     {
         $this->beforeFilter('auth'); // bloqueo de acceso
     }
+    public function postEditar()
+    {
+        $persona=Persona::find( Auth::id() )->update(Input::all());
+        return Response::json(
+            array(
+                'rst'=>1,
+                'datos'=>$persona,
+                'msj'=>"Telefono actualizado",
+            )
+        );
+    }
+    
     /**
      * Mostrar los datos del contacto actual
      * POST /usuario/misdatos

@@ -1,6 +1,7 @@
 <script type="text/javascript">
 $(document).ready(function() {	
 	$("#btn_guardar").click(Editar);   
+	$("#btn_guardarbasicos").click(EditarBasicos);   
 	$("#slct_sexo").val("<?= Auth::user()->sexo; ?>");
 });
 
@@ -8,6 +9,11 @@ Editar=function(){
 	if(validaUsuario()){
 		Usuario.MisDatos();
 	}
+}
+EditarBasicos=function(){
+	//if(validaUsuario()){
+		Usuario.EditarTelefonoUsuario();
+	//}
 }
 
 validaUsuario=function(){

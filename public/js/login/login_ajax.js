@@ -17,6 +17,9 @@ var Login={
                 if(obj.rst==1 && obj.estado==1){
                     window.location='admin.inicio';
                 }
+                else if(obj.rst==3 && obj.estado==1){
+                    window.location='admin.mantenimiento.misdatosbasicos';
+                }
                 else if(obj.rst==1){
                     MostrarMensaje(obj.msj);
                 }
