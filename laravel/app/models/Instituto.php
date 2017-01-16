@@ -22,11 +22,11 @@ class Instituto extends Base
     }
     public function ciclos()
     {
-        return $this->belongsToMany('Ciclo');
+        return $this->belongsToMany('Ciclo')->withTimestamps();
     }
     public function carreras()
     {
-        return $this->belongsToMany('Carrera');
+        return $this->belongsToMany('Carrera')->withTimestamps();
     }
 
     public function getInstituto(){

@@ -45,13 +45,18 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                     <form id="form_problemas" name="form_problemas" action="" method="post">
                         <div class="row form-group">
                             <div class="col-sm-12">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="control-label">Responsable</label>
                                     <h4>&nbsp;&nbsp;&nbsp;&nbsp;{{ strtoupper( Session::get('persona') ) }} </h4>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label class="control-label">Sede</label>
                                     <select class="form-control" name="slct_sede_id" id="slct_sede_id">
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Instituto</label>
+                                    <select class="form-control" name="slct_instituto_id" id="slct_instituto_id">
                                     </select>
                                 </div>
                             </div>
@@ -83,6 +88,33 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <textarea id="descripcion" name="descripcion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
+                        </div>
+                        <div  id='div_articulos' style="display:none">
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-5">
+                                        <label class="control-label">Tipo Articulo</label>
+                                        <select class="form-control" name="slct_tipo_articulo" id="slct_tipo_articulo">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="control-label">Articulo</label>
+                                        <select class="form-control" name="slct_articulo_id" id="slct_articulo_id">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        </br>
+                                        <button type="button" class="btn btn-success" onclick="AgregarArticulo();">
+                                          <i class="fa fa-plus fa-sm"></i>
+                                          &nbsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <legend>Lista de articulos</legend>
+                                <ul class="list-group" id="t_articulos"></ul>
+                            </fieldset>
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-12">

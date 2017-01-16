@@ -10,6 +10,7 @@ class RegistrarProblemaController extends BaseController
         //'fecha_problema'    => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
         'tipo_problema_id'  => 'required|numeric',
         'sede_id'           => 'required|numeric',
+        'instituto_id'           => 'required|numeric',
         //'email'             => 'required|email|unique:alumnos,email',
         //'telefono'          => 'required|min:6'
     );
@@ -55,7 +56,26 @@ class RegistrarProblemaController extends BaseController
             $data['problema_id'] = $problema->id;
             $data['resultado'] = '';
             $data['fecha_estado'] = $problema->fecha_problema;
-
+            //crear articulos
+            if (Input::has('articulos_selec')) {
+                $articulos_selec=Input::get('articulos_selec');
+                $articulos_selec = explode(",", $articulos_selec);
+                //relacionar cantidad y descripcion con el articulo que corresponde
+                //dd($articulos_selec);
+                foreach ($articulos_selec as $key => $value) {
+                    //var_dump($value); exit();
+                    $cantidad = Input::get('cantidad'.$value);
+                    $descripcion = Input::get('descripcion'.$value);
+                    
+                    $articulo[$value] = [
+                        'cantidad'=>$cantidad,
+                        'descripcion'=>$descripcion
+                    ];
+                }
+                //dd($articulo);
+                $problema->articulos()->sync($articulo);
+                //$problema->articulos()->sync([1 => ['expires' => true], 2, 3]);
+            }
             //crear detalle
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
             //crear alumnopoblema

@@ -23,6 +23,14 @@ $(document).ready(function() { $("#form_problemas").validate();
     var funcionesSede = {success:successSede};
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
+    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,null,null,null,null);
+
+    slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,null,null,'#slct_articulo_id','TA');
+    //slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','T');
+
+    slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,null,null,null,null,null);
+
+
     slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','simple',null);
     slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','T');
     slctGlobal.listarSlct('lista/carreratipocarrera','slct_carrera_id','simple',null,null,1);
@@ -75,13 +83,19 @@ $(document).ready(function() { $("#form_problemas").validate();
         if ( this.value =='3') {
             //constancia y certificado
             $('#div_tipo_carrera').css('display','');
+            $('#div_articulos').css('display','none');
+        } else if ( this.value =='6') {
+            //constancia y certificado
+            $('#div_articulos').css('display','');
         } else {
             //mostrar solo la descripcion
             //$('#div_descripcion').css('display','');
             $('#div_tipo_carrera').css('display','none');
+            $('#div_articulos').css('display','none');
             $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
             $('#slct_tipo_carrera_id').multiselect('refresh');
         }
+
         $('#slct_tipo_carrera_id').trigger('change');
     });
     $('#slct_tipo_carrera_id').change(function(event) {
@@ -165,6 +179,40 @@ $(document).ready(function() { $("#form_problemas").validate();
         modal.find('.modal-body input').val('');
     });
 });
+AgregarArticulo=function(){
+    var articulo_id=$('#slct_articulo_id option:selected').val();
+    var articulo=$('#slct_articulo_id option:selected').text();
+    var buscar_cargo = $('#cargo_'+articulo_id).text();
+    if (articulo_id!=='') {
+        if (buscar_cargo==="") {
+
+            var html='';
+            html+="<li class='list-group-item'><div class='row'>";
+            html+="<div class='col-sm-4' id='cargo_"+articulo_id+"'><h5>"+articulo+"</h5></div>";
+
+            html+="<div class='col-sm-3'>";
+            html+="<input type='text' class='form-control' placeholder='ingrese cantidad' name='cantidad"+articulo_id+"'' id='cantidad"+articulo_id+"'></div>";
+            html+="<div class='col-sm-3'>";
+            html+="<input type='text' class='form-control' placeholder='ingrese descripcion' name='descripcion"+articulo_id+"'' id='descripcion"+articulo_id+"'></div>";
+
+            html+='<div class="col-sm-2">';
+            html+='<button type="button" id="'+articulo_id+'" Onclick="EliminarArticulo(this)" class="btn btn-danger btn-sm" >';
+            html+='<i class="fa fa-minus fa-sm"></i> </button></div>';
+            html+="</div></li>";
+
+            $("#t_articulos").append(html);
+            articulos_selec.push(articulo_id);
+        } else 
+            alert("Ya se agrego este Articulo");
+    } else 
+        alert("Seleccione Articulo");
+};
+EliminarArticulo=function(obj){
+    var valor= obj.id;
+    obj.parentNode.parentNode.parentNode.remove();
+    var index = articulos_selec.indexOf(valor);
+    articulos_selec.splice( index, 1 );
+};
 successSede=function(){
     var numSedes = $("#slct_sede_id option").length;
     $('#slct_sede_id option').each(function(index, el) {
@@ -176,10 +224,20 @@ successSede=function(){
     });
 };
 Validar=function(){
+    var sede=$('#slct_sede_id').val();
+    var instituto=$('#slct_instituto_id').val();
     var tipo_problema=$('#slct_tipo_problema_id').val();
     var tipo_carrera=$('#slct_tipo_carrera_id').val();
     var fecha_problema=$('#fecha_problema').val();
 
+    if (sede==='') {
+        Psi.mensaje('danger', 'Seleccione sede', 6000);
+        return false;
+    }
+    if (instituto==='') {
+        Psi.mensaje('danger', 'Seleccione instituto', 6000);
+        return false;
+    }
     if (fecha_problema==='') {
         Psi.mensaje('danger', 'Seleccione fecha del problema', 6000);
         return false;
@@ -281,6 +339,8 @@ Guardar=function(){
     if (alumno_id!==undefined && alumno_id!=='undefined' && alumno_id!=='') {
         $("#form_problemas").append("<input type='hidden' value='"+alumno_id+"' name='alumno_id'>");
     }
+    $("#form_problemas input[name='articulos_selec']").remove();
+    $("#form_problemas").append("<input type='hidden' value='"+articulos_selec+"' name='articulos_selec'>");
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
 
     Problema.Crear(datos);

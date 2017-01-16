@@ -106,5 +106,48 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$sede));
         }
     }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/instituto
+     *
+     * @return Response
+     */
+    public function postInstituto()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $instituto = $this->listaRepo->getInstituto();
+            return Response::json(array('rst'=>1,'datos'=>$instituto));
+        }
+    }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/tipoarticulo
+     *
+     * @return Response
+     */
+    public function postTipoarticulo()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $tipoArticulo = $this->listaRepo->getTipoarticulo();
+            return Response::json(array('rst'=>1,'datos'=>$tipoArticulo));
+        }
+    }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/articulo
+     *
+     * @return Response
+     */
+    public function postArticulo()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $tipo= Input::get('tipo_articulo');
+            $articulo = $this->listaRepo->getArticuloPorTipo($tipo);
+            return Response::json(array('rst'=>1,'datos'=>$articulo));
+        }
+    }
 
 }
