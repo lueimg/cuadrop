@@ -18,11 +18,11 @@ class Persona extends Base implements UserInterface, RemindableInterface
     
     public static $where =[
                         'id', 'paterno','materno','nombre','email','dni',
-                        'password','fecha_nacimiento','sexo', 'estado'
+                        'password','fecha_nacimiento','sexo', 'estado','tipo_problema_ids'
                         ];
     public static $selec =[
                         'id', 'paterno','materno','nombre','email','dni',
-                        'password','fecha_nacimiento','sexo', 'estado'
+                        'password','fecha_nacimiento','sexo', 'estado','tipo_problema_ids'
                         ];
     public static function get(array $data =array()){
 

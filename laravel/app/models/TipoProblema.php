@@ -28,6 +28,9 @@ class TipoProblema extends Base
                         if ( Input::get('estado') ) {
                             $query->where('estado','=','1');
                         }
+                        if ( Input::has('porusuario') ) {
+                            $query->whereRaw('FIND_IN_SET(id,"'.Auth::user()->tipo_problema_ids.'")');
+                        }
                     }
                 )
                 ->orderBy('nombre')
