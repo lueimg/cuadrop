@@ -64,7 +64,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <div class="col-sm-4">
-                                    <label class="control-label">Tipo de problema</label>
+                                    <label class="control-label">Problema General</label>
                                     <select class="form-control" name="slct_tipo_problema_id" id="slct_tipo_problema_id">
                                     </select>
                                 </div>
