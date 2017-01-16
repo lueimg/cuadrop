@@ -13,7 +13,7 @@ class ArticuloController extends \BaseController
     {
         //si la peticion es ajax
         if ( Request::ajax() ) {
-            $sedes = Articulo::get(Input::all());
+            $sedes = Articulo::getCargar();
             $tipoArticulo = TipoArticulo::get(['estado',1]);
             return Response::json(['rst'=>1,'datos'=>$sedes,'tipoarticulo'=>$tipoArticulo]);
         }

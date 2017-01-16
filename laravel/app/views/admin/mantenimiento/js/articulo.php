@@ -71,6 +71,7 @@ HTMLCargarSede=function(datos){
 
         html+="<tr>"+
             "<td>"+data.nombre+"</td>"+
+            "<td>"+data.tipo+"</td>"+
             "<td id='estado_"+data.id+"' data-estado='"+data.estado+"'>"+estadohtml+"</td>"+
             '<td><a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sedeModal" data-id="'+index+'" data-titulo="Editar"><i class="fa fa-edit fa-lg"></i> </a></td>';
 
