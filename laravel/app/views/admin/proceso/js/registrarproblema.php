@@ -86,7 +86,10 @@ $(document).ready(function() { $("#form_problemas").validate();
             $('#div_articulos').css('display','none');
         } else if ( this.value =='6') {
             //constancia y certificado
+            $('#div_tipo_carrera').css('display','none');
             $('#div_articulos').css('display','');
+            $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
+            $('#slct_tipo_carrera_id').multiselect('refresh');
         } else {
             //mostrar solo la descripcion
             //$('#div_descripcion').css('display','');
@@ -442,6 +445,15 @@ limpiar=function(){
     $('#slct_ciclo_id').multiselect('refresh');
     $('#slct_ciclo_id').trigger('change');
 
+    $("#slct_tipo_articulo").val('');
+    $('#slct_tipo_articulo').multiselect('refresh');
+    $('#slct_tipo_articulo').trigger('change');
+
+    $("#slct_articulo_id").val('');
+    $('#slct_articulo_id').multiselect('refresh');
+    $('#slct_articulo_id').trigger('change');
+
+    $("#t_articulos").html("");
     $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
     $('#descripcion').val('');
     $('#carrera').val('');
