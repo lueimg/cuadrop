@@ -38,6 +38,22 @@ class TipoProblemaController extends \BaseController
             );
         }
     }
+
+    public function postListargrupo()
+    {
+        if ( Request::ajax() ) {
+            $a      = new TipoProblema;
+            $listar = Array();
+            $listar = $a->getTipoProblemaGrupo();
+
+            return Response::json(
+                array(
+                    'rst'   => 1,
+                    'datos' => $listar
+                )
+            );
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * POST /tipoproblema/crear

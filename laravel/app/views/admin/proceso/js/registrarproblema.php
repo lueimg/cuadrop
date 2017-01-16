@@ -33,7 +33,7 @@ $(document).ready(function() { $("#form_problemas").validate();
     /*var data={estado:1}
     slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);*/
 
-    var data={porusuario:1};
+    var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','T');
     slctGlobal.listarSlct('lista/carreratipocarrera','slct_carrera_id','simple',null,null,1);

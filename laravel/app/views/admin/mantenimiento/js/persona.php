@@ -1,7 +1,8 @@
 <script type="text/javascript">
 $(document).ready(function() {  
     Persona.CargarPersonas(activarTabla);
-    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','multiple',null);
+    var data={estado:1}
+    slctGlobal.listarSlct2('tipoproblema/listargrupo','slct_tipo_problema_id','multiplegrupo',null,data);
 
     $('#personaModal').on('show.bs.modal', function (event) {
         $('#slct_tipo_problema_id').multiselect('deselectAll', false);
@@ -49,6 +50,7 @@ $(document).ready(function() {
                 slctGlobalHtml('slct_tipo_problema_id','multiple',PersonaObj[persona_id].tipo_problema_ids.split(","));
             }
             else{
+                alert(PersonaObj[persona_id].tipo_problema_ids);
                 slctGlobalHtml('slct_tipo_problema_id','multiple');
             }
         }

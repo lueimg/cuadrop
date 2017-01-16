@@ -5,11 +5,12 @@ $(document).ready(function() {
 
 htmlListarSlct=function(obj,slct,tipo,valarray,afectado,afectados,slct_id,slctant,slctant_id, funciones){
     var html="";var disabled='';
-    if(tipo!="multiple"){
+    if(tipo=="simple"){
         html+= "<option value=''>.::Seleccione::.</option>";
     }
 
     if(obj.rst==1){                    
+        var grupo='';
         $.each(obj.datos,function(index,data){
         disabled=''; 
         rel=''; rel2='';rel3='';x='';y='';direccion='';
@@ -40,13 +41,29 @@ htmlListarSlct=function(obj,slct,tipo,valarray,afectado,afectados,slct_id,slctan
             if (data.direccion!='' && data.direccion!=null) {
                 direccion=' data-direccion="'+data.direccion+'" ';
             }
-                        //si se recibe estado
-            if (data.estado==1 && tipo=='multiple')
+
+            if( tipo=='multiplegrupo' ){
+                if(grupo!=data.grupo){
+                    if(html!=''){
+                        html+="</optgroup>";
+                    }
+                    grupo=data.grupo;
+                    html+="<optgroup label='"+data.grupo+"'>";
+                }
+                html += "<option value=\"" + data.id + "\" data-grupo='"+data.grupo_id+"'>" + data.nombre + "</option>";
+            }
+            else if (data.estado==1 && tipo=='multiple'){
                 html += "<option selected"+rel+rel2+x+y+direccion+" value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
-            else
+            }
+            else{
                 html += "<option "+rel+rel2+rel3+x+y+direccion+" value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
+            }
             
         }); 
+        if( tipo=='multiplegrupo' ){
+            html+="</optgroup>";
+            tipo='multiple';
+        }
     }      
     $("#"+slct).html(html);
     
