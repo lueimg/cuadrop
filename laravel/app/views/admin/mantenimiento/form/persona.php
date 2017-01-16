@@ -110,6 +110,14 @@
             <div class="row form-group">
               <div class="col-sm-12">
                 <div class="col-sm-6">
+                  <label class="control-label">Persona - Problema:
+                  </label>
+                  <select class="form-control" name="slct_tipo_problema_id[]" id="slct_tipo_problema_id" multiple>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="col-sm-6">
                   <label class="control-label">Roles:
                   </label>
                   <select class="form-control" name="slct_cargos" id="slct_cargos">

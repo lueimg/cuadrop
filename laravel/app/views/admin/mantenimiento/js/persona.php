@@ -1,8 +1,11 @@
 <script type="text/javascript">
 $(document).ready(function() {  
     Persona.CargarPersonas(activarTabla);
+    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','multiple',null);
 
     $('#personaModal').on('show.bs.modal', function (event) {
+        $('#slct_tipo_problema_id').multiselect('deselectAll', false);
+        $('#slct_tipo_problema_id').multiselect('destroy');
 
         $('#txt_fecha_nac').daterangepicker({
             format: 'YYYY-MM-DD',
@@ -21,7 +24,7 @@ $(document).ready(function() {
         $("#form_personas input[type='hidden']").remove();
         slctGlobal.listarSlct('cargo','slct_cargos','simple');
         if(titulo=='Nuevo'){
-            
+            slctGlobalHtml('slct_tipo_problema_id','multiple');
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form_personas #slct_estado').val(1); 
@@ -42,6 +45,12 @@ $(document).ready(function() {
             $('#form_personas #slct_sexo').val( PersonaObj[persona_id].sexo );
             $('#form_personas #slct_estado').val( PersonaObj[persona_id].estado );
             $("#form_personas").append("<input type='hidden' value='"+PersonaObj[persona_id].id+"' name='id'>");
+            if( PersonaObj[persona_id].tipo_problema_ids!='' ){
+                slctGlobalHtml('slct_tipo_problema_id','multiple',PersonaObj[persona_id].tipo_problema_ids.split(","));
+            }
+            else{
+                slctGlobalHtml('slct_tipo_problema_id','multiple');
+            }
         }
         $( "#form_personas #slct_estado" ).trigger('change');
         $( "#form_personas #slct_estado" ).change(function() {
