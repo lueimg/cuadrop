@@ -108,6 +108,7 @@ protected $table = '';
                 FROM problemas p
                 JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
                 JOIN sedes s ON p.sede_id=s.id
+                JOIN institutos i ON i.id=p.instituto_id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
                             FROM problema_detalle

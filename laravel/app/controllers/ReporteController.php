@@ -200,7 +200,7 @@ class ReporteController extends BaseController
         'BF','BG','BH','BI','BJ','BK','BL','BM','BN','BO','BP','BQ','BR','BS','BT','BU','BV','BW','BX','BY','BZ','CA','CB','CC','CD','CE','CF',
         'CG','CH','CI','CJ','CK','CL','CM','CN','CO','CP','CQ','CR','CS','CT','CU','CV','CW','CX','CY','CZ','DA','DB','DC','DD','DE','DF','DG',
         'DH','DI','DJ','DK','DL','DM','DN','DO','DP','DQ','DR','DS','DT','DU','DV','DW','DX','DY','DZ');
-        $azcount=array(5,17,21,40,12,18.5,18.5,18.5,18.5,40,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+        $azcount=array(5,17,21,40,12,18.5,18.5,18.5,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
             15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
@@ -227,36 +227,41 @@ class ReporteController extends BaseController
         $cabecera=array('');
         if( $datos['tipo']=='' ){
 
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado',
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
                             'Paterno','Materno','Nombre','Email','Telefono','Carrera','Tipo Carrera','Ciclo','Documento','Observación',
                             'Curso Nota','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
-                            'Curso Pago','Recibo','Monto'
+                            'Curso Pago','Recibo','Monto','Resultado'
                         );
         }
         elseif( $datos['tipo']=='5' ){
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado');
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
         elseif( $datos['tipo']=='4' ){
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado',
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
                             'Paterno','Materno','Nombre','Email','Telefono','Carrera','Tipo Carrera','Ciclo','Documento','Observación',
                             'Curso Nota','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
-                            'Curso Pago','Recibo','Monto'
+                            'Curso Pago','Recibo','Monto','Resultado'
                         );
         }
         elseif( $datos['tipo']=='3' ){
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado','Tipo Artículo','Artículo','Descripción','Cantidad');
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Tipo Artículo','Artículo','Descripción','Cantidad','Resultado');
         }
         elseif( $datos['tipo']=='2' ){
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado');
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
         elseif( $datos['tipo']=='1' ){
-            $cabecera=array('N°','Sede','Tipo Problema','Descripción','Estado Problema','Fecha Problema','Fecha Registro','Tiempo Transcurrido','Fecha Estado','Resultado');
+            $cabecera=array('N°','Sede','Problema General','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
 
         for($i=0;$i<count($cabecera);$i++){
         $objPHPExcel->getActiveSheet()->setCellValue($az[$i]."4",$cabecera[$i]);
         $objPHPExcel->getActiveSheet()->getStyle($az[$i]."4")->getAlignment()->setWrapText(true);
-        $objPHPExcel->getActiveSheet()->getColumnDimension($az[$i])->setWidth($azcount[$i]);
+            if($cabecera[$i]=="Resultado"){
+                $objPHPExcel->getActiveSheet()->getColumnDimension($az[$i])->setWidth(40);
+            }
+            else{
+                $objPHPExcel->getActiveSheet()->getColumnDimension($az[$i])->setWidth($azcount[$i]);
+            }
         }
 
         $objPHPExcel->getActiveSheet()->getStyle('A4:'.$az[($i-1)].'4')->applyFromArray( Config::get("excel.styleAlignmentBold") );
@@ -277,8 +282,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -290,8 +295,6 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->paterno);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->materno);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->nombre);$azpos++;
@@ -302,6 +305,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->ciclo);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->documento);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->observacion);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
 
                 $nota=explode('**',$r->nota);
                 $detallenota=array();
@@ -344,8 +348,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -357,7 +361,6 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
             elseif( $datos['tipo']=='4' ){
@@ -366,8 +369,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -379,8 +382,6 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->paterno);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->materno);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->nombre);$azpos++;
@@ -425,6 +426,7 @@ class ReporteController extends BaseController
                     $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$detallepago[$i]);
                     $objPHPExcel->getActiveSheet()->getStyle($az[$azpos].$valorinicial)->getAlignment()->setWrapText(true);$azpos++;
                 }
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
             elseif( $datos['tipo']=='3' ){
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$cont);$azpos++;
@@ -432,8 +434,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -445,12 +447,11 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_articulo);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->articulo);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->art_descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->art_cantidad);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
             elseif( $datos['tipo']=='2' ){
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$cont);$azpos++;
@@ -458,8 +459,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -471,7 +472,6 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
             elseif( $datos['tipo']=='1' ){
@@ -480,8 +480,8 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->tipo_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->descripcion);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->estado_problema);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_problema);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_registro);$azpos++;
+                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,date("Y-m-d"));$azpos++;
                 $tt="";
                 if($r->tiempo_transcurrido>7 AND $r->tiempo_transcurrido%7==0){
                     $tt=floor($r->tiempo_transcurrido/7)." Sem";
@@ -493,7 +493,6 @@ class ReporteController extends BaseController
                     $tt=($r->tiempo_transcurrido&7)."Dia(s)";
                 }
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
-                $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->fecha_estado);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
             
