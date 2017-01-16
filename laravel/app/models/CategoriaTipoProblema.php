@@ -2,7 +2,7 @@
 
 class CategoriaTipoProblema extends Base
 {
-    public $table = "categoria_tipo_problema";
+    public $table = "tipo_problema_categorias";
     public static $where =['id', 'nombre','tipo_problema_id', 'estado'];
     public static $selec =['id', 'nombre','tipo_problema_id', 'estado'];
     /**
@@ -22,7 +22,7 @@ class CategoriaTipoProblema extends Base
     
     public static function getCargar(){
         $Ssql="SELECT ctp.*,tp.nombre as tipo_problema
-                FROM categoria_tipo_problema ctp 
+                FROM tipo_problema_categorias ctp 
                 INNER JOIN tipo_problema tp on ctp.tipo_problema_id=tp.id
                 ";
                 
@@ -31,7 +31,7 @@ class CategoriaTipoProblema extends Base
     }
 
     public function getCategoriaTipoProblema(){
-        $CategoriaTipoProblema=DB::table('categoria_tipo_problema')
+        $CategoriaTipoProblema=DB::table('tipo_problema_categorias')
                 ->select('id','nombre','tipo_problema_id','estado')
                 ->where( 
                     function($query){
