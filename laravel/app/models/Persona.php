@@ -15,14 +15,17 @@ class Persona extends Base implements UserInterface, RemindableInterface
      * @var string
      */
     public $table = "personas";
-    
+    protected $fillable = [
+        'id', 'paterno','materno','nombre','email','dni',
+        'password','fecha_nacimiento','sexo', 'estado','telefono'
+    ];
     public static $where =[
                         'id', 'paterno','materno','nombre','email','dni',
-                        'password','fecha_nacimiento','sexo', 'estado'
+                        'password','fecha_nacimiento','sexo', 'estado','telefono'
                         ];
     public static $selec =[
                         'id', 'paterno','materno','nombre','email','dni',
-                        'password','fecha_nacimiento','sexo', 'estado'
+                        'password','fecha_nacimiento','sexo', 'estado','telefono'
                         ];
     public static function get(array $data =array()){
 

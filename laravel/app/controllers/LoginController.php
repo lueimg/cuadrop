@@ -18,7 +18,8 @@ class LoginController extends BaseController
                                 CONCAT(m.ruta,'.',o.ruta)
                             ) as ruta, m.class_icono as icon,
                             CONCAT(p.paterno, ' ', p.materno, ', ', p.nombre)
-                            as persona
+                            as persona,
+                            p.telefono
                             FROM personas p
                             JOIN cargo_persona cp ON p.id=cp.persona_id
                             JOIN cargos c ON cp.cargo_id=c.id
@@ -34,9 +35,11 @@ class LoginController extends BaseController
 
                 $menus = array();
                 $accesos = array();
+                $telefono=null;
                 foreach ($res as $data) {
                     $menu = $data->menu;
                     $persona = $data->persona;
+                    $telefono = $data->telefono;
                     //$accesos[] = $data->ruta;
                     array_push($accesos, $data->ruta);
                     if (isset($menus[$menu])) {
@@ -52,10 +55,13 @@ class LoginController extends BaseController
                 Session::set('accesos', $accesos);
                 Session::set('persona', $persona);
                 Lang::setLocale(Session::get('language_id'));
-
+                $rst='1';
+                if ($telefono=='' || $telefono==null) {
+                    $rst='3';//telefono vacio
+                }
                 return Response::json(
                     array(
-                        'rst'=>'1',
+                        'rst'=>$rst,
                         'estado'=>Auth::user()->estado,
                         'query'=>$query,
                         'menu'=>$menus,
