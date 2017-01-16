@@ -73,6 +73,31 @@ class SolucionarProblemaController extends BaseController
             return Response::json(array('rst'=>1,'datos'=>$problemas));
         }
     }
+
+    public function postCargarfiltro2()
+    {
+        if ( Request::ajax() ) {
+            $datos=array();
+            $datos['sede'] = Input::get('sede', array('0'));
+            $datos['tipo']='';
+            if ( Input::has('tipo_reporte') ){
+                $datos['tipo'] = Input::get('tipo_reporte');
+            }
+
+            if ( Input::has('estado') ){
+                $datos['estado'] = Input::get('estado');
+            }
+
+            if ( Input::has('fecha_ini') and Input::has('fecha_fin') ){
+                $datos['fecha_ini'] = Input::get('fecha_ini');
+                $datos['fecha_fin'] = Input::get('fecha_fin');
+            }
+
+            $datos['sede'] = ($datos['sede']=='') ? array('0') : $datos['sede'] ;
+            $problemas = $this->problemaRepo->getReporteSolucionProblemasFiltro2($datos);
+            return Response::json(array('rst'=>1,'datos'=>$problemas));
+        }
+    }
     /**
      * nuevo problema
      * solucionar_problema/create
