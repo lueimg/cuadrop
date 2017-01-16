@@ -15,30 +15,20 @@ $(document).ready(function() {
 
         if(titulo=='Nuevo'){
 
-            $("#slct_carreras").multiselect('deselectAll', false);
-            $('#slct_carreras').multiselect('rebuild');
-            $("#slct_carreras").multiselect('refresh');
-
-            $("#slct_ciclos").multiselect('deselectAll', false);
-            $('#slct_ciclos').multiselect('rebuild');
-            $("#slct_ciclos").multiselect('refresh');
-
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
-            $('#form_sedes #slct_estado').val(1);
-            $('#form_sedes #slct_modalidad_id').val(0);
+            $('#form_sedes #slct_estado').val(1); 
+            $('#form_sedes #slct_tipo_articulo').val(0);
             $('#form_sedes #txt_nombre').focus();
         }
-        else {
-            //enviar peticion de las carreras y ciclos asociados a este instituto
+        else{
             var id = SedeObj[sede_id].id;
-            Sedes.ConsultarCarrerasCiclos(id);
 
             modal.find('.modal-footer .btn-primary').text('Actualizar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
             $('#form_sedes #txt_nombre').val( SedeObj[sede_id].nombre );
             $('#form_sedes #slct_estado').val( SedeObj[sede_id].estado );
-            $('#form_sedes #slct_modalidad_id').val(SedeObj[sede_id].modalidad_id);
+            $('#form_sedes #slct_tipo_articulo').val(SedeObj[sede_id].tipo_articulo);
             $("#form_sedes").append("<input type='hidden' value='"+id+"' name='id'>");
         }
     });
@@ -48,28 +38,12 @@ $(document).ready(function() {
         modal.find('.modal-body input').val(''); // busca un input para copiarle texto
     });
 });
-cargarModalidades=function(Obj){
+cargarTipoArticulo=function(Obj){
     var html="";
     $.each(Obj,function(index,data){
         html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
     });
-    $("#slct_modalidad_id").html(html);
-};
-cargarCiclos=function(Obj){
-    var html="";
-    $.each(Obj,function(index,data){
-        html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
-    });
-    $("#slct_ciclos").html(html);
-    slctGlobalHtml("slct_ciclos",'multiple');
-};
-cargarCarreras=function(Obj){
-    var html="";
-    $.each(Obj,function(index,data){
-        html += "<option value=\"" + data.id + "\">" + data.nombre + "</option>";
-    });
-    $("#slct_carreras").html(html);
-    slctGlobalHtml("slct_carreras",'multiple');
+    $("#slct_tipo_articulo").html(html);
 };
 beforeSubmit=function (){};
         success=function (){};

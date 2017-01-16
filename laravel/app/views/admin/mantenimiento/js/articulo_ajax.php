@@ -7,9 +7,9 @@ var Sedes={
         //$("#form_sedes").append("<input type='hidden' value='"+$("#imagenp")[0]+"' name='h_imagenp'>");
 
         var datos=$("#form_sedes").serialize().split("txt_").join("").split("slct_").join("");
-        var accion="instituto/crear";
+        var accion="articulo/crear";
         if(AE==1){
-            accion="instituto/editar";
+            accion="articulo/editar";
         }
         var options = { 
             beforeSubmit:   beforeSubmit(),
@@ -29,7 +29,7 @@ var Sedes={
                 $(".overlay,.loading-img").remove();
                 if(obj.rst==1){
                     if(AE==0){//subir imagenes despues de crear el sede
-                        var sede_id=obj.sede_id;
+                        var sede_id=obj.sede_id
                     }
                     $('#t_sedes').dataTable().fnDestroy();
 
@@ -63,7 +63,7 @@ var Sedes={
     },
     CargarSedes:function(evento){
         $.ajax({
-            url         : 'instituto/cargar',
+            url         : 'articulo/cargar',
             type        : 'POST',
             cache       : false,
             dataType    : 'json',
@@ -74,54 +74,7 @@ var Sedes={
                 if(obj.rst==1){
                     HTMLCargarSede(obj.datos);
                     SedeObj = obj.datos;
-                    //ModalidadObj = obj.modalidades;
-                    cargarModalidades(obj.modalidades);
-                    cargarCarreras(obj.carreras);
-                    cargarCiclos(obj.ciclos);
-                }
-                $(".overlay,.loading-img").remove();
-            },
-            error: function(){
-                $(".overlay,.loading-img").remove();
-                $("#msj").html('<div class="alert alert-dismissable alert-danger">'+
-                    '<i class="fa fa-ban"></i>'+
-                    '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>'+
-                    '<b>Ocurrio una interrupción en el proceso,Favor de intentar nuevamente.'+
-                '</div>');
-            }
-        });
-    },
-    ConsultarCarrerasCiclos:function(id){
-        $.ajax({
-            url         : 'instituto/consultarcarrerasciclos',
-            type        : 'POST',
-            cache       : false,
-            dataType    : 'json',
-            data        : {id:id},
-            beforeSend : function() {
-                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
-            },
-            success : function(obj) {
-                if(obj.rst==1){
-                    //seleccionar ciclos y carreras
-                    var selec=[];
-                    $.each(obj.carreras,function(index,data){
-                        selec.push(data.id);
-                    });
-                    $("#slct_carreras").multiselect('deselectAll', false);
-                    $('#slct_carreras').multiselect('rebuild');
-                    $("#slct_carreras").multiselect('refresh');
-
-                    $("#slct_carreras").multiselect('select', selec);
-                    selec=[];
-                    $.each(obj.ciclos,function(index,data){
-                        selec.push(data.id);
-                    });
-                    $("#slct_ciclos").multiselect('deselectAll', false);
-                    $('#slct_ciclos').multiselect('rebuild');
-                    $("#slct_ciclos").multiselect('refresh');
-
-                    $("#slct_ciclos").multiselect('select', selec);
+                    cargarTipoArticulo(obj.tipoarticulo);
                 }
                 $(".overlay,.loading-img").remove();
             },
@@ -140,7 +93,7 @@ var Sedes={
         $("#form_sedes").append("<input type='hidden' value='"+AD+"' name='estado'>");
         var datos=$("#form_sedes").serialize().split("txt_").join("").split("slct_").join("");
         $.ajax({
-            url         : 'instituto/cambiarestado',
+            url         : 'articulo/cambiarestado',
             type        : 'POST',
             cache       : false,
             dataType    : 'json',
