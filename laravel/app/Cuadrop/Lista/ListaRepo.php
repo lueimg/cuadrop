@@ -92,4 +92,36 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
                 AND s.estado=1 AND p.id=? ";
         return DB::select($sql, array($personaId));
     }
+    public function getInstituto()
+    {
+        return Instituto::select('*')->where('estado',1)->get();
+    }
+    public function getTipoarticulo()
+    {
+        return TipoArticulo::select('*')->where('estado',1)->get();
+    }
+    public function getArticulo()
+    {
+        return Articulo::select('*')->where('estado',1)->get();
+    }
+    public function getArticuloPorTipo($tipo)
+    {/*
+        return Articulo::select('*')
+        ->where('estado',1)
+        ->where('tipo_articulo',$tipo)
+        ->get();*/
+
+        return  DB::table('articulos as a')
+        ->select('a.id', 'a.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("TA",tipo_articulo) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    ))
+        ->where('a.estado', '=', '1')
+        ->groupBy('a.id')
+        ->get();
+    }
 }
