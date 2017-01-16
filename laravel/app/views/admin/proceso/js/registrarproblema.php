@@ -29,6 +29,9 @@ $(document).ready(function() { $("#form_problemas").validate();
     //slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','T');
 
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,null,null,null,null,null);
+    slctGlobalHtml('slct_categoria_tipo_problema_id','simple');
+    /*var data={estado:1}
+    slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);*/
 
 
     slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema_id','simple',null);
@@ -98,7 +101,9 @@ $(document).ready(function() { $("#form_problemas").validate();
             $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
             $('#slct_tipo_carrera_id').multiselect('refresh');
         }
-
+        $("#slct_categoria_tipo_problema_id").multiselect('destroy');
+        var data={estado:1,tipo_problema_id:this.value}
+        slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);
         $('#slct_tipo_carrera_id').trigger('change');
     });
     $('#slct_tipo_carrera_id').change(function(event) {

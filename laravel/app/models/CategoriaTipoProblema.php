@@ -38,6 +38,9 @@ class CategoriaTipoProblema extends Base
                         if ( Input::get('estado') ) {
                             $query->where('estado','=','1');
                         }
+                        if ( Input::get('tipo_problema_id') ) {
+                            $query->where('tipo_problema_id','=',Input::get('tipo_problema_id'));
+                        }
                     }
                 )
                 ->orderBy('nombre')

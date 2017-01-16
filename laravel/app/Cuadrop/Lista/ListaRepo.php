@@ -30,6 +30,10 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
     {
         return TipoProblema::select('*')->where('estado',1)->get();
     }
+    public function getCategoriaTipoProblema()
+    {
+        return CategoriaTipoProblema::select('*')->where('estado',1)->get();
+    }
     public function getTipoCarrera()
     {
         return TipoCarrera::select('*')->where('estado',1)->get();
