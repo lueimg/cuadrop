@@ -36,6 +36,7 @@ class LoginController extends BaseController
                 $menus = array();
                 $accesos = array();
                 $telefono=null;
+                $persona='';
                 foreach ($res as $data) {
                     $menu = $data->menu;
                     $persona = $data->persona;

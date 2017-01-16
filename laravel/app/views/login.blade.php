@@ -20,8 +20,8 @@
 
 			<?php echo HTML::style('css/login/login.css'); ?>
 			
-			{{ HTML::script('js/login/login_ajax.js') }}
-			{{ HTML::script('js/login/login.js') }}
+			@include( 'admin.js.login_ajax' )
+			@include( 'admin.js.login' )
 	</head>
 
 <body  bgcolor="#FFF" onkeyup="return validaEnter(event,'btnIniciar');">
