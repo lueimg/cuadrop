@@ -23,7 +23,7 @@ protected $table = '';
                 p.created_at AS fecha_registro,
                 pd.fecha_estado, pd.resultado,
                 a.paterno,a.materno,a.nombre,a.email,a.telefono,
-                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
+                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'Técnico') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
                 ap.documento,ap.observacion,
                                 apnf.nota,appf.pago
                 FROM problemas p
@@ -102,7 +102,7 @@ protected $table = '';
                 p.created_at AS fecha_registro,
                 pd.fecha_estado, pd.resultado,
                 a.paterno,a.materno,a.nombre,a.email,a.telefono,
-                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
+                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'Técnico') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
                 ap.documento,ap.observacion,
                 apnf.nota,appf.pago,DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,
@@ -177,7 +177,7 @@ protected $table = '';
                 p.created_at AS fecha_registro,
                 pd.fecha_estado, pd.resultado,
                 a.paterno,a.materno,a.nombre,a.email,a.telefono,
-                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
+                IFNULL(c.nombre,ap.carrera) carrera,IFNULL(tc.nombre,'Técnico') tipo_carrera,IFNULL(ci.nombre,'') ciclo,
                 ap.documento,ap.observacion,
                 apnf.nota,appf.pago,DATEDIFF(CURDATE(),DATE(p.fecha_problema)) tiempo_transcurrido,
                 i.nombre instituto,CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona,per.telefono,

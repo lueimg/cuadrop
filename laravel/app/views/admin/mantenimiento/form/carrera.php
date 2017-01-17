@@ -28,6 +28,7 @@
                 <option value=''>Seleccione</option>
                 <option value='2'>Profesional 3 años</option>
                 <option value='3' selected>Profesional 5 años</option>
+                <option value='4'>Técnico</option>
             </select>
           </div>
           <div class="form-group">

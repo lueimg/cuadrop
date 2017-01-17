@@ -53,6 +53,16 @@
                                 <select class="form-control" name="slct_estado[]" id="slct_estado" multiple>
                                 </select>
                             </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Tipo de Reporte:
+                                </label>
+                                <select class="form-control" name="slct_tipo_reporte[]" id="slct_tipo_reporte" multiple>
+                                    <option value="1">Todo</option>
+                                    <option value="2">Logistica</option>
+                                    <option value="3">Academico</option>
+                                    <option value="4">Standar</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row  form-group">
