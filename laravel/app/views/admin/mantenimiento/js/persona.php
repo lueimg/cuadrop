@@ -28,6 +28,7 @@ $(document).ready(function() {
             slctGlobalHtml('slct_tipo_problema_id','multiple');
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
+            $('#form_personas input').val('');
             $('#form_personas #slct_estado').val(1); 
             $('#form_personas #txt_nombre').focus();
         }
@@ -45,6 +46,7 @@ $(document).ready(function() {
             $('#form_personas #txt_email').val( PersonaObj[persona_id].email );
             $('#form_personas #slct_sexo').val( PersonaObj[persona_id].sexo );
             $('#form_personas #slct_estado').val( PersonaObj[persona_id].estado );
+            $('#form_personas #txt_telefono').val( PersonaObj[persona_id].telefono );
             $("#form_personas").append("<input type='hidden' value='"+PersonaObj[persona_id].id+"' name='id'>");
             if( PersonaObj[persona_id].tipo_problema_ids!='' ){
                 slctGlobalHtml('slct_tipo_problema_id','multiple',PersonaObj[persona_id].tipo_problema_ids.split(","));

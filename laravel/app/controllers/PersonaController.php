@@ -88,6 +88,7 @@ class PersonaController extends BaseController
             $persona['email'] = Input::get('email');
             $persona['dni'] = Input::get('dni');
             $persona['sexo'] = Input::get('sexo');
+            $persona['telefono'] = Input::get('telefono');
             $persona['password'] = Hash::make(Input::get('password'));
             $persona['fecha_nacimiento'] = Input::get('fecha_nac');
             $persona['tipo_problema_ids'] = implode(",",Input::get('tipo_problema_id'));
@@ -224,6 +225,7 @@ class PersonaController extends BaseController
             $persona['nombre'] = Input::get('nombre');
             $persona['email'] = Input::get('email');
             $persona['dni'] = Input::get('dni');
+            $persona['telefono'] = Input::get('telefono');
             $persona['sexo'] = Input::get('sexo');
             if (Input::get('password')<>'') 
                 $persona['password'] = Hash::make(Input::get('password'));

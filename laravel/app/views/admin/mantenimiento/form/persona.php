@@ -100,6 +100,11 @@
                       <option value='1' selected>Activo</option>
                   </select>
                 </div>
+                <div class="col-sm-6">
+                  <label class="control-label">Telefono:
+                  </label>
+                  <input type="text" class="form-control" placeholder="Ingrese Teléfono" name="txt_telefono" id="txt_telefono">
+                </div>
               </div>
 
             </div>
@@ -118,7 +123,7 @@
               </div>
               <div class="col-sm-12">
                 <div class="col-sm-6">
-                  <label class="control-label">Roles:
+                  <label class="control-label">Cargos:
                   </label>
                   <select class="form-control" name="slct_cargos" id="slct_cargos">
                   </select>
