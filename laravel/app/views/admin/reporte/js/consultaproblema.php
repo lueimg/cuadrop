@@ -5,10 +5,11 @@ $(document).ready(function() {
         singleDatePicker: true
     });
 
+    var data={porusuario:1,estado:1};
+    slctGlobal.listarSlct('tipoproblema','slct_tipo_problema','multiple',null,data);
+    
     data={estado:1};
-
     slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple');
-    slctGlobal.listarSlct('lista/tipoproblema','slct_tipo_problema','multiple');
     slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado','multiple',null,data);
 
     $("#buscar").click(mostrar);
