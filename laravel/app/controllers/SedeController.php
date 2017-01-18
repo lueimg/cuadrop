@@ -38,6 +38,22 @@ class SedeController extends \BaseController
             );
         }
     }
+
+    public function postListar2()
+    {
+        if ( Request::ajax() ) {
+            $a      = new Sede;
+            $listar = Array();
+            $listar = $a->getSede2();
+
+            return Response::json(
+                array(
+                    'rst'   => 1,
+                    'datos' => $listar
+                )
+            );
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * POST /sede/crear

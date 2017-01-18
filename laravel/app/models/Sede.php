@@ -35,4 +35,20 @@ class Sede extends Base
                 
         return $sede;
     }
+
+    public function getSede2(){
+        $sede=DB::table('sedes')
+                ->select('id','nombre')
+                ->where( 
+                    function($query){
+                        if ( Input::get('estado') ) {
+                            $query->where('estado','=','1');
+                        }
+                    }
+                )
+                ->orderBy('nombre')
+                ->get();
+                
+        return $sede;
+    }
 }

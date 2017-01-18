@@ -106,7 +106,7 @@ var Persona={
                         html+="<div class='col-sm-6'><select class='form-control' multiple='multiple' name='slct_sedes"+data[0]+"[]' id='slct_sedes"+data[0]+"'></select></div>";
                         //var envio = {cargo_id: data[0]};
                         var envio = {cargo_id: data[0],estado:1};
-                        slctGlobal.listarSlct('sede','slct_sedes'+data[0],'multiple',sedes,envio);
+                        slctGlobal.listarSlct2('sede/listar2','slct_sedes'+data[0],'multiple',sedes,envio);
 
                         html+='<div class="col-sm-2">';
                         html+='<button type="button" id="'+data[0]+'" Onclick="EliminarSede(this)" class="btn btn-danger btn-sm" >';
