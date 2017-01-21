@@ -4767,3 +4767,4 @@ INSERT INTO `tipo_problema_categorias` VALUES ('7', '6', 'Marketing', '1', null,
 INSERT INTO `tipo_problema_categorias` VALUES ('8', '8', 'S/N', '0', null, '2017-01-16 12:44:08', null, '5');
 INSERT INTO `tipo_problema_categorias` VALUES ('9', '5', 'RR.HH', '1', '2017-01-16 14:26:53', '2017-01-16 14:26:53', '5', null);
 INSERT INTO `tipo_problema_categorias` VALUES ('10', '1', 'Convalidacion', '1', '2017-01-16 17:42:43', '2017-01-16 17:42:43', '5', null);
+
