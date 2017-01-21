@@ -65,3 +65,4 @@ Route::controller('carrera', 'CarreraController');
 Route::controller('reporte', 'ReporteController');
 Route::controller('categoriatipoproblema', 'CategoriaTipoProblemaController');
 Route::controller('area', 'AreaController');
+Route::controller('especialidad', 'EspecialidadController');

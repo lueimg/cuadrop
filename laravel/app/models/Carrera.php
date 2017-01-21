@@ -33,7 +33,7 @@ class Carrera extends Base
                 ->where( 
                     function($query){
                         if ( Input::get('estado') ) {
-                            $query->where('estado','=','1');
+                            $query->where('c.estado','=','1');
                         }
                     }
                 )
