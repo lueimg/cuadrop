@@ -51,7 +51,7 @@
                                 </tfoot>
                             </table>
                             <a class='btn btn-primary btn-sm' class="btn btn-primary" 
-                            data-toggle="modal" data-target="#areaModal" data-titulo="Nuevo"><i class="fa fa-plus fa-lg"></i>&nbsp;Nuevo</a>
+                            data-toggle="modal" data-target="#areaModal" data-titulo="Nueva"><i class="fa fa-plus fa-lg"></i>&nbsp;Nuevo</a>
                         </div><!-- /.box-body -->
                     </div><!-- /.box -->
                     <!-- Finaliza contenido -->

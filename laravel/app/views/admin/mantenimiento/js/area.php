@@ -13,7 +13,7 @@ $(document).ready(function() {
       $('#form_areas [data-toggle="tooltip"]').css("display","none");
       $("#form_areas input[type='hidden']").remove();
 
-        if(titulo=='Nuevo'){
+        if(titulo=='Nueva'){
 
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
