@@ -15,7 +15,7 @@ $(document).ready(function() {
       $('#form__especialidades [data-toggle="tooltip"]').css("display","none");
       $("#form__especialidades input[type='hidden']").remove();
 
-        if(titulo=='Nuevo'){
+        if(titulo=='Nueva'){
 
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
