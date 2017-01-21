@@ -4481,3 +4481,19 @@ CREATE TABLE `tipo_problema_categorias` (
 -- Records of tipo_problema_categorias
 -- ----------------------------
 INSERT INTO `tipo_problema_categorias` VALUES ('1', '5', 'Sunafil', '1', '2017-01-16 00:34:29', '2017-01-16 09:29:34', '1', '1');
+
+-- ----------------------------
+-- Table structure for areas
+-- ----------------------------
+DROP TABLE IF EXISTS `areas`;
+CREATE TABLE `areas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `usuario_created_at` int(11) DEFAULT NULL,
+  `usuario_updated_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
