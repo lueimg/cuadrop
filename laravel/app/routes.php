@@ -68,3 +68,5 @@ Route::controller('area', 'AreaController');
 Route::controller('especialidad', 'EspecialidadController');
 Route::controller('municipalidad', 'MunicipalidadController');
 Route::controller('licencia', 'LicenciaController');
+Route::controller('servicio', 'ServicioController');
+Route::controller('semestre', 'SemestreController');
