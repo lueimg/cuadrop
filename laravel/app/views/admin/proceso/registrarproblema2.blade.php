@@ -69,23 +69,21 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label class="control-label">Fecha del problema:</label>
-                                    <input type="text" class="form-control" name="fecha_problema" placeholder="AAAA-MM-DD HH:mm" id="fecha_problema" onfocus="blur()"/>
-                                </div>
-                                <div class="col-sm-4" id="div_tipo_carrera">
-                                    <label class="control-label">Tipo de carrera</label>
-                                    <select class="form-control" name="slct_tipo_carrera_id" id="slct_tipo_carrera_id">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                                <div class="col-sm-3">
                                     <label class="control-label">Tipo Problema:</label>
                                     <select class="form-control" name="slct_categoria_tipo_problema_id" id="slct_categoria_tipo_problema_id">
                                     </select>
                                 </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Fecha del problema:</label>
+                                    <input type="text" class="form-control" name="fecha_problema" placeholder="AAAA-MM-DD HH:mm" id="fecha_problema" onfocus="blur()"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-12" id="div_tipo_carrera">
+                                    <label class="control-label">Tipo de carrera</label>
+                                    <select class="form-control" name="slct_tipo_carrera_id" id="slct_tipo_carrera_id">
+                                    </select>
                             </div>
                             <div class="col-sm-12">
                                 <div class="col-sm-3">
@@ -96,7 +94,33 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 </div>
                             </div>
                         </div>
-                        <div  id='div_articulos' style="display:none">
+                        <div class="panel panel-info articulo" style="display:none">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Artículos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-5">
+                                    <label class="control-label">Tipo Articulo</label>
+                                    <select class="form-control" name="slct_tipo_articulo" id="slct_tipo_articulo">
+                                    </select>
+                                </div>
+                                <div class="col-sm-5">
+                                    <label class="control-label">Articulo</label>
+                                    <select class="form-control" name="slct_articulo_id" id="slct_articulo_id">
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    </br>
+                                    <button type="button" class="btn btn-success" onclick="AgregarArticulo();">
+                                      <i class="fa fa-plus fa-sm"></i>
+                                      &nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--div  id='div_articulos' style="display:none">
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <div class="col-sm-5">
@@ -122,7 +146,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <legend>Lista de articulos</legend>
                                 <ul class="list-group" id="t_articulos"></ul>
                             </fieldset>
-                        </div>
+                        </div-->
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <a class='btn btn-default btn-sm' id="eventAlumno" role="button" data-toggle="collapse" href="#collapseAlumno" aria-expanded="false" aria-controls="collapseAlumno">
@@ -170,6 +194,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <!-- Finaliza contenido -->
                             </div>
                         </div>
+
                         <div id="profesional">
                             <div class="row form-group">
                                 <div class="col-sm-12">
