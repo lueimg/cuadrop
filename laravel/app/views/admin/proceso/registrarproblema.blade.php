@@ -9,7 +9,7 @@
     {{ HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js') }}
     {{ HTML::script('lib/daterangepicker/js/daterangepicker_single.js') }}
     {{ HTML::script('lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js') }}
-
+    {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js') }}
     @include( 'admin.js.slct_global_ajax' )
     @include( 'admin.js.slct_global' )
     @include( 'admin.proceso.js.registrarproblema_ajax' )
@@ -41,7 +41,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                 </section>
 
                 <!-- Main content -->
-                <section class="content">
+                <section class="content" id='app'>
                     <form id="form_problemas" name="form_problemas" action="" method="post">
                         <div class="row form-group">
                             <div class="col-sm-12">
@@ -303,6 +303,46 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 </div>
                             </div>
                         </div>
+                        <div class="panel panel-info">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Archivos
+                                <a @click="addArchivos" class="btn btn-succes btn-sm"><i class="fa fa-plus"></i></a>
+                            </h3>
+                          </div>
+                          <div class="panel-body">
+                              <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                  <th class="col-sm-5" style="text-align:center;">Nombre</th>
+                                  <th class="col-sm-5" style="text-align:center;">Subir Archivo</th>
+                                  <th class="col-sm-2" style="text-align:center;">[]</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                  <tr v-for="(item, index) in archivos">
+                                    <td>
+                                        <input type="text" class="form-control" v-model='archivos[item].nombre'>
+                                    </td>
+                                    <td>
+                                        <input type="text" readonly class="form-control" v-model='archivos[item].name' name="archivos[]" value="">
+                                        <label class="btn bg-olive btn-flat margin">
+                                            <i class="fa fa-file-pdf-o fa-lg"></i>
+                                            <i class="fa fa-file-word-o fa-lg"></i>
+                                            <i class="fa fa-file-image-o fa-lg"></i>
+                                            <input type="file" style="display: none;" @Change="onChange(item)">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <a @click="removeArchivos(item)" class="btn btn-danger btn-sm">
+                                          <i class="fa fa-trash fa-lg"></i>
+                                        </a>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                          </div>
+                        </div>
                     </form>
                     <div class="row form-group">
                         <div class="col-sm-12">
@@ -314,6 +354,38 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                         </div>
                     </div>
                 </section><!-- /.content -->
+    <script>
+        app = new Vue({
+            el: '#app',
+            data: {
+                archivos:[{}],
+            },
+            methods: {
+                addArchivos:function(){
+                    app.archivos.push({});
+                },
+                removeArchivos:function(id){
+                    app.archivos.splice( id, 1 );
+                },
+                onChange: function(item) {
+                    var files = event.target.files || event.dataTransfer.files;
+                    if (!files.length)
+                      return;
+                    var image = new Image();
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        app.archivos[item].archivo = event.target.result;
+                    };
+                    reader.readAsDataURL(files[0]);
+                    app.archivos[item].name=files[0].name;
+
+                },
+            },/*
+            ready: function(){
+                
+            },*/
+        });
+    </script>
 @stop
 
 @section('formulario')

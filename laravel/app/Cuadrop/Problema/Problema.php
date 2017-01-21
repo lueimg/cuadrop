@@ -13,4 +13,11 @@ class Problema extends BaseEntity
         ->withPivot('cantidad', 'descripcion')
         ->withTimestamps();
     }
+    /**
+     * Archivos relationship
+     */
+    public function archivos()
+    {
+        return $this->hasMany('Archivo');
+    }
 }

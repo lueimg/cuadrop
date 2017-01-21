@@ -40,6 +40,29 @@ class RegistrarProblemaController extends BaseController
         }
     }
     /**
+     * $file  valor que se recive del frontend
+     * $id
+     * $url  url para guardar en el backend
+     */
+    public function fileToFile($file,$id, $url){
+        if ( !is_dir('upload') ) {
+            mkdir('upload');
+        }
+        if ( !is_dir('upload/'.$id) ) {
+            mkdir('upload/'.$id);
+        }
+        list($type, $file) = explode(';', $file);
+        list(, $type) = explode('/', $type);
+        if ($type=='jpeg') $type='jpg';
+        if ($type=='vnd.openxmlformats-officedocument.wordprocessingml.document') $type='docx';
+        if ($type=='sheet') $type='xlsx';
+        if ($type=='plain') $type='txt';
+        list(, $file)      = explode(',', $file);
+        $file = base64_decode($file);
+        file_put_contents($url. $type , $file);
+        return $url. $type;
+    }
+    /**
      * nuevo problema
      *
      * @return Response
@@ -78,6 +101,23 @@ class RegistrarProblemaController extends BaseController
             }
             //crear detalle
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
+            //crear archivos
+            if (Input::has('archivos_length') && Input::get('archivos_length')>0) {
+                $length=Input::get('archivos_length');
+                $archivos=[];
+                $id = Auth::id();
+                for ($i=0; $i < $length; $i++) {
+                    $archivo = Input::get('archivo'.$i);
+                    $url = "upload/$id/archivo".$i;
+                    $archivo =new Archivo( [
+                        'nombre_archivo'=>Input::get('nombre'.$i),
+                        'ruta_archivo'=>$this->fileToFile($archivo, $id, $url),
+                        'usuario_created_at'=>$problema->id,
+                    ]);
+                    array_push($archivos, $archivo);
+                }
+                $problema->archivos()->saveMany($archivos);
+            }
             //crear alumnopoblema
             if (!Input::has('carrera_id') )
                 $data['carrera_id'] = Null;

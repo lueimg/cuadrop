@@ -10,9 +10,9 @@ $(document).ready(function() { $("#form_problemas").validate();
         showDropdowns: true
     });
     $('#guardar').click(function(event) {
-        if (Validar() ) {
+        //if (Validar() ) {
             Guardar();
-        }
+        //}
     });
     $('#div_tipo_carrera').css('display','none');
     $('#eventAlumno').css('display','none');
@@ -349,6 +349,11 @@ Guardar=function(){
     }
     $("#form_problemas input[name='articulos_selec']").remove();
     $("#form_problemas").append("<input type='hidden' value='"+articulos_selec+"' name='articulos_selec'>");
+    $.each(app.archivos, function(index, val) {
+        $("#form_problemas").append("<input type='hidden' value='"+val.nombre+"' name='nombre"+index+"'>");
+        $("#form_problemas").append("<input type='hidden' value='"+val.archivo+"' name='archivo"+index+"'>");
+    });
+    $("#form_problemas").append("<input type='hidden' value='"+app.archivos.length+"' name='archivos_length'>");
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
 
     Problema.Crear(datos);

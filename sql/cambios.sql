@@ -85,3 +85,18 @@ CREATE TABLE `semestres` (
   `usuario_updated_at` INT(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `cuadrop`.`archivos`(  
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'PK',
+  `problema_id` INT(11) NOT NULL COMMENT 'FK de tabla problemas',
+  `nombre_archivo` VARCHAR(50),
+  `ruta_archivo` VARCHAR(50),
+  `usuario_updated_at` INT(11),
+  `usuario_deleted_at` INT(11) COMMENT 'usuario que elimina',
+  `usuario_created_at` INT(11),
+  `created_at` DATETIME,
+  `updated_at` DATETIME,
+  `deteled_at` DATETIME COMMENT 'fecha de eliminacion',
+  PRIMARY KEY (`id`)
+);
