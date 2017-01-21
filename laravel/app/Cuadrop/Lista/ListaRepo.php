@@ -57,6 +57,44 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
         ->groupBy('c.id')
         ->get();
     }
+    public function getCarreraInstituto()
+    {
+        return  DB::table('carreras as c')
+        ->select('c.id', 'c.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("I",instituto_id) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    ))
+        ->join(
+            'carrera_instituto as ci',
+            'c.id','=','ci.carrera_id'
+            )
+        ->where('c.estado', '=', '1')
+        ->groupBy('c.id')
+        ->get();
+    }
+    public function getCicloInstituto()
+    {
+        return  DB::table('ciclos as c')
+        ->select('c.id', 'c.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("I",instituto_id) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    ))
+        ->join(
+            'ciclo_instituto as ci',
+            'c.id','=','ci.ciclo_id'
+            )
+        ->where('c.estado', '=', '1')
+        ->groupBy('c.id')
+        ->get();
+    }
     public function getCiclo()
     {
         return Ciclo::select('*')->where('estado',1)->get();
@@ -109,12 +147,7 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
         return Articulo::select('*')->where('estado',1)->get();
     }
     public function getArticuloPorTipo($tipo)
-    {/*
-        return Articulo::select('*')
-        ->where('estado',1)
-        ->where('tipo_articulo',$tipo)
-        ->get();*/
-
+    {
         return  DB::table('articulos as a')
         ->select('a.id', 'a.nombre',
                     DB::raw(
