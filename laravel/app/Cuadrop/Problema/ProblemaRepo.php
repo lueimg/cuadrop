@@ -78,7 +78,7 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 LEFT JOIN carreras c ON ap.carrera_id = c.id
                 LEFT JOIN tipo_carrera tc ON c.tipo_carrera_id=tc.id
                 WHERE p.estado=1 AND pd.estado=1 and p.sede_id in ($sede)
-                and p.tipo_problema_id in ($tipo)
+                and p.categoria_tipo_problema_id in ($tipo)
                 $estado $fecha
                 ORDER BY p.fecha_problema DESC";
         return DB::select($sql);

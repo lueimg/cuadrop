@@ -6,8 +6,11 @@ $(document).ready(function() {
         showDropdowns: true
     });
 
-    var data={porusuario:1,estado:1};
-    slctGlobal.listarSlct('tipoproblema','slct_tipo_problema','multiple',null,data);
+    var data={porusuario:1,estado:1}
+    slctGlobal.listarSlct2('tipoproblema/listargrupo','slct_tipo_problema','multiplegrupo',null,data);
+
+    /*var data={porusuario:1,estado:1};
+    slctGlobal.listarSlct('tipoproblema','slct_tipo_problema','multiple',null,data);*/
 
     data={estado:1};
     slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple');

@@ -53,12 +53,20 @@ class TipoProblema extends Base
                                 ->where('tpc.estado','=','1');
                         }
                         if ( Input::has('porusuario') ) {
-                            $query->whereRaw('FIND_IN_SET(id,"'.Auth::user()->tipo_problema_ids.'")');
+                            $query->whereRaw('FIND_IN_SET(tpc.id,"'.Auth::user()->tipo_problema_ids.'")');
+
                         }
                     }
-                )
-                ->orderBy('nombre')
-                ->get();
+                )->orderBy('nombre')->get();
+
+        /*if ( Input::has('porusuario') ) {
+            $tipoproblema->select('tpc.id','tpc.nombre','tp.nombre as grupo','tpc.estado');
+        }
+        else{
+            $tipoproblema->select('tpc.id','tpc.nombre','tp.nombre as grupo');
+        }*/
+
+        //$tipoproblema->orderBy('nombre')->get();
                 
         return $tipoproblema;
     }
