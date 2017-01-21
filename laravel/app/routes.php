@@ -67,3 +67,4 @@ Route::controller('categoriatipoproblema', 'CategoriaTipoProblemaController');
 Route::controller('area', 'AreaController');
 Route::controller('especialidad', 'EspecialidadController');
 Route::controller('municipalidad', 'MunicipalidadController');
+Route::controller('licencia', 'LicenciaController');
