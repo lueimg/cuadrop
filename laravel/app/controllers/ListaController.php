@@ -64,11 +64,43 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$carrera));
         }
     }
+
+    /**
+     * obtener carreras por tipo carrera
+     */
     public function postCarreratipocarrera()
     {
         if (Request::ajax()) {
             $carrera = $this->listaRepo->getCarreraTipoCarrera();
             return Response::json(array('rst'=>1,'datos'=>$carrera));
+        }
+    }
+
+    /**
+     * cargar carreras por instituto
+     * POST /lista/carrerainstituto
+     *
+     * @return Response
+     */
+    public function postCarrerainstituto()
+    {
+        if (Request::ajax()) {
+            $carrera = $this->listaRepo->getCarreraInstituto();
+            return Response::json(array('rst'=>1,'datos'=>$carrera));
+        }
+    }
+
+    /**
+     * cargar ciclos por instituto
+     * POST /lista/cicloinstituto
+     *
+     * @return Response
+     */
+    public function postCicloinstituto()
+    {
+        if (Request::ajax()) {
+            $ciclo = $this->listaRepo->getCicloInstituto();
+            return Response::json(array('rst'=>1,'datos'=>$ciclo));
         }
     }
     /**
@@ -85,6 +117,9 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$ciclo));
         }
     }
+    /**
+     * obtener ciclos por tipo carrera
+     */
     public function postCiclotipocarrera()
     {
         if (Request::ajax()) {
