@@ -281,7 +281,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                                 <thead>
                                                     <tr>
                                                         <th>N</th>
-                                                        <th>Cursos</th>
+                                                        <th>Fecha</th>
                                                         <th>N° Recibo</th>
                                                         <th>Monto</th>
                                                     </tr>
@@ -290,7 +290,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                                 <tfoot>
                                                     <tr>
                                                         <th>N</th>
-                                                        <th>Cursos</th>
+                                                        <th>Fecha</th>
                                                         <th>N° Recibo</th>
                                                         <th>Monto</th>
                                                     </tr>

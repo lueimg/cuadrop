@@ -103,3 +103,6 @@ CREATE TABLE `archivos`(
 
 ALTER TABLE `alumno_problema_pago` 
   ADD COLUMN `ruta_archivo` VARCHAR(50) NULL AFTER `alumno_problema_id`;
+
+ALTER TABLE `alumno_problema_pago`   
+  CHANGE `curso` `fecha` VARCHAR(80) CHARSET utf8 COLLATE utf8_general_ci NULL;

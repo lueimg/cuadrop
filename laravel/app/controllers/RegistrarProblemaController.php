@@ -154,7 +154,7 @@ class RegistrarProblemaController extends BaseController
                         $url = "upload/$problema->id/pago".$i.'.';
                         $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
                         $alumnoProbPago =new AlumnoProblemaPago( [
-                            'curso' => Input::get('tp_curso')[$i],
+                            'fecha' => Input::get('tp_fecha')[$i],
                             'recibo' => Input::get('tp_recibo')[$i],
                             'monto' => Input::get('tp_monto')[$i],
                             'ruta_archivo' => $ruta_archivo,

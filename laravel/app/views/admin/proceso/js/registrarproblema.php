@@ -49,7 +49,7 @@ $(document).ready(function() { $("#form_problemas").validate();
             j=i+1;
             html+="<tr>"+
                 '<td>'+j+'</td>'+
-                '<td><input type="text" class="form-control" name="tp_curso[]" id="tp_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control fecha" name="tp_fecha[]" id="tp_fecha_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tp_recibo[]" id="tp_recibo_'+j+'" value="" required="required"></td>'+
                 '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>'+
                 '<td>'+
@@ -65,6 +65,10 @@ $(document).ready(function() { $("#form_problemas").validate();
             html+="</tr>";
         }
         $("#tb_pagos").html(html);
+        $('.fecha').daterangepicker({
+            singleDatePicker: true,
+            format: 'YYYY-MM-DD'
+        });
     });
     //nro_cursos
     $('#nro_cursos').change(function(event) {
