@@ -3,7 +3,8 @@
 
 @section('includes')
     @parent
-    {{ HTML::script('http://malsup.github.com/jquery.form.js') }} 
+    {{ HTML::style('lib/bootstrap-multiselect/dist/css/bootstrap-multiselect.css') }}
+    {{ HTML::script('lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js') }}
     @include( 'admin.mantenimiento.js.especialidad_ajax' )
     @include( 'admin.mantenimiento.js.especialidad' )
     @include( 'admin.js.slct_global_ajax' )

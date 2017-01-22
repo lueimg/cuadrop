@@ -100,3 +100,6 @@ CREATE TABLE `archivos`(
   `deteled_at` DATETIME COMMENT 'fecha de eliminacion',
   PRIMARY KEY (`id`)
 );
+
+ALTER TABLE `alumno_problema_pago` 
+  ADD COLUMN `ruta_archivo` VARCHAR(50) NULL AFTER `alumno_problema_id`;

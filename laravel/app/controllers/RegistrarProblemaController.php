@@ -2,6 +2,7 @@
 use Cuadrop\Problema\ProblemaRepoInterface;
 use Cuadrop\ProblemaDetalle\ProblemaDetalleRepoInterface;
 use Cuadrop\AlumnoProblema\AlumnoProblemaRepoInterface;
+use Cuadrop\AlumnoProblema\AlumnoProblemaPago;
 
 class RegistrarProblemaController extends BaseController
 {
@@ -46,10 +47,10 @@ class RegistrarProblemaController extends BaseController
      */
     public function fileToFile($file,$id, $url){
         if ( !is_dir('upload') ) {
-            mkdir('upload');
+            mkdir('upload',0777);
         }
         if ( !is_dir('upload/'.$id) ) {
-            mkdir('upload/'.$id);
+            mkdir('upload/'.$id,0777);
         }
         list($type, $file) = explode(';', $file);
         list(, $type) = explode('/', $type);
@@ -59,7 +60,7 @@ class RegistrarProblemaController extends BaseController
         if ($type=='plain') $type='txt';
         list(, $file)      = explode(',', $file);
         $file = base64_decode($file);
-        file_put_contents($url. $type , $file);
+        file_put_contents($url.$type , $file);
         return $url. $type;
     }
     /**
@@ -74,9 +75,10 @@ class RegistrarProblemaController extends BaseController
         $validator = Validator::make($data, $this->_rules, $this->_mensaje);
         if ( $validator->passes() ) {
             //crear problema
+            $id = Auth::id();
             $problema = $this->problemaRepo->create($data);
             $data['estado_problema_id'] = 1;
-            $data['problema_id'] = $problema->id;
+            $data['problema_id'] = $problema_id=$problema->id;
             $data['resultado'] = '';
             $data['fecha_estado'] = $problema->fecha_problema;
             //crear articulos
@@ -86,18 +88,14 @@ class RegistrarProblemaController extends BaseController
                 //relacionar cantidad y descripcion con el articulo que corresponde
                 //dd($articulos_selec);
                 foreach ($articulos_selec as $key => $value) {
-                    //var_dump($value); exit();
                     $cantidad = Input::get('cantidad'.$value);
                     $descripcion = Input::get('descripcion'.$value);
-                    
                     $articulo[$value] = [
                         'cantidad'=>$cantidad,
                         'descripcion'=>$descripcion
                     ];
                 }
-                //dd($articulo);
                 $problema->articulos()->sync($articulo);
-                //$problema->articulos()->sync([1 => ['expires' => true], 2, 3]);
             }
             //crear detalle
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
@@ -105,14 +103,16 @@ class RegistrarProblemaController extends BaseController
             if (Input::has('archivos_length') && Input::get('archivos_length')>0) {
                 $length=Input::get('archivos_length');
                 $archivos=[];
-                $id = Auth::id();
+                $nombre = Input::get('nombre');
+                $file = Input::get('archivo');
                 for ($i=0; $i < $length; $i++) {
-                    $archivo = Input::get('archivo'.$i);
-                    $url = "upload/$id/archivo".$i;
+                    $url = "upload/$problema->id/archivo".$i.'.';
+                    $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
                     $archivo =new Archivo( [
-                        'nombre_archivo'=>Input::get('nombre'.$i),
-                        'ruta_archivo'=>$this->fileToFile($archivo, $id, $url),
-                        'usuario_created_at'=>$problema->id,
+                        'nombre_archivo'=>$nombre[$i],
+                        'ruta_archivo'=>$ruta_archivo,
+                        'usuario_created_at'=>$id,
+                        'problema_id'=>$problema->id
                     ]);
                     array_push($archivos, $archivo);
                 }
@@ -147,18 +147,30 @@ class RegistrarProblemaController extends BaseController
                     }
                 }
                 if (Input::has('nro_pagos') && Input::get('nro_pagos')>0) {
+                    $alumnoProbPagos=[];
+                    $file = Input::get('pago_archivo');
                     for ($i=0; $i < Input::get('nro_pagos'); $i++) {
-                        $row['curso'] = Input::get('tp_curso')[$i];
-                        $row['recibo'] = Input::get('tp_recibo')[$i];
-                        $row['monto'] = Input::get('tp_monto')[$i];
-                        $this->alumnoProblemaRepo->createAlumnoProblemaPago($row);
+                        
+                        $url = "upload/$problema->id/pago".$i.'.';
+                        $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
+                        $alumnoProbPago =new AlumnoProblemaPago( [
+                            'curso' => Input::get('tp_curso')[$i],
+                            'recibo' => Input::get('tp_recibo')[$i],
+                            'monto' => Input::get('tp_monto')[$i],
+                            'ruta_archivo' => $ruta_archivo,
+                            'usuario_created_at'=>$id,
+                            'alumno_problema_id'=>$alumnoProblema->id
+                        ]);
+                        array_push($alumnoProbPagos, $alumnoProbPago);
                     }
+                    $alumnoProblema->alumnoProbPagos()->saveMany($alumnoProbPagos);
                 }
             }
 
             $rst=1;
             $msj='Registro actualizado correctamente';
         } else {
+            $problema_id=null;
             $rst=2;
             $msj=$validator->messages();
         }
@@ -166,7 +178,7 @@ class RegistrarProblemaController extends BaseController
             array(
                     'rst'=>$rst,
                     'msj'=>$msj,
-                    'problemaId'=>$problema->id,
+                    'problemaId'=>$problema_id,
                 )
         );
     }

@@ -17,6 +17,9 @@ $(document).ready(function() {
 
         if(titulo=='Nueva'){
 
+            $("#slct_carrera").multiselect('deselectAll', false);
+            $('#slct_carrera').multiselect('rebuild');
+            $("#slct_carrera").multiselect('refresh');
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form__especialidades #slct_estado').val(1); 
@@ -29,7 +32,13 @@ $(document).ready(function() {
             modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
             $('#form_especialidades #txt_nombre').val( EspecialidadObj[especialidad_id].nombre );
             $('#form_especialidades #slct_estado').val( EspecialidadObj[especialidad_id].estado );
-            $('#form_especialidades #slct_carrera').val( EspecialidadObj[especialidad_id].carrera_id );
+            $("#slct_carrera").multiselect('deselectAll', false);
+            $('#slct_carrera').multiselect('rebuild');
+            $("#slct_carrera").multiselect('refresh');
+
+            $("#slct_carrera").multiselect('select', EspecialidadObj[especialidad_id].carrera_id);
+            //$('#form_especialidades #slct_carrera').val( EspecialidadObj[especialidad_id].carrera_id );
+
             $("#form_especialidades").append("<input type='hidden' value='"+id+"' name='id'>");
         }
         
