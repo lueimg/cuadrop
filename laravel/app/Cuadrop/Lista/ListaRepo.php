@@ -177,8 +177,8 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
         ->groupBy('e.id')
         ->get();
     }
-    public function getArticulo()
+    public function getSemestre()
     {
-        return Semestre::select('*')->where('estado',1)->get();
+        return DB::table('semestres')->select('*')->where('estado',1)->orderBy('nombre')->get();
     }
 }

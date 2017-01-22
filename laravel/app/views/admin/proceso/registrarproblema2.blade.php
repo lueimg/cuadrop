@@ -118,8 +118,15 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">Ciclo:</label>
-                                    <select class="form-control" name="slct_ciclo_id" id="slct_ciclo_id">
+                                    <select class="form-control" id="slct_cs_ciclo_id">
                                     </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    </br>
+                                    <button type="button" class="btn btn-success" onclick="AgregarCicloSemestre();">
+                                      <i class="fa fa-plus fa-sm"></i>
+                                      &nbsp;
+                                    </button>
                                 </div>
                             </div>
                             <fieldset>
@@ -137,11 +144,13 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">Semestre Inicio:</label>
-                                    <input type="number" name="txt_semestre_ini_id" id="txt_semestre_ini_id" class="form-control">
+                                    <select name="slct_semestre_ini_id" id="slct_semestre_ini_id" class="form-control">
+                                    </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">Semestre Final:</label>
-                                    <input type="number" name="txt_semestre_fin_id" id="txt_semestre_fin_id" class="form-control">
+                                    <select name="slct_semestre_fin_id" id="slct_semestre_fin_id" class="form-control">
+                                    </select>
                                 </div>
                             </div>
                           </div>
@@ -155,12 +164,12 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-5">
                                     <label class="control-label">Tipo Articulo</label>
-                                    <select class="form-control" name="slct_tipo_articulo" id="slct_tipo_articulo">
+                                    <select class="form-control" id="slct_tipo_articulo">
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
                                     <label class="control-label">Articulo</label>
-                                    <select class="form-control" name="slct_articulo_id" id="slct_articulo_id">
+                                    <select class="form-control" id="slct_articulo_id">
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -269,9 +278,9 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                             <thead>
                                                 <tr>
                                                     <th>N</th>
-                                                    <th>Curso</th>
+                                                    <th>Tema(Horas)</th>
                                                     <th>Frecuencia</th>
-                                                    <th>Hora</th>
+                                                    <th>Horario</th>
                                                     <th>Profesor</th>
                                                     <th>Fec. Ini</th>
                                                     <th>Fec. Fin</th>
@@ -282,9 +291,9 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                             <tfoot>
                                                 <tr>
                                                     <th>N</th>
-                                                    <th>Curso</th>
+                                                    <th>Tema(Horas)</th>
                                                     <th>Frecuencia</th>
-                                                    <th>Hora</th>
+                                                    <th>Horario</th>
                                                     <th>Profesor</th>
                                                     <th>Fec. Ini</th>
                                                     <th>Fec. Fin</th>
@@ -321,18 +330,20 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                             <thead>
                                                 <tr>
                                                     <th>N</th>
-                                                    <th>Cursos</th>
+                                                    <th>Fecha</th>
                                                     <th>N° Recibo</th>
                                                     <th>Monto</th>
+                                                    <th>Archivo</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tb_pagos"></tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th>N</th>
-                                                    <th>Cursos</th>
+                                                    <th>Fecha</th>
                                                     <th>N° Recibo</th>
                                                     <th>Monto</th>
+                                                    <th>Archivo</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -362,10 +373,11 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <tbody>
                                   <tr v-for="(item, index) in archivos">
                                     <td>
-                                        <input type="text" class="form-control" v-model='archivos[item].nombre'>
+                                        <input type="text" name="arc_nombre[]" class="form-control" v-model='archivos[item].nombre'>
                                     </td>
                                     <td>
-                                        <input type="text" readonly class="form-control" v-model='archivos[item].name' name="archivos[]" value="">
+                                        <input type="text" readonly class="form-control" v-model='archivos[item].name' value="">
+                                        <input type="hidden" readonly class="form-control" v-model='archivos[item].archivo' name="arc_archivo[]" value="">
                                         <label class="btn bg-olive btn-flat margin">
                                             <i class="fa fa-file-pdf-o fa-lg"></i>
                                             <i class="fa fa-file-word-o fa-lg"></i>
@@ -414,7 +426,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                     var image = new Image();
                     var reader = new FileReader();
                     reader.onload = (e) => {
-                        app.archivos[item].archivo = event.target.result;
+                        app.archivos[item].archivo = e.target.result;
                     };
                     reader.readAsDataURL(files[0]);
                     app.archivos[item].name=files[0].name;

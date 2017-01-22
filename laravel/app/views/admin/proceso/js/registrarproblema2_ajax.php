@@ -62,7 +62,7 @@ var Alumno={
 var Problema={
     Crear:function(form){
         $.ajax({
-            url         : "registrar_problema/create",
+            url         : "registrar_problema/crear",
             type        : 'POST',
             cache       : false,
             dataType    : 'json',
@@ -85,7 +85,6 @@ var Problema={
             error: function(obj) {
                 $(".overlay,.loading-img").remove();
                 Psi.mensaje('danger', 'ocurrio un error al registrar', 6000);
-                //alert('no se cargo archivo');
             }
         });
     }

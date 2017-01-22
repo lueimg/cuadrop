@@ -182,4 +182,121 @@ class RegistrarProblemaController extends BaseController
                 )
         );
     }
+
+    public function postCrear()
+    {
+        $data = Input::all();// dd($data);
+        $row['usuario_created_at']=$data['usuario_created_at'] = Auth::user()->id;
+        $validator = Validator::make($data, $this->_rules, $this->_mensaje);
+        $problema_id=null;
+        if ( $validator->passes() ) {
+            //crear problema
+            /*
+            $id = Auth::id();
+            $problema = $this->problemaRepo->create($data);
+            $data['estado_problema_id'] = 1;
+            $data['problema_id'] = $problema_id=$problema->id;
+            $data['resultado'] = '';
+            $data['fecha_estado'] = $problema->fecha_problema;
+            //crear articulos
+            if (Input::has('articulos_selec')) {
+                $articulos_selec=Input::get('articulos_selec');
+                $articulos_selec = explode(",", $articulos_selec);
+                //relacionar cantidad y descripcion con el articulo que corresponde
+                //dd($articulos_selec);
+                foreach ($articulos_selec as $key => $value) {
+                    $cantidad = Input::get('cantidad'.$value);
+                    $descripcion = Input::get('descripcion'.$value);
+                    $articulo[$value] = [
+                        'cantidad'=>$cantidad,
+                        'descripcion'=>$descripcion
+                    ];
+                }
+                $problema->articulos()->sync($articulo);
+            }
+            //crear detalle
+            $problemaDetalle = $this->problemaDetalleRepo->create($data);
+            //crear archivos
+            if (Input::has('archivos_length') && Input::get('archivos_length')>0) {
+                $length=Input::get('archivos_length');
+                $archivos=[];
+                $nombre = Input::get('nombre');
+                $file = Input::get('archivo');
+                for ($i=0; $i < $length; $i++) {
+                    $url = "upload/$problema->id/archivo".$i.'.';
+                    $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
+                    $archivo =new Archivo( [
+                        'nombre_archivo'=>$nombre[$i],
+                        'ruta_archivo'=>$ruta_archivo,
+                        'usuario_created_at'=>$id,
+                        'problema_id'=>$problema->id
+                    ]);
+                    array_push($archivos, $archivo);
+                }
+                $problema->archivos()->saveMany($archivos);
+            }
+            //crear alumnopoblema
+            if (!Input::has('carrera_id') )
+                $data['carrera_id'] = Null;
+            if (!Input::has('ciclo_id') )
+                $data['ciclo_id'] = Null;
+            if (Input::has('alumno_id')) {
+                //crear alumno problema
+                $alumnoProblema = $this->alumnoProblemaRepo->create($data);
+                $row['alumno_problema_id']=$alumnoProblema->id;
+                if (Input::has('nro_cursos') && Input::get('nro_cursos')>0) {
+                    for ($i=0; $i < Input::get('nro_cursos'); $i++) {
+                        $row['curso'] = Input::get('tc_curso')[$i];
+                        $row['frecuencia'] = Input::get('tc_frecuencia')[$i];
+                        $row['hora'] = Input::get('tc_hora')[$i];
+                        $row['profesor'] = Input::get('tc_profesor')[$i];
+                        $row['fecha_inicio'] = Input::get('tc_fecha_ini')[$i];
+                        $row['fecha_fin'] = Input::get('tc_fecha_fin')[$i];
+                        $row['nota'] = Input::get('tc_nota')[$i];
+                        $row['curso'] = Input::get('tc_curso')[$i];
+                        $row['frecuencia'] = Input::get('tc_frecuencia')[$i];
+                        $row['hora'] = Input::get('tc_hora')[$i];
+                        $row['profesor'] = Input::get('tc_profesor')[$i];
+                        $row['fecha_ini'] = Input::get('tc_fecha_ini')[$i];
+                        $row['fecha_fin'] = Input::get('tc_fecha_fin')[$i];
+                        $row['nota'] = Input::get('tc_nota')[$i];
+                        $this->alumnoProblemaRepo->createAlumnoProblemaNota($row);
+                    }
+                }
+                if (Input::has('nro_pagos') && Input::get('nro_pagos')>0) {
+                    $alumnoProbPagos=[];
+                    $file = Input::get('pago_archivo');
+                    for ($i=0; $i < Input::get('nro_pagos'); $i++) {
+                        
+                        $url = "upload/$problema->id/pago".$i.'.';
+                        $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
+                        $alumnoProbPago =new AlumnoProblemaPago( [
+                            'curso' => Input::get('tp_curso')[$i],
+                            'recibo' => Input::get('tp_recibo')[$i],
+                            'monto' => Input::get('tp_monto')[$i],
+                            'ruta_archivo' => $ruta_archivo,
+                            'usuario_created_at'=>$id,
+                            'alumno_problema_id'=>$alumnoProblema->id
+                        ]);
+                        array_push($alumnoProbPagos, $alumnoProbPago);
+                    }
+                    $alumnoProblema->alumnoProbPagos()->saveMany($alumnoProbPagos);
+                }
+            }
+            */
+
+            $rst=1;
+            $msj='Registro actualizado correctamente';
+        } else {
+            $rst=2;
+            $msj=$validator->messages();
+        }
+        return Response::json(
+            array(
+                    'rst'=>$rst,
+                    'msj'=>$msj,
+                    'problemaId'=>$problema_id,
+                )
+        );
+    }
 }

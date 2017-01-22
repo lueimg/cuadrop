@@ -10,15 +10,15 @@ $(document).ready(function() { $("#form_problemas").validate();
         showDropdowns: true
     });
     $('#guardar').click(function(event) {
-        if (Validar() ) {
+        //if (Validar() ) {
             Guardar();
-        }
+        //}
     });
     /******************************Cargar Datos********************************/
     var funcionesSede = {success:successSede};
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
-    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_ciclo_id','I');
+    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id','I');
 
     slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,null,null,'#slct_articulo_id','TA');
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,1,null,null,null,null);
@@ -27,8 +27,9 @@ $(document).ready(function() { $("#form_problemas").validate();
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
-    slctGlobal.listarSlct('lista/cicloinstituto','slct_ciclo_id','simple',null,null,1);
-    slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple');
     /**************************************************************************/
     /***********************************Alumnos********************************/
     Alumno.Cargar(alumnosHTML);
@@ -87,12 +88,27 @@ $(document).ready(function() { $("#form_problemas").validate();
             j=i+1;
             html+="<tr>"+
                 '<td>'+j+'</td>'+
-                '<td><input type="text" class="form-control" name="tp_curso[]" id="tp_curso_'+j+'" value="" required="required"></td>'+
+                '<td><input type="text" class="form-control fecha" name="tp_fecha[]" id="tp_fecha_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tp_recibo[]" id="tp_recibo_'+j+'" value="" required="required"></td>'+
-                '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>';
+                '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>'+
+                '<td>'+
+                    '<input type="text" readonly class="form-control" id="pago_nombre'+i+'"" value="">'+
+                    '<input type="hidden" readonly id="pago_archivo'+i+'" name="tp_archivo[]">'+
+                    '<label class="btn bg-olive btn-flat margin">'+
+                        '<i class="fa fa-file-pdf-o fa-lg"></i>'+
+                        '<i class="fa fa-file-word-o fa-lg"></i>'+
+                        '<i class="fa fa-file-image-o fa-lg"></i>'+
+                        '<input type="file" style="display: none;" onchange="onPagos(event,'+i+');" >'+
+                    '</label>'+
+                '</td>';
             html+="</tr>";
         }
         $("#tb_pagos").html(html);
+        $('.fecha').daterangepicker({
+            format: 'YYYY-MM-DD',
+            singleDatePicker: true,
+            showDropdowns: true
+        });
     });
     /**************************************************************************/
     /**********************************Cursos**********************************/
@@ -130,25 +146,41 @@ $(document).ready(function() { $("#form_problemas").validate();
     /*************************Categoría Tipo Problema**************************/
     $('#slct_categoria_tipo_problema_id').change(function(event) {
         alert(this.value+' :visualizando');
+        alumno_id=undefined;
+        $("#t_ciclosemestre,#t_articulos").html("")
     });
     /**************************************************************************/
 });
+onPagos=function(event,item){
+    var files = event.target.files || event.dataTransfer.files;
+    if (!files.length)
+      return;
+    var image = new Image();
+    var reader = new FileReader();
+    reader.onload = (e) => {
+        $('#pago_archivo'+item).val(e.target.result);
+    };
+    reader.readAsDataURL(files[0]);
+    $('#pago_nombre'+item).val(files[0].name);
+    console.log(files[0].name);
+};
+/******************************************************************************/
 /**********************************Articulos***********************************/
 AgregarArticulo=function(){
     var articulo_id=$('#slct_articulo_id option:selected').val();
     var articulo=$('#slct_articulo_id option:selected').text();
-    var buscar_cargo = $('#cargo_'+articulo_id).text();
+    var buscar_cargo = $('#ar_div_articulo_'+articulo_id).text();
     if (articulo_id!=='') {
         if (buscar_cargo==="") {
 
             var html='';
             html+="<li class='list-group-item'><div class='row'>";
-            html+="<div class='col-sm-4' id='cargo_"+articulo_id+"'><h5>"+articulo+"</h5></div>";
+            html+="<div class='col-sm-4' id='ar_div_articulo_"+articulo_id+"'><input type='hidden' name='ar_articulo_id[]' value='"+articulo_id+"'><h5>"+articulo+"</h5></div>";
 
             html+="<div class='col-sm-3'>";
-            html+="<input type='text' class='form-control' placeholder='ingrese cantidad' name='cantidad"+articulo_id+"'' id='cantidad"+articulo_id+"'></div>";
+            html+="<input type='text' class='form-control' placeholder='ingrese cantidad' name='ar_cantidad[]' id='cantidad"+articulo_id+"'></div>";
             html+="<div class='col-sm-3'>";
-            html+="<input type='text' class='form-control' placeholder='ingrese descripcion' name='descripcion"+articulo_id+"'' id='descripcion"+articulo_id+"'></div>";
+            html+="<input type='text' class='form-control' placeholder='ingrese descripcion' name='ar_descripcion[]' id='descripcion"+articulo_id+"'></div>";
 
             html+='<div class="col-sm-2">';
             html+='<button type="button" id="'+articulo_id+'" Onclick="EliminarArticulo(this)" class="btn btn-danger btn-sm" >';
@@ -156,17 +188,54 @@ AgregarArticulo=function(){
             html+="</div></li>";
 
             $("#t_articulos").append(html);
-            articulos_selec.push(articulo_id);
         } else 
             alert("Ya se agrego este Articulo");
     } else 
         alert("Seleccione Articulo");
 };
 EliminarArticulo=function(obj){
-    var valor= obj.id;
     obj.parentNode.parentNode.parentNode.remove();
-    var index = articulos_selec.indexOf(valor);
-    articulos_selec.splice( index, 1 );
+};
+/******************************************************************************/
+/**********************************Ciclo Semestre***********************************/
+AgregarCicloSemestre=function(){
+    var ciclo_id=$('#slct_cs_ciclo_id option:selected').val();
+    var ciclo=$('#slct_cs_ciclo_id option:selected').text();
+    var buscar_cargo = $('#cs_div_ciclo_'+ciclo_id).text();
+    if (ciclo_id!=='') {
+        if (buscar_cargo==="") {
+            var html='';
+            html+="<li class='list-group-item'><div class='row'>";
+            html+="<div class='col-sm-1' id='cs_div_ciclo_"+ciclo_id+"' ><input type='hidden' name='cs_ciclo_id[]' value='"+ciclo_id+"'><h5>"+ciclo+"</h5></div>";
+
+            html+=" <div class='col-sm-3'>"+
+                        "<label class='control-label'>Semestre Inicio:</label>"+
+                        "<select name='slct_cs_semestre_ini_id[]' id='slct_cs_semestre_ini_id"+ciclo_id+"' class='form-control'>"+
+                        "</select>"+
+                    "</div>";
+
+            html+=" <div class='col-sm-3'>"+
+                        "<label class='control-label'>Semestre Final:</label>"+
+                        "<select name='slct_cs_semestre_fin_id[]' id='slct_cs_semestre_fin_id"+ciclo_id+"' class='form-control'>"+
+                        "</select>"+
+                    "</div>";
+
+            html+='<div class="col-sm-2">';
+            html+='<button type="button" id="'+ciclo_id+'" Onclick="EliminarCicloSemestre(this)" class="btn btn-danger btn-sm" >';
+            html+='<i class="fa fa-minus fa-sm"></i> </button></div>';
+            html+="</div></li>";
+
+            $("#t_ciclosemestre").append(html);
+            $("#slct_cs_semestre_ini_id"+ciclo_id).html( $("#slct_semestre_ini_id").html() );
+            $("#slct_cs_semestre_fin_id"+ciclo_id).html( $("#slct_semestre_fin_id").html() );
+            slctGlobalHtml('slct_cs_semestre_ini_id'+ciclo_id+',#slct_cs_semestre_fin_id'+ciclo_id,'simple');
+        } else 
+            alert("Ya se agrego este Ciclo");
+    } else 
+        alert("Seleccione Ciclo");
+};
+EliminarCicloSemestre=function(obj){
+    obj.parentNode.parentNode.parentNode.remove();
 };
 /******************************************************************************/
 successSede=function(){
@@ -183,20 +252,12 @@ Validar=function(){
     
 };
 Guardar=function(){
-    $("#form_problemas input[type='hidden']").remove();
+    $("#form_problemas input[name='alumno_id']").remove();
     if (alumno_id!==undefined && alumno_id!=='undefined' && alumno_id!=='') {
         $("#form_problemas").append("<input type='hidden' value='"+alumno_id+"' name='alumno_id'>");
     }
-    $("#form_problemas input[name='articulos_selec']").remove();
-    $("#form_problemas").append("<input type='hidden' value='"+articulos_selec+"' name='articulos_selec'>");
-
-    $.each(app.archivos, function(index, val) {
-        $("#form_problemas").append("<input type='hidden' value='"+val.nombre+"' name='nombre"+index+"'>");
-        $("#form_problemas").append("<input type='hidden' value='"+val.archivo+"' name='archivo"+index+"'>");
-    });
-    $("#form_problemas").append("<input type='hidden' value='"+app.archivos.length+"' name='archivos_length'>");
+    
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
-
     Problema.Crear(datos);
 };
 Editar=function(){
@@ -280,13 +341,13 @@ seleccionar=function(id,tr){
     $(tr).addClass( "selec" );
 };
 limpiar=function(){
-    $('#slct_tipo_problema_id').multiselect('deselectAll', false);
+    /*$('#slct_tipo_problema_id').multiselect('deselectAll', false);
     $('#slct_tipo_problema_id').multiselect('refresh');
     $('#slct_tipo_problema_id').trigger('change');
 
     $("#t_articulos").html("");
     $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
     $('#descripcion').val('');
-    alumno_id=undefined;
+    alumno_id=undefined;*/
 };
 </script>
