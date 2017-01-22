@@ -46,10 +46,10 @@ class RegistrarProblemaController extends BaseController
      */
     public function fileToFile($file,$id, $url){
         if ( !is_dir('upload') ) {
-            mkdir('upload');
+            mkdir('upload',0777);
         }
         if ( !is_dir('upload/'.$id) ) {
-            mkdir('upload/'.$id);
+            mkdir('upload/'.$id,0777);
         }
         list($type, $file) = explode(';', $file);
         list(, $type) = explode('/', $type);
@@ -59,7 +59,7 @@ class RegistrarProblemaController extends BaseController
         if ($type=='plain') $type='txt';
         list(, $file)      = explode(',', $file);
         $file = base64_decode($file);
-        file_put_contents($url. $type , $file);
+        file_put_contents($url.$type , $file);
         return $url. $type;
     }
     /**
@@ -86,18 +86,14 @@ class RegistrarProblemaController extends BaseController
                 //relacionar cantidad y descripcion con el articulo que corresponde
                 //dd($articulos_selec);
                 foreach ($articulos_selec as $key => $value) {
-                    //var_dump($value); exit();
                     $cantidad = Input::get('cantidad'.$value);
                     $descripcion = Input::get('descripcion'.$value);
-                    
                     $articulo[$value] = [
                         'cantidad'=>$cantidad,
                         'descripcion'=>$descripcion
                     ];
                 }
-                //dd($articulo);
                 $problema->articulos()->sync($articulo);
-                //$problema->articulos()->sync([1 => ['expires' => true], 2, 3]);
             }
             //crear detalle
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
@@ -107,12 +103,15 @@ class RegistrarProblemaController extends BaseController
                 $archivos=[];
                 $id = Auth::id();
                 for ($i=0; $i < $length; $i++) {
-                    $archivo = Input::get('archivo'.$i);
-                    $url = "upload/$id/archivo".$i;
+                    $nombre = Input::get('nombre'.$i);
+                    $file = Input::get('archivo'.$i);
+                    $url = "upload/$problema->id/archivo".$i.'.';
+                    $ruta_archivo = $this->fileToFile($file, $problema->id, $url);
                     $archivo =new Archivo( [
-                        'nombre_archivo'=>Input::get('nombre'.$i),
-                        'ruta_archivo'=>$this->fileToFile($archivo, $id, $url),
-                        'usuario_created_at'=>$problema->id,
+                        'nombre_archivo'=>$nombre,
+                        'ruta_archivo'=>$ruta_archivo,
+                        'usuario_created_at'=>$id,
+                        'problema_id'=>$problema->id
                     ]);
                     array_push($archivos, $archivo);
                 }
