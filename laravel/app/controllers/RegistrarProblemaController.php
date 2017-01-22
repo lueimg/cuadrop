@@ -55,8 +55,8 @@ class RegistrarProblemaController extends BaseController
         list($type, $file) = explode(';', $file);
         list(, $type) = explode('/', $type);
         if ($type=='jpeg') $type='jpg';
-        if ($type=='vnd.openxmlformats-officedocument.wordprocessingml.document') $type='docx';
-        if ($type=='sheet') $type='xlsx';
+        if (strpos($type,'document')!==False) $type='docx';
+        if (strpos($type, 'sheet') !== False) $type='xlsx';
         if ($type=='plain') $type='txt';
         list(, $file)      = explode(',', $file);
         $file = base64_decode($file);
