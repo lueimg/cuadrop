@@ -51,7 +51,17 @@ $(document).ready(function() { $("#form_problemas").validate();
                 '<td>'+j+'</td>'+
                 '<td><input type="text" class="form-control" name="tp_curso[]" id="tp_curso_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tp_recibo[]" id="tp_recibo_'+j+'" value="" required="required"></td>'+
-                '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>';
+                '<td><input type="number" class="form-control" name="tp_monto[]" id="tp_monto_'+j+'" value="" required="required" step="0.01" pattern="[0-9]+([\.|,][0-9]+)?"></td>'+
+                '<td>'+
+                    '<input type="text" readonly class="form-control" id="pago_nombre'+i+'"" value="">'+
+                    '<input type="text" style="display: none;" id="pago_archivo'+i+'" name="pago_archivo[]">'+
+                    '<label class="btn bg-olive btn-flat margin">'+
+                        '<i class="fa fa-file-pdf-o fa-lg"></i>'+
+                        '<i class="fa fa-file-word-o fa-lg"></i>'+
+                        '<i class="fa fa-file-image-o fa-lg"></i>'+
+                        '<input type="file" style="display: none;" onchange="onPagos('+i+');" >'+
+                    '</label>'+
+                '</td>';
             html+="</tr>";
         }
         $("#tb_pagos").html(html);
@@ -187,6 +197,22 @@ $(document).ready(function() { $("#form_problemas").validate();
         modal.find('.modal-body input').val('');
     });
 });
+onPagos=function(item){
+    var files = event.target.files || event.dataTransfer.files;
+    if (!files.length)
+      return;
+    var image = new Image();
+    var reader = new FileReader();
+    reader.onload = (e) => {
+        //pagosObj[item]=[];
+        //pagosObj[item].archivo = event.target.result;
+        $('#pago_archivo'+item).val(event.target.result);
+        //console.log(event.target.result);
+    };
+    reader.readAsDataURL(files[0]);
+    $('#pago_nombre'+item).val(files[0].name);
+    console.log(files[0].name);
+};
 AgregarArticulo=function(){
     var articulo_id=$('#slct_articulo_id option:selected').val();
     var articulo=$('#slct_articulo_id option:selected').text();
@@ -350,8 +376,8 @@ Guardar=function(){
     $("#form_problemas input[name='articulos_selec']").remove();
     $("#form_problemas").append("<input type='hidden' value='"+articulos_selec+"' name='articulos_selec'>");
     $.each(app.archivos, function(index, val) {
-        $("#form_problemas").append("<input type='hidden' value='"+val.nombre+"' name='nombre"+index+"'>");
-        $("#form_problemas").append("<input type='hidden' value='"+val.archivo+"' name='archivo"+index+"'>");
+        $("#form_problemas").append("<input type='hidden' value='"+val.nombre+"' name='nombre[]'>");
+        $("#form_problemas").append("<input type='hidden' value='"+val.archivo+"' name='archivo[]'>");
     });
     $("#form_problemas").append("<input type='hidden' value='"+app.archivos.length+"' name='archivos_length'>");
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");

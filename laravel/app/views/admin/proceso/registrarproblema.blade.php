@@ -329,7 +329,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                             <i class="fa fa-file-pdf-o fa-lg"></i>
                                             <i class="fa fa-file-word-o fa-lg"></i>
                                             <i class="fa fa-file-image-o fa-lg"></i>
-                                            <input type="file" style="display: none;" @Change="onChange(item)">
+                                            <input type="file" style="display: none;" @Change="onChangeFileArchivo(item)">
                                         </label>
                                     </td>
                                     <td>
@@ -358,7 +358,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
         app = new Vue({
             el: '#app',
             data: {
-                archivos:[{}],
+                archivos:[],
             },
             methods: {
                 addArchivos:function(){
@@ -367,7 +367,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                 removeArchivos:function(id){
                     app.archivos.splice( id, 1 );
                 },
-                onChange: function(item) {
+                onChangeFileArchivo: function(item) {
                     var files = event.target.files || event.dataTransfer.files;
                     if (!files.length)
                       return;

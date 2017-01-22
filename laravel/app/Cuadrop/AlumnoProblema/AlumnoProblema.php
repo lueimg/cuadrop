@@ -11,4 +11,11 @@ class AlumnoProblema extends BaseEntity
     protected $table = 'alumno_problema';
     protected $fillable = ['problema_id','alumno_id','carrera_id','ciclo_id',
     'carrera','documento', 'observacion', 'estado','usuario_created_at','usuario_updated_at'];
+    /**
+     * AlumnoProblemaPago relationship
+     */
+    public function alumnoProbPagos()
+    {
+        return $this->hasMany('Cuadrop\AlumnoProblema\AlumnoProblemaPago');
+    }
 }
