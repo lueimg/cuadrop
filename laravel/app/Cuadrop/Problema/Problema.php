@@ -10,7 +10,7 @@ class Problema extends BaseEntity
     
     public function articulos(){
         return $this->belongsToMany('Articulo')
-        ->withPivot('cantidad', 'descripcion')
+        ->withPivot('cantidad', 'descripcion','usuario_created_at')
         ->withTimestamps();
     }
     /**

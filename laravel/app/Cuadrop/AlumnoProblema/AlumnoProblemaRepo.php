@@ -58,4 +58,14 @@ class AlumnoProblemaRepo extends BaseRepo implements AlumnoProblemaRepoInterface
             WHERE ap.problema_id=?";
         return DB::select($sql, array($problemaId));
     }
+    public function createAlumnoProblemaCS($data)
+    {
+        $new = AlumnoProblemaCS::create($data);
+    }
+    public function getAlumnoProblemaCSProblema($alumnoProblemaId)
+    {
+        return AlumnoProblemaCS::select('*')
+        ->where('alumno_problema_id', $alumnoProblemaId)
+        ->get();
+    }
 }

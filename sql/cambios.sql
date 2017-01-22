@@ -104,5 +104,32 @@ CREATE TABLE `archivos`(
 ALTER TABLE `alumno_problema_pago` 
   ADD COLUMN `ruta_archivo` VARCHAR(50) NULL AFTER `alumno_problema_id`;
 
+
 ALTER TABLE `alumno_problema_pago`   
   CHANGE `curso` `fecha` VARCHAR(80) CHARSET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `alumno_problema`
+ADD COLUMN `especialidad_id`  int NULL AFTER `ciclo_id`,
+ADD COLUMN `semestre_ini_id`  int NULL AFTER `especialidad_id`,
+ADD COLUMN `semestre_fin_id`  int NULL AFTER `semestre_ini_id`;
+
+
+CREATE TABLE `alumno_problema_cs` (
+`id`  int NOT NULL AUTO_INCREMENT ,
+`alumno_problema_id`  int NULL ,
+`ciclo_id`  int NULL ,
+`semestre_ini_id`  int NULL ,
+`semestre_fin_id`  int NULL ,
+`estado`  int(1) NULL DEFAULT 1 ,
+`usuario_created_at`  int NULL ,
+`usuario_updated_at`  int NULL ,
+`created_at`  datetime NULL ,
+`updated_at`  datetime NULL ,
+PRIMARY KEY (`id`)
+)
+;
+
+ALTER TABLE `articulo_problema`
+ADD COLUMN `usuario_created_at`  int NULL AFTER `descripcion`,
+ADD COLUMN `usuario_updated_at`  int NULL AFTER `usuario_created_at`;
+
