@@ -184,5 +184,33 @@ class ListaController extends \BaseController
             return Response::json(array('rst'=>1,'datos'=>$articulo));
         }
     }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/especialidad
+     *
+     * @return Response
+     */
+    public function postEspecialidad()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $especialidad = $this->listaRepo->getEspecialidad();
+            return Response::json(array('rst'=>1,'datos'=>$especialidad));
+        }
+    }
+    /**
+     * Store a newly created resource in storage.
+     * POST /lista/semestre
+     *
+     * @return Response
+     */
+    public function postSemestre()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $semestre = $this->listaRepo->getSemestre();
+            return Response::json(array('rst'=>1,'datos'=>$semestre));
+        }
+    }
 
 }

@@ -161,4 +161,24 @@ class ListaRepo extends BaseRepo implements ListaRepoInterface
         ->groupBy('a.id')
         ->get();
     }
+    public function getEspecialidad()
+    {
+        return  DB::table('especialidades as e')
+        ->select('e.id', 'e.nombre',
+                    DB::raw(
+                        'CONCAT(
+                            GROUP_CONCAT( DISTINCT(CONCAT("C",e.carrera_id) )
+                                SEPARATOR "|,|"
+                            )
+                        ) as relation'
+                    )
+                )
+        ->where('e.estado', '=', '1')
+        ->groupBy('e.id')
+        ->get();
+    }
+    public function getArticulo()
+    {
+        return Semestre::select('*')->where('estado',1)->get();
+    }
 }

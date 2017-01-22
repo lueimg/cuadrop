@@ -26,9 +26,9 @@ $(document).ready(function() { $("#form_problemas").validate();
 
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
-    slctGlobal.listarSlct('lista/tipocarrera','slct_tipo_carrera_id','simple',null,null,null);
-    slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
     slctGlobal.listarSlct('lista/cicloinstituto','slct_ciclo_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple',null,null,1);
     /**************************************************************************/
     /***********************************Alumnos********************************/
     Alumno.Cargar(alumnosHTML);
@@ -125,7 +125,6 @@ $(document).ready(function() { $("#form_problemas").validate();
         $("#slct_categoria_tipo_problema_id").multiselect('destroy');
         var data={estado:1,porusuario:1,tipo_problema_id:this.value};
         slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);
-        //$('#slct_tipo_carrera_id').trigger('change');
     });
     /**************************************************************************/
     /*************************Categoría Tipo Problema**************************/
@@ -133,43 +132,6 @@ $(document).ready(function() { $("#form_problemas").validate();
         alert(this.value+' :visualizando');
     });
     /**************************************************************************/
-    $('#slct_tipo_carrera_id').change(function(event) {
-
-        if (isNaN( this.value ) || this.value==='' ) {
-            //mostrar la tabla de alumnos
-            $('#eventAlumno').css('display','none');
-        } else {
-            $('#eventAlumno').css('display','');
-            $('#collapseAlumno').collapse();
-        }
-
-        if ( this.value =='1' || this.value=='4') {
-            //escolar o tecnico
-            //alumno_problema, sin guardar ni carrer_id ni ciclo_id
-            //pero habilitar registros para alumno_problema_nota, alumno_problema_pago
-            $('#profesional_tecnico').css('display','');
-            $('#profesional').css('display','none');
-            $('#collapseAlumno').css('display','');
-            $('#tecnico').css('display','');
-            $('#tecnico_detalle').css('display','');
-        } else if ( this.value =='2' || this.value=='3' ) {
-            //profesional
-            //cargar y registrar en  alumno_problema
-            $('#profesional_tecnico').css('display','');
-            $('#profesional').css('display','');
-            $('#collapseAlumno').css('display','');
-            $('#tecnico').css('display','none');
-            $('#tecnico_detalle').css('display','none');
-
-        } else {
-            //oculatar todo
-            $('#profesional_tecnico').css('display','none');
-            $('#profesional').css('display','none');
-            $('#tecnico').css('display','none');
-            $('#tecnico_detalle').css('display','none');
-            $('#collapseAlumno').css('display','none');
-        }
-    });
 });
 /**********************************Articulos***********************************/
 AgregarArticulo=function(){
@@ -227,6 +189,12 @@ Guardar=function(){
     }
     $("#form_problemas input[name='articulos_selec']").remove();
     $("#form_problemas").append("<input type='hidden' value='"+articulos_selec+"' name='articulos_selec'>");
+
+    $.each(app.archivos, function(index, val) {
+        $("#form_problemas").append("<input type='hidden' value='"+val.nombre+"' name='nombre"+index+"'>");
+        $("#form_problemas").append("<input type='hidden' value='"+val.archivo+"' name='archivo"+index+"'>");
+    });
+    $("#form_problemas").append("<input type='hidden' value='"+app.archivos.length+"' name='archivos_length'>");
     var datos=$("#form_problemas").serialize().split("txt_").join("").split("slct_").join("");
 
     Problema.Crear(datos);
@@ -315,11 +283,6 @@ limpiar=function(){
     $('#slct_tipo_problema_id').multiselect('deselectAll', false);
     $('#slct_tipo_problema_id').multiselect('refresh');
     $('#slct_tipo_problema_id').trigger('change');
-
-    $('#slct_tipo_carrera_id').multiselect('deselectAll', false);
-    $('#slct_tipo_carrera_id').multiselect('refresh');
-    $('#slct_tipo_carrera_id').trigger('change');
-
 
     $("#t_articulos").html("");
     $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');

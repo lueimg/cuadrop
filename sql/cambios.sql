@@ -87,7 +87,7 @@ CREATE TABLE `semestres` (
 ) ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `cuadrop`.`archivos`(  
+CREATE TABLE `archivos`(  
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'PK',
   `problema_id` INT(11) NOT NULL COMMENT 'FK de tabla problemas',
   `nombre_archivo` VARCHAR(50),
