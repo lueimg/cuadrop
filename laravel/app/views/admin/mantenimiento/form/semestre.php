@@ -11,7 +11,7 @@
         <form id="form_semestres" name="form_semestres" action="" method="post" data-toggle="validator" role="form">
       <div class="modal-body">
           <div class="form-group">
-            <label for="txt_nombre" class="control-label">Nombre
+            <label for="txt_nombre" class="control-label">Nombre (Ejemplo: 2017-II)
                 <a id="error_nombre" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese Nombre">
                     <i class="fa fa-exclamation"></i>
                 </a>
