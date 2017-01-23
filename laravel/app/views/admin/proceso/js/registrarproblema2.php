@@ -30,6 +30,8 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,1,null,null,null,null);
     slctGlobalHtml('slct_categoria_tipo_problema_id','simple');
 
+    var data={estado:1};
+    slctGlobal.listarSlct2('area/listar','slct_pe_area_id','simple',null,data);
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
@@ -39,6 +41,7 @@ $(document).ready(function() {
     /**************************************************************************/
     /***********************************Alumnos********************************/
     Alumno.Cargar(alumnosHTML);
+    Alumno.CargarP(personasHTML);
     $('#collapseAlumno').on('hidden.bs.collapse', function () {
         $('#eventAlumno i').attr('class','fa fa-caret-square-o-down');
         $('#eventAlumno i').html(' Mostrar Alumnos ');
@@ -379,6 +382,12 @@ Validar=function(){
         r=false;
     }
     /**************************************************************************/
+    /*******************************Persona************************************/
+    if( $("#persona_id").attr("disabled")==undefined && $.trim($("#persona_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Busque y Seleccione Persona",4000);
+        r=false;
+    }
+    /**************************************************************************/
     /********************************Carta*************************************/
     if( $("#txt_cp_instituto").attr("disabled")==undefined && $.trim($("#txt_cp_instituto").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Instituto",4000);
@@ -404,6 +413,28 @@ Validar=function(){
     }
     if( $("#txt_ad_nota").attr("disabled")==undefined && $.trim($("#txt_ad_nota").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Nota",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*******************************Personal***********************************/
+    if( $("#slct_pe_area_id").attr("disabled")==undefined && $.trim($("#slct_pe_area_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Área",4000);
+        r=false;
+    }
+    if( $("#txt_pe_jefe").attr("disabled")==undefined && $.trim($("#txt_pe_jefe").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Jefe",4000);
+        r=false;
+    }
+    if( $("#txt_pe_motivo").attr("disabled")==undefined && $.trim($("#txt_pe_motivo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Motivo",4000);
+        r=false;
+    }
+    if( $("#txt_pe_solicita").attr("disabled")==undefined && $.trim($("#txt_pe_solicita").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese que Solicita",4000);
+        r=false;
+    }
+    if( $("#txt_pe_fecha").attr("disabled")==undefined && $.trim($("#txt_pe_fecha").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Fecha",4000);
         r=false;
     }
     /**************************************************************************/
@@ -557,6 +588,25 @@ alumnosHTML=function(datos){
     $("#tb_alumnos").html(html);
     $("#t_alumnos").dataTable();
 };
+personasHTML=function(datos){
+    AlumnosObj=datos;
+    $('#t_personas').dataTable().fnDestroy();
+    var sexo='Masculino', html='';
+    $.each(datos,function(index,data){
+
+        estado='onClick="seleccionarp('+data.id+',this)"';
+        html+="<tr "+estado+" >"+
+            "<td>"+data.paterno+"</td>"+
+            "<td>"+data.materno+"</td>"+
+            "<td>"+data.nombre+"</td>"+
+            "<td>"+data.sexo+"</td>"+
+            "<td>"+data.email+"</td>"+
+            "<td>"+data.telefono+"</td>";
+        html+="</tr>";
+    });
+    $("#tb_personas").html(html);
+    $("#t_personas").dataTable();
+};
 seleccionar=function(id,tr){
     if(alumno_id!==id){
         if ($( tr ).hasClass( "selec" )) {
@@ -566,6 +616,23 @@ seleccionar=function(id,tr){
         }
         alumno_id=id;
         $("#alumno_id").val(alumno_id);
+
+        var trs = tr.parentNode.children;
+        for(var i =0;i<trs.length;i++)
+            $(trs[i]).removeClass("selec");
+
+        $(tr).addClass( "selec" );
+    }
+};
+seleccionarp=function(id,tr){
+    if(persona_id!==id){
+        if ($( tr ).hasClass( "selec" )) {
+            $(tr).removeClass("selec");
+            persona_id=undefined;
+            return;
+        }
+        persona_id=id;
+        $("#persona_id").val(persona_id);
 
         var trs = tr.parentNode.children;
         for(var i =0;i<trs.length;i++)

@@ -240,6 +240,53 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
+                        <div class="panel panel-info grupog grupo-persona">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Personas
+                                <small>
+                                    <a class='btn btn-default btn-sm' id="eventPersona" role="button" data-toggle="collapse" href="#collapsePersona" aria-expanded="false" aria-controls="collapsePersona">
+                                    <i class="fa fa-caret-square-o-up"> Ocultar Personas </i></a>
+                                    <input type='hidden' class="grupo" value='' id='persona_id' name='persona_id'>
+                                </small>
+                            </h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="row form-group collapse" id="collapsePersona">
+                                <div class="col-sm-12">
+                                    <!-- Inicia contenido -->
+                                    <div class="box">
+                                        <div class="box-body table-responsive">
+                                            <table id="t_personas" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Apellido P</th>
+                                                        <th>Apellido M</th>
+                                                        <th>Nombres</th>
+                                                        <th>Sexo</th>
+                                                        <th>Telefono</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tb_personas"></tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Apellido P</th>
+                                                        <th>Apellido M</th>
+                                                        <th>Nombres</th>
+                                                        <th>Sexo</th>
+                                                        <th>Telefono</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div><!-- /.box-body -->
+                                    </div><!-- /.box -->
+                                    <!-- Finaliza contenido -->
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="panel panel-info grupog grupo-adicional">
                           <div class="panel-heading">
                             <h3 class="panel-title">Datos requeridos</h3>
@@ -253,6 +300,39 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-3 grupo-adicional-d grupo-ad_nota">
                                     <label class="control-label">Nota Alumno:</label>
                                     <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-personal">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-personal-d grupo-area_id">
+                                    <label class="control-label">Área:</label>
+                                    <select class="form-control grupo" name="slct_pe_area_id" id="slct_pe_area_id">
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 grupo-personal-d grupo-jefe">
+                                    <label class="control-label">Jefe:</label>
+                                    <input type="text" name="txt_pe_jefe" id="txt_pe_jefe" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-personal-d grupo-motivo">
+                                    <label class="control-label">Motivo:</label>
+                                    <input type="text" name="txt_pe_motivo" id="txt_pe_motivo" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-personal-d grupo-solicita">
+                                    <label class="control-label">Que solicita:</label>
+                                    <input type="text" name="txt_pe_solicita" id="txt_pe_solicita" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-personal-d grupo-fecha">
+                                    <label class="control-label">Fecha:</label>
+                                    <input type="text" name="txt_pe_fecha" id="txt_pe_fecha" class="form-control grupo fecha">
                                 </div>
                             </div>
                           </div>

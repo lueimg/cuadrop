@@ -22,6 +22,27 @@ var Alumno={
             }
         });
     },
+    CargarP:function(evento){
+        $.ajax({
+            url         : "alumno/persona",
+            type        : 'GET',
+            contentType : false,
+            processData : false,
+            cache       : false,
+            dataType    : "json",
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success: function(obj) {
+                $(".overlay,.loading-img").remove();
+                evento(obj.datos);
+            },
+            error: function(obj) {
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
+            }
+        });
+    },
     AgregarEditar:function(AE){
         var datos=$("#form_alumno").serialize().split("txt_").join("").split("slct_").join("");
         var accion="alumno/create";

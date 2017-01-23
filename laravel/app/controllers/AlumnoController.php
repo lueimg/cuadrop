@@ -34,6 +34,17 @@ class AlumnoController extends BaseController
             return Response::json(array('rst'=>1,'datos'=>$alumnos));
         }
     }
+
+    public function getPersona()
+    {
+        if ( Request::ajax() ) {
+            $sql="  SELECT *
+                    FROM personas
+                    WHERE estado=1 ";
+            $personas = DB::select($sql);
+            return Response::json(array('rst'=>1,'datos'=>$personas));
+        }
+    }
     /**
      * nuevo alumno
      *

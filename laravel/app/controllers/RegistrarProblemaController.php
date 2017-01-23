@@ -197,6 +197,25 @@ class RegistrarProblemaController extends BaseController
         //****************************Detalle Problema**************************
             $problemaDetalle = $this->problemaDetalleRepo->create($data);
         //**********************************************************************
+        //*********************************Personal*****************************
+        if ( Input::has('pe_area_id') || Input::has('pe_jefe') || Input::has('persona_id') || Input::has('pe_motivo') || Input::has('pe_solicita') || Input::has('pe_fecha') ) {   
+            $personal=new ProblemaPersonal;
+            $personal['problema_id']=$problema->id;
+            if ( Input::has('pe_area_id') )
+                $personal['area_id']=Input::get('pe_area_id');
+            if ( Input::has('pe_jefe') )
+                $personal['jefe']=Input::get('pe_jefe');
+            if ( Input::has('persona_id') )
+                $personal['persona_id']=Input::get('persona_id');
+            if ( Input::has('pe_motivo') )
+                $personal['motivo']=Input::get('pe_motivo');
+            if ( Input::has('pe_solicita') )
+                $personal['solicita']=Input::get('pe_solicita');
+            if ( Input::has('pe_fecha') )
+                $personal['fecha']=Input::get('pe_fecha');
+            $personal->save();
+        }
+        //**********************************************************************
         //****************************Alumno Problema***************************
             if (!Input::has('carrera_id') )
                 $data['carrera_id'] = Null;
