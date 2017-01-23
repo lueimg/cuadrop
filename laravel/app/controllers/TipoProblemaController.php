@@ -39,6 +39,22 @@ class TipoProblemaController extends \BaseController
         }
     }
 
+    public function postListar2()
+    {
+        if ( Request::ajax() ) {
+            $a      = new TipoProblema;
+            $listar = Array();
+            $listar = $a->getListar();
+
+            return Response::json(
+                array(
+                    'rst'   => 1,
+                    'datos' => $listar
+                )
+            );
+        }
+    }
+
     public function postListargrupo()
     {
         if ( Request::ajax() ) {

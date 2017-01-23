@@ -22,6 +22,7 @@
                   <label class="control-label">Tipo Problema:
                   </label>
                   <select class="form-control" name="slct_tipo_problema" id="slct_tipo_problema">
+                  <option value="">.::Seleccione::.</option>
                   </select>
                 </div>
 

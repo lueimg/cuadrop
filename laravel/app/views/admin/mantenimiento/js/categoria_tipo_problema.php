@@ -2,7 +2,7 @@
 $(document).ready(function() {  
     CategoriaTipoProblema.CargarCategoriaTipoProblema(activarTabla);
     var datos={estado:1};
-    slctGlobal.listarSlct('tipoproblema','slct_tipo_problema','simple',null,datos);
+    slctGlobal.listarSlctFijo('tipoproblema/listar2','slct_tipo_problema',datos);
     
     $('#categoriatipoproblemaModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // captura al boton

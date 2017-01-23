@@ -68,12 +68,13 @@ var slctGlobal={
             }
         });
     },
-    listarSlctFijo:function(controlador,slct){
+    listarSlctFijo:function(controlador,slct,datos){
         $.ajax({
             url         : controlador+'/listar',
             type        : 'POST',
             cache       : false,
             dataType    : 'json',
+            data        : datos,
             beforeSend : function() {
                 //$("body").append('<div class="overlay"></div><div class="loading-img"></div>');
             },

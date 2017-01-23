@@ -20,6 +20,23 @@ class TipoProblema extends Base
         return $this->hasMany('Ruta');
     }
 
+    public function getListar(){
+        $tipoproblema=DB::table('tipo_problema as tp')
+                ->select('tp.id','tp.nombre','tp.estado')
+                ->where( 
+                    function($query){
+                        if ( Input::has('estado') ) {
+                            $query->where('tp.estado','=','1');
+                        }
+                    }
+                )
+                ->groupBy('tp.id')
+                ->orderBy('tp.nombre')
+                ->get();
+                
+        return $tipoproblema;
+    }
+
     public function getTipoProblema(){
         $tipoproblema=DB::table('tipo_problema as tp')
                 ->join('tipo_problema_categorias as tpc','tp.id','=','tpc.tipo_problema_id')
