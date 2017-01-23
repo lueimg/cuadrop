@@ -30,7 +30,7 @@ $(document).ready(function() {
         });
         if(titulo=='Nuevo'){
             modal.find('.modal-footer .btn-primary').text('Guardar');
-            modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
+            //modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form_semestres #slct_estado').val(1); 
             $('#form_semestres #txt_nombre').focus();
         }
@@ -38,7 +38,7 @@ $(document).ready(function() {
             var id = SemestreObj[semestre_id].id;
 
             modal.find('.modal-footer .btn-primary').text('Actualizar');
-            modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
+            //modal.find('.modal-footer .btn-primary').attr('onClick','Editar();');
             $('#form_semestres #txt_nombre').val( SemestreObj[semestre_id].nombre );
             $('#form_semestres #slct_estado').val( SemestreObj[semestre_id].estado );
             $("#form_semestres").append("<input type='hidden' value='"+id+"' name='id'>");
