@@ -96,12 +96,12 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                           <div class="panel-body">
                             <div class="col-sm-12">
-                                <div class="col-sm-6 grupo-carrera-carrera">
+                                <div class="col-sm-6 grupo-carrera-d grupo-carrera_id">
                                     <label class="control-label">Carrera:</label>
                                     <select class="form-control grupo" name="slct_carrera_id" id="slct_carrera_id">
                                     </select>
                                 </div>
-                                <div class="col-sm-6 grupo-carrera-especialidad">
+                                <div class="col-sm-6 grupo-carrera-d grupo-especialidad_id">
                                     <label class="control-label">Especialidad/Diploma:</label>
                                     <select class="form-control grupo" name="slct_especialidad_id" id="slct_especialidad_id">
                                     </select>
