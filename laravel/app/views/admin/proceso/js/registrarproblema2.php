@@ -170,8 +170,19 @@ $(document).ready(function() {
 ValidarHTML=function(datos){
     $.each(datos,function(index,data){
         $("#form_problemas .grupo-"+data.grupo).css("display","");
-        $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
-        $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
+        $("#form_problemas .grupo-"+data.grupo+"-d").css("display","");
+        if( data.campos!='' ){
+            $("#form_problemas .grupo-"+data.grupo+"-d").css("display","none");
+            for (var i =0; i<data.campos.split(",").length; i++) {
+                $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]).css("display","");
+                $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]+" input.grupo").removeAttr("disabled");
+                $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]+" select.grupo").multiselect("enable");
+            }
+        }
+        else{
+            $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
+            $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
+        }
         $('#form_problemas select.grupo').multiselect('deselectAll', false);
         $('#form_problemas select.grupo').multiselect('refresh');
         $('#form_problemas select.grupo').trigger('change');
@@ -383,6 +394,16 @@ Validar=function(){
     }
     if( $("#txt_cp_area").attr("disabled")==undefined && $.trim($("#txt_cp_area").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Área",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /******************************Adicional***********************************/
+    if( $("#txt_ad_cambiando").attr("disabled")==undefined && $.trim($("#txt_ad_cambiando").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Cambiando",4000);
+        r=false;
+    }
+    if( $("#txt_ad_nota").attr("disabled")==undefined && $.trim($("#txt_ad_nota").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nota",4000);
         r=false;
     }
     /**************************************************************************/

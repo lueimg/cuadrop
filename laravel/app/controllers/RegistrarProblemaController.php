@@ -216,6 +216,8 @@ class RegistrarProblemaController extends BaseController
                 $data['cp_cargo'] = Null;
             if (!Input::has('cp_area') )
                 $data['cp_area'] = Null;
+            if (!Input::has('ad_nota') )
+                $data['ad_nota'] = Null;
             if (Input::has('alumno_id')) {
                 $data['carrera'] = Null;
                 $data['documento'] = Null;
@@ -280,7 +282,10 @@ class RegistrarProblemaController extends BaseController
                 $file = Input::get('tp_archivo');
                 for ($i=0; $i < count(Input::get('tp_fecha')); $i++) {
                     $url = "upload/$problema->id/pago".$i.'.';
-                    $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
+                    $ruta_archivo="";
+                    if( $file[$i]!='' ){
+                        $ruta_archivo = $this->fileToFile($file[$i], $problema->id, $url);
+                    }
                     $alumnoProbPago =new AlumnoProblemaPago( [
                         'fecha' => Input::get('tp_fecha')[$i],
                         'recibo' => Input::get('tp_recibo')[$i],
@@ -331,7 +336,7 @@ class RegistrarProblemaController extends BaseController
 
     public function getValidar(){
         $datos= Input::all();
-        $sql="  SELECT grupo,campos
+        $sql="  SELECT grupo,IFNULL(campos,'') campos
                 FROM tipo_problema_categorias_etiquetas
                 WHERE tipo_problema_categoria_id=".$datos['categoria_tipo_problema_id'];
         $r=DB::select($sql);

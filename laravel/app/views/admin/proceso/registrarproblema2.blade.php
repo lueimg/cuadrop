@@ -246,13 +246,13 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                           <div class="panel-body">
                             <div class="col-sm-12">
-                                <div class="col-sm-6">
-                                    <label class="control-label">Nota Alumno:</label>
-                                    <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3 grupo-adicional-d grupo-ad_cambiando">
                                     <label class="control-label">Cambiando:</label>
                                     <input type="number" name="txt_ad_cambiando" id="txt_ad_cambiando" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-ad_nota">
+                                    <label class="control-label">Nota Alumno:</label>
+                                    <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
                                 </div>
                             </div>
                           </div>
