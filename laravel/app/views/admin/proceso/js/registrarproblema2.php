@@ -16,10 +16,10 @@ $(document).ready(function() {
         }
     });
 
-    $("#form_problemas .grupo input,#form_problemas .grupo select").val("");
-    $("#form_problemas .grupo input,#form_problemas .grupo select").attr("disabled","true");
+    $("#form_problemas .grupog").css("display","none");
+    $("#form_problemas input.grupo,#form_problemas select.grupo").val("");
+    $("#form_problemas input.grupo,#form_problemas select.grupo").attr("disabled","true");
     $("#t_ciclosemestre,#t_articulos,#tb_cursos,#tb_pagos,.grupo-archivo table tbody tr").html("");
-    //$("#slct_instituto_id").multiselect("enable");
     /******************************Cargar Datos********************************/
     var funcionesSede = {success:successSede};
 
@@ -151,17 +151,31 @@ $(document).ready(function() {
     /**************************************************************************/
     /*************************Categoría Tipo Problema**************************/
     $('#slct_categoria_tipo_problema_id').change(function(event) {
-        Problema.Validar(ValidarHTML);
         alumno_id=undefined;
-        $("#form_problemas .grupo input,#form_problemas .grupo select").val("");
-        $("#form_problemas .grupo input,#form_problemas .grupo select").attr("disabled","true");
+        $("#tb_alumnos tr").removeClass("selec");
+        $("#form_problemas input.grupo").val("");
+        $("#form_problemas input.grupo").attr("disabled","true");
+        $("#form_problemas select.grupo").multiselect("disable");
+        $("#form_problemas .grupog").css("display","none");
+
         $("#t_ciclosemestre,#t_articulos,#tb_cursos,#tb_pagos,.grupo-archivo table tbody tr").html("");
-        $("#form_problemas .grupo select").multiselect("refresh");
+
+        if(this.value!=''){
+            var datos={categoria_tipo_problema_id:this.value};
+            Problema.Validar(ValidarHTML,datos);
+        }
     });
     /**************************************************************************/
 });
 ValidarHTML=function(datos){
-    alert(datos);
+    $.each(datos,function(index,data){
+        $("#form_problemas .grupo-"+data.grupo).css("display","");
+        $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
+        $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
+        $('#form_problemas select.grupo').multiselect('deselectAll', false);
+        $('#form_problemas select.grupo').multiselect('refresh');
+        $('#form_problemas select.grupo').trigger('change');
+    });
 }
 onPagos=function(event,item){
     var files = event.target.files || event.dataTransfer.files;
@@ -183,7 +197,7 @@ AgregarArticulo=function(){
     var articulo=$('#slct_articulo_id option:selected').text();
     var buscar_cargo = $('#ar_div_articulo_'+articulo_id).text();
     if (articulo_id!=='') {
-        if (buscar_cargo==="") {
+        if (buscar_cargo=="") {
 
             var html='';
             html+="<li class='list-group-item'><div class='row'>";
@@ -215,7 +229,7 @@ AgregarCicloSemestre=function(){
     var ciclo=$('#slct_cs_ciclo_id option:selected').text();
     var buscar_cargo = $('#cs_div_ciclo_'+ciclo_id).text();
     if (ciclo_id!=='') {
-        if (buscar_cargo==="") {
+        if (buscar_cargo=="") {
             var html='';
             html+="<li class='list-group-item'><div class='row'>";
             html+="<div class='col-sm-1' id='cs_div_ciclo_"+ciclo_id+"' ><input type='hidden' name='cs_ciclo_id[]' value='"+ciclo_id+"'><h5>"+ciclo+"</h5></div>";
@@ -263,54 +277,54 @@ successSede=function(){
 Validar=function(){
     var r=true;
     /****************************Problema**************************************/
-    if( $.trim($("#slct_sede_id").val())==='' ){
+    if( $.trim($("#slct_sede_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Sede",4000);
         r=false;
     }
-    else if( $("#slct_instituto_id").attr("disabled")===undefined && $.trim($("#slct_instituto_id").val())==='' ){
+    if( $("#slct_instituto_id").attr("disabled")==undefined && $.trim($("#slct_instituto_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Instituto",4000);
         r=false;
     }
-    else if( $.trim($("#slct_tipo_problema_id").val())==='' ){
+    if( $.trim($("#slct_tipo_problema_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Problema General",4000);
         r=false;
     }
-    else if( $.trim($("#slct_categoria_tipo_problema_id").val())==='' ){
+    if( $.trim($("#slct_categoria_tipo_problema_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Tipo Problema",4000);
         r=false;
     }
-    else if( $.trim($("#fecha_problema").val())==='' ){
+    if( $.trim($("#fecha_problema").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Fecha del Problema",4000);
         r=false;
     }
-    else if( $.trim($("#descripcion").val())==='' ){
+    if( $.trim($("#descripcion").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Descripción del Problema",4000);
         r=false;
     }
     /**************************************************************************/
     /*****************************Carrera**************************************/
-    else if( $("#slct_carrera_id").attr("disabled")===undefined && $.trim($("#slct_carrera_id").val())==='' ){
+    if( $("#slct_carrera_id").attr("disabled")==undefined && $.trim($("#slct_carrera_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Carrera",4000);
         r=false;
     }
-    else if( $("#slct_especialidad_id").attr("disabled")===undefined && $.trim($("#slct_especialidad_id").val())==='' ){
+    if( $("#slct_especialidad_id").attr("disabled")==undefined && $.trim($("#slct_especialidad_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Especialidad/Diploma",4000);
         r=false;
     }
     /**************************************************************************/
     /*****************************Ciclo Semestre*******************************/
-    else if( $("#slct_cs_ciclo_id").attr("disabled")===undefined ){
-        if( $("#t_ciclosemestre .list-group-item").length===0 ){
+    if( $("#slct_cs_ciclo_id").attr("disabled")==undefined && r==true ){
+        if( $("#t_ciclosemestre .list-group-item").length==0 ){
             Psi.mensaje("warning","Agregue almenos 1 Ciclo",4000);
             r=false;
         }
         else{
             $("#t_ciclosemestre .list-group-item").map(function(){
-                if( $(this).find("select:eq(0)").val()==='' && r===true ){
+                if( $(this).find("select:eq(0)").val()=='' && r==true ){
                     Psi.mensaje("warning","Seleccione Semestre Inicio del ciclo "+$(this).find("h5").text(),4000);
                     r=false;
                 }
-                else if( $(this).find("select:eq(1)").val()==='' && r===true ){
+                else if( $(this).find("select:eq(1)").val()=='' && r==true ){
                     Psi.mensaje("warning","Seleccione Semestre Final del ciclo "+$(this).find("h5").text(),4000);
                     r=false;
                 }
@@ -319,28 +333,28 @@ Validar=function(){
     }
     /**************************************************************************/
     /*****************************Semestre*************************************/
-    else if( $("#slct_semestre_ini_id").attr("disabled")===undefined && $.trim($("#slct_semestre_ini_id").val())==='' ){
+    if( $("#slct_semestre_ini_id").attr("disabled")==undefined && $.trim($("#slct_semestre_ini_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Semestre Inicio",4000);
         r=false;
     }
-    else if( $("#slct_semestre_fin_id").attr("disabled")===undefined && $.trim($("#slct_semestre_fin_id").val())==='' ){
+    if( $("#slct_semestre_fin_id").attr("disabled")==undefined && $.trim($("#slct_semestre_fin_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Semestre Fin",4000);
         r=false;
     }
     /**************************************************************************/
     /*****************************Articulo*************************************/
-    else if( $("#slct_articulo_id").attr("disabled")===undefined ){
-        if( $("#t_articulos .list-group-item").length===0 ){
+    if( $("#slct_articulo_id").attr("disabled")==undefined && r==true ){
+        if( $("#t_articulos .list-group-item").length==0 ){
             Psi.mensaje("warning","Agregue almenos 1 artículo",4000);
             r=false;
         }
         else{
             $("#t_articulos .list-group-item").map(function(){
-                if( $(this).find("input:eq(1)").val()==='' && r===true ){
+                if( $(this).find("input:eq(1)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Cantidad de '"+$(this).find("h5").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(2)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(2)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Descripción de '"+$(this).find("h5").text()+"'",4000);
                     r=false;
                 }
@@ -349,44 +363,44 @@ Validar=function(){
     }
     /**************************************************************************/
     /*******************************Alumno*************************************/
-    if( $("#alumno_id").attr("disabled")===undefined && $.trim($("#alumno_id").val())==='' ){
+    if( $("#alumno_id").attr("disabled")==undefined && $.trim($("#alumno_id").val())=='' && r==true ){
         Psi.mensaje("warning","Busque y Seleccione Alumno",4000);
         r=false;
     }
     /**************************************************************************/
     /*******************************Cursos*************************************/
-    else if( $("#nro_cursos").attr("disabled")===undefined ){
-        if( $("#tb_cursos tr").length===0 ){
+    if( $("#nro_cursos").attr("disabled")==undefined && r==true ){
+        if( $("#tb_cursos tr").length==0 ){
             Psi.mensaje("warning","Agregue almenos 1 curso/tema",4000);
             r=false;
         }
         else{
             $("#tb_cursos tr").map(function(){
-                if( $(this).find("input:eq(0)").val()==='' && r===true ){
+                if( $(this).find("input:eq(0)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Tema del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(1)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(1)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Frecuencia del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(2)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(2)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Horario del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(3)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(3)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Profesor del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(4)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(4)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Fecha Inicio del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(5)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(5)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Fecha Fin del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(6)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(6)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Nota del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
@@ -395,22 +409,22 @@ Validar=function(){
     }
     /**************************************************************************/
     /********************************Pagos*************************************/
-    else if( $("#nro_pagos").attr("disabled")===undefined ){
-        if( $("#tb_pagos tr").length===0 ){
-            Psi.mensaje("warning","Agregue almenos 1 curso/tema",4000);
+    if( $("#nro_pagos").attr("disabled")==undefined && r==true ){
+        if( $("#tb_pagos tr").length==0 ){
+            Psi.mensaje("warning","Agregue almenos 1 pago",4000);
             r=false;
         }
         else{
             $("#tb_pagos tr").map(function(){
-                if( $(this).find("input:eq(0)").val()==='' && r===true ){
+                if( $(this).find("input:eq(0)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Fecha de Pago del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(1)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(1)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Recibo de Pago del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
-                else if( $(this).find("input:eq(2)").val()==='' && r===true ){
+                else if( $(this).find("input:eq(2)").val()=='' && r==true ){
                     Psi.mensaje("warning","Ingrese Monto de Pago del item '"+$(this).find("td:eq(0)").text()+"'",4000);
                     r=false;
                 }
@@ -419,13 +433,13 @@ Validar=function(){
     }
     /**************************************************************************/
     /********************************Pagos*************************************/
-    else if( $(".grupo-archivo table tbody tr").length>0 ){
+    if( $(".grupo-archivo table tbody tr").length>0 && r==true ){
         $(".grupo-archivo table tbody tr").map(function(){
-            if( $(this).find("input:eq(0)").val()==='' && r===true ){
+            if( $(this).find("input:eq(0)").val()=='' && r==true ){
                 Psi.mensaje("warning","Ingrese Nombre del Archivo",4000);
                 r=false;
             }
-            else if( $(this).find("input:eq(1)").val()==='' && r===true ){
+            else if( $(this).find("input:eq(1)").val()=='' && r==true ){
                 Psi.mensaje("warning","Busque y Seleccione Archivo",4000);
                 r=false;
             }
@@ -455,7 +469,7 @@ validaAlumnos=function(){
     var rpta=true;
 
     for(i=0;i<a.length;i++){
-        if(a[i]===false){
+        if(a[i]==false){
             rpta=false;
             break;
         }
@@ -522,14 +536,17 @@ seleccionar=function(id,tr){
     }
 };
 limpiar=function(){
-    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id,#slct_instituto_id').multiselect('deselectAll', false);
-    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id,#slct_instituto_id').multiselect('refresh');
-    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id,#slct_instituto_id').trigger('change');
+    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id').multiselect('deselectAll', false);
+    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id').multiselect('refresh');
+    $('#slct_categoria_tipo_problema_id,#slct_tipo_problema_id').trigger('change');
 
-    $("#form_problemas .grupo input,#form_problemas .grupo select").val("");
-    $("#form_problemas .grupo input,#form_problemas .grupo select").attr("disabled","true");
+    alumno_id=undefined;
+    $("#tb_alumnos tr").removeClass("selec");
+    $("#form_problemas input.grupo").val("");
+    $("#form_problemas input.grupo").attr("disabled","true");
+    $("#form_problemas select.grupo").multiselect("disable");
+    $("#form_problemas .grupog").css("display","none");
     $("#t_ciclosemestre,#t_articulos,#tb_cursos,#tb_pagos,.grupo-archivo table tbody tr").html("");
-    $("#form_problemas .grupo select").multiselect("refresh");
 
     $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
     $('#descripcion').val('');

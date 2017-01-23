@@ -59,9 +59,9 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <select class="form-control" name="slct_sede_id" id="slct_sede_id">
                                     </select>
                                 </div>
-                                <div class="col-sm-4 grupo grupo-instituto">
+                                <div class="col-sm-4 grupog grupo-instituto">
                                     <label class="control-label">Institución</label>
-                                    <select class="form-control" name="slct_instituto_id" id="slct_instituto_id">
+                                    <select class="form-control grupo" name="slct_instituto_id" id="slct_instituto_id">
                                     </select>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-carrera">
+                        <div class="panel panel-info grupog grupo-carrera">
                           <div class="panel-heading">
                             <h3 class="panel-title">Carrera</h3>
                           </div>
@@ -98,19 +98,19 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6 grupo-carrera-carrera">
                                     <label class="control-label">Carrera:</label>
-                                    <select class="form-control" name="slct_carrera_id" id="slct_carrera_id">
+                                    <select class="form-control grupo" name="slct_carrera_id" id="slct_carrera_id">
                                     </select>
                                 </div>
                                 <div class="col-sm-6 grupo-carrera-especialidad">
                                     <label class="control-label">Especialidad/Diploma:</label>
-                                    <select class="form-control" name="slct_especialidad_id" id="slct_especialidad_id">
+                                    <select class="form-control grupo" name="slct_especialidad_id" id="slct_especialidad_id">
                                     </select>
                                 </div>
                             </div>
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-ciclosemestre">
+                        <div class="panel panel-info grupog grupo-ciclosemestre">
                           <div class="panel-heading">
                             <h3 class="panel-title">Ciclo - Semestre</h3>
                           </div>
@@ -118,7 +118,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">Ciclo:</label>
-                                    <select class="form-control" id="slct_cs_ciclo_id">
+                                    <select class="form-control grupo" id="slct_cs_ciclo_id">
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -136,7 +136,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-semestre">
+                        <div class="panel panel-info grupog grupo-semestre">
                           <div class="panel-heading">
                             <h3 class="panel-title">Semestre</h3>
                           </div>
@@ -144,19 +144,19 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">Semestre Inicio:</label>
-                                    <select name="slct_semestre_ini_id" id="slct_semestre_ini_id" class="form-control">
+                                    <select name="slct_semestre_ini_id" id="slct_semestre_ini_id" class="form-control grupo">
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">Semestre Final:</label>
-                                    <select name="slct_semestre_fin_id" id="slct_semestre_fin_id" class="form-control">
+                                    <select name="slct_semestre_fin_id" id="slct_semestre_fin_id" class="form-control grupo">
                                     </select>
                                 </div>
                             </div>
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-articulo">
+                        <div class="panel panel-info grupog grupo-articulo">
                           <div class="panel-heading">
                             <h3 class="panel-title">Artículos</h3>
                           </div>
@@ -164,12 +164,12 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-5">
                                     <label class="control-label">Tipo Artículo</label>
-                                    <select class="form-control" id="slct_tipo_articulo">
+                                    <select class="form-control grupo" id="slct_tipo_articulo">
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
                                     <label class="control-label">Artículo</label>
-                                    <select class="form-control" id="slct_articulo_id">
+                                    <select class="form-control grupo" id="slct_articulo_id">
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -187,13 +187,13 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-alumno">
+                        <div class="panel panel-info grupog grupo-alumno">
                           <div class="panel-heading">
                             <h3 class="panel-title">Alumnos
                                 <small>
                                     <a class='btn btn-default btn-sm' id="eventAlumno" role="button" data-toggle="collapse" href="#collapseAlumno" aria-expanded="false" aria-controls="collapseAlumno">
                                     <i class="fa fa-caret-square-o-up"> Ocultar Alumnos </i></a>
-                                    <input type='hidden' value='' id='alumno_id' name='alumno_id'>
+                                    <input type='hidden' class="grupo" value='' id='alumno_id' name='alumno_id'>
                                 </small>
                             </h3>
                           </div>
@@ -240,7 +240,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-adicional">
+                        <div class="panel panel-info grupog grupo-adicional">
                           <div class="panel-heading">
                             <h3 class="panel-title">Datos requeridos</h3>
                           </div>
@@ -248,17 +248,17 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">A:</label>
-                                    <input type="number" name="txt_ad_a" id="txt_ad_a" class="form-control">
+                                    <input type="number" name="txt_ad_a" id="txt_ad_a" class="form-control grupo">
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">B:</label>
-                                    <input type="number" name="txt_ad_b" id="txt_ad_b" class="form-control">
+                                    <input type="number" name="txt_ad_b" id="txt_ad_b" class="form-control grupo">
                                 </div>
                             </div>
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-curso">
+                        <div class="panel panel-info grupog grupo-curso">
                           <div class="panel-heading">
                             <h3 class="panel-title">Curso</h3>
                           </div>
@@ -268,7 +268,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <label class="control-label">Nro de cursos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" name="nro_cursos" id="nro_cursos" class="form-control">
+                                    <input type="number" name="nro_cursos" id="nro_cursos" class="form-control grupo">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -310,7 +310,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-pago">
+                        <div class="panel panel-info grupog grupo-pago">
                           <div class="panel-heading">
                             <h3 class="panel-title">Pago</h3>
                           </div>
@@ -320,7 +320,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <label class="control-label">Nro de pagos :</label>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" name="nro_pagos" id="nro_pagos" class="form-control">
+                                    <input type="number" name="nro_pagos" id="nro_pagos" class="form-control grupo">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -356,7 +356,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info grupo grupo-archivo">
+                        <div class="panel panel-info grupog grupo-archivo">
                           <div class="panel-heading">
                             <h3 class="panel-title">Archivos
                                 <a @click="addArchivos" class="btn btn-succes btn-sm"><i class="fa fa-plus"></i></a>
@@ -374,10 +374,10 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <tbody>
                                   <tr v-for="(item, index) in archivos">
                                     <td>
-                                        <input type="text" name="arc_nombre[]" class="form-control" v-model='archivos[item].nombre'>
+                                        <input type="text" name="arc_nombre[]" class="form-control grupo" v-model='archivos[item].nombre'>
                                     </td>
                                     <td>
-                                        <input type="text" readonly class="form-control" v-model='archivos[item].name' value="">
+                                        <input type="text" readonly class="form-control grupo" v-model='archivos[item].name' value="">
                                         <input type="hidden" readonly class="form-control" v-model='archivos[item].archivo' name="arc_archivo[]" value="">
                                         <label class="btn bg-olive btn-flat margin">
                                             <i class="fa fa-file-pdf-o fa-lg"></i>

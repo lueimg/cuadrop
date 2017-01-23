@@ -88,14 +88,13 @@ var Problema={
             }
         });
     },
-    Validar:function(evento){
+    Validar:function(evento,datos){
         $.ajax({
             url         : "registrar_problema/validar",
             type        : 'GET',
-            contentType : false,
-            processData : false,
             cache       : false,
             dataType    : "json",
+            data        : datos,
             beforeSend : function() {
                 $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
             },

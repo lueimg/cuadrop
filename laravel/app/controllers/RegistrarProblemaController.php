@@ -7,13 +7,8 @@ use Cuadrop\AlumnoProblema\AlumnoProblemaPago;
 class RegistrarProblemaController extends BaseController
 {
     protected $_rules = array(
-        //'descripcion'        => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
-        //'fecha_problema'    => 'required|regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i',
         'tipo_problema_id'  => 'required|numeric',
         'sede_id'           => 'required|numeric',
-        'instituto_id'           => 'required|numeric',
-        //'email'             => 'required|email|unique:alumnos,email',
-        //'telefono'          => 'required|min:6'
     );
     protected $_mensaje= array(
         'required'    => ':attribute Es requerido',
@@ -327,6 +322,11 @@ class RegistrarProblemaController extends BaseController
     }
 
     public function getValidar(){
-        return Response::json(array('rst'=>1,'datos'=>" Validando "));
+        $datos= Input::all();
+        $sql="  SELECT grupo,campos
+                FROM tipo_problema_categorias_etiquetas
+                WHERE tipo_problema_categoria_id=".$datos['categoria_tipo_problema_id'];
+        $r=DB::select($sql);
+        return Response::json(array('rst'=>1,'datos'=>$r));
     }
 }
