@@ -87,6 +87,27 @@ var Problema={
                 Psi.mensaje('danger', 'ocurrio un error al registrar', 6000);
             }
         });
+    },
+    Validar:function(evento){
+        $.ajax({
+            url         : "registrar_problema/validar",
+            type        : 'GET',
+            contentType : false,
+            processData : false,
+            cache       : false,
+            dataType    : "json",
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success: function(obj) {
+                $(".overlay,.loading-img").remove();
+                evento(obj.datos);
+            },
+            error: function(obj) {
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
+            }
+        });
     }
 };
 </script>

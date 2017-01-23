@@ -325,4 +325,8 @@ class RegistrarProblemaController extends BaseController
                 )
         );
     }
+
+    public function getValidar(){
+        return Response::json(array('rst'=>1,'datos'=>" Validando "));
+    }
 }

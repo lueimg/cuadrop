@@ -59,7 +59,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <select class="form-control" name="slct_sede_id" id="slct_sede_id">
                                     </select>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 grupo grupo-instituto">
                                     <label class="control-label">Institución</label>
                                     <select class="form-control" name="slct_instituto_id" id="slct_instituto_id">
                                     </select>
@@ -90,18 +90,18 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info carrera">
+                        <div class="panel panel-info grupo grupo-carrera">
                           <div class="panel-heading">
                             <h3 class="panel-title">Carrera</h3>
                           </div>
                           <div class="panel-body">
                             <div class="col-sm-12">
-                                <div class="col-sm-6 slct_carrera_id">
+                                <div class="col-sm-6 grupo-carrera-carrera">
                                     <label class="control-label">Carrera:</label>
                                     <select class="form-control" name="slct_carrera_id" id="slct_carrera_id">
                                     </select>
                                 </div>
-                                <div class="col-sm-6 slct_especialidad_id">
+                                <div class="col-sm-6 grupo-carrera-especialidad">
                                     <label class="control-label">Especialidad/Diploma:</label>
                                     <select class="form-control" name="slct_especialidad_id" id="slct_especialidad_id">
                                     </select>
@@ -110,7 +110,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info ciclosemestre">
+                        <div class="panel panel-info grupo grupo-ciclosemestre">
                           <div class="panel-heading">
                             <h3 class="panel-title">Ciclo - Semestre</h3>
                           </div>
@@ -136,7 +136,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info semestre">
+                        <div class="panel panel-info grupo grupo-semestre">
                           <div class="panel-heading">
                             <h3 class="panel-title">Semestre</h3>
                           </div>
@@ -156,19 +156,19 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info articulo">
+                        <div class="panel panel-info grupo grupo-articulo">
                           <div class="panel-heading">
                             <h3 class="panel-title">Artículos</h3>
                           </div>
                           <div class="panel-body">
                             <div class="col-sm-12">
                                 <div class="col-sm-5">
-                                    <label class="control-label">Tipo Articulo</label>
+                                    <label class="control-label">Tipo Artículo</label>
                                     <select class="form-control" id="slct_tipo_articulo">
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
-                                    <label class="control-label">Articulo</label>
+                                    <label class="control-label">Artículo</label>
                                     <select class="form-control" id="slct_articulo_id">
                                     </select>
                                 </div>
@@ -187,12 +187,13 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info alumno">
+                        <div class="panel panel-info grupo grupo-alumno">
                           <div class="panel-heading">
                             <h3 class="panel-title">Alumnos
                                 <small>
                                     <a class='btn btn-default btn-sm' id="eventAlumno" role="button" data-toggle="collapse" href="#collapseAlumno" aria-expanded="false" aria-controls="collapseAlumno">
                                     <i class="fa fa-caret-square-o-up"> Ocultar Alumnos </i></a>
+                                    <input type='hidden' value='' id='alumno_id' name='alumno_id'>
                                 </small>
                             </h3>
                           </div>
@@ -239,7 +240,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info adicional">
+                        <div class="panel panel-info grupo grupo-adicional">
                           <div class="panel-heading">
                             <h3 class="panel-title">Datos requeridos</h3>
                           </div>
@@ -247,17 +248,17 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-6">
                                     <label class="control-label">A:</label>
-                                    <input type="number" name="txt_a" id="txt_a" class="form-control">
+                                    <input type="number" name="txt_ad_a" id="txt_ad_a" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">B:</label>
-                                    <input type="number" name="txt_b" id="txt_b" class="form-control">
+                                    <input type="number" name="txt_ad_b" id="txt_ad_b" class="form-control">
                                 </div>
                             </div>
                           </div>
                         </div>
 
-                        <div class="panel panel-info curso">
+                        <div class="panel panel-info grupo grupo-curso">
                           <div class="panel-heading">
                             <h3 class="panel-title">Curso</h3>
                           </div>
@@ -309,7 +310,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info pago">
+                        <div class="panel panel-info grupo grupo-pago">
                           <div class="panel-heading">
                             <h3 class="panel-title">Pago</h3>
                           </div>
@@ -355,7 +356,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
-                        <div class="panel panel-info archivo">
+                        <div class="panel panel-info grupo grupo-archivo">
                           <div class="panel-heading">
                             <h3 class="panel-title">Archivos
                                 <a @click="addArchivos" class="btn btn-succes btn-sm"><i class="fa fa-plus"></i></a>
