@@ -258,6 +258,32 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
+                        <div class="panel panel-info grupog grupo-carta-presentacion">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Nombre de Institución donde va realizar las prácticas:</label>
+                                    <input type="text" required name="txt_cp_instituto" id="txt_cp_instituto" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Nombre de la persona a quien va dirigido la carta y su grado de la perosna:</label>
+                                    <input type="text" required name="txt_cp_persona" id="txt_cp_persona" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">El cargo que tiene la persona:</label>
+                                    <input type="text" required name="txt_cp_cargo" id="txt_cp_cargo" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Área donde se va desempeñar:</label>
+                                    <input type="text" required name="txt_cp_area" id="txt_cp_area" class="form-control grupo">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="panel panel-info grupog grupo-curso">
                           <div class="panel-heading">
                             <h3 class="panel-title">Curso</h3>

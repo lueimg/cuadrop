@@ -368,6 +368,24 @@ Validar=function(){
         r=false;
     }
     /**************************************************************************/
+    /********************************Carta*************************************/
+    if( $("#txt_cp_instituto").attr("disabled")==undefined && $.trim($("#txt_cp_instituto").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Instituto",4000);
+        r=false;
+    }
+    if( $("#txt_cp_persona").attr("disabled")==undefined && $.trim($("#txt_cp_persona").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Persona",4000);
+        r=false;
+    }
+    if( $("#txt_cp_cargo").attr("disabled")==undefined && $.trim($("#txt_cp_cargo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Cargo",4000);
+        r=false;
+    }
+    if( $("#txt_cp_area").attr("disabled")==undefined && $.trim($("#txt_cp_area").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Área",4000);
+        r=false;
+    }
+    /**************************************************************************/
     /*******************************Cursos*************************************/
     if( $("#nro_cursos").attr("disabled")==undefined && r==true ){
         if( $("#tb_cursos tr").length==0 ){

@@ -208,6 +208,14 @@ class RegistrarProblemaController extends BaseController
                 $data['semestre_ini_id'] = Null;
             if (!Input::has('semestre_fin_id') )
                 $data['semestre_fin_id'] = Null;
+            if (!Input::has('cp_instituto') )
+                $data['cp_instituto'] = Null;
+            if (!Input::has('cp_persona') )
+                $data['cp_persona'] = Null;
+            if (!Input::has('cp_cargo') )
+                $data['cp_cargo'] = Null;
+            if (!Input::has('cp_area') )
+                $data['cp_area'] = Null;
             if (Input::has('alumno_id')) {
                 $data['carrera'] = Null;
                 $data['documento'] = Null;
@@ -241,7 +249,7 @@ class RegistrarProblemaController extends BaseController
                 $problema->articulos()->sync($articulo);
             }
         //**********************************************************************
-        //*******************************Adicional*******************************
+        //*******************************Adicional******************************
 
         //**********************************************************************
         //***********************Alumno Problema Curso**************************
