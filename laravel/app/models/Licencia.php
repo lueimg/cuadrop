@@ -20,7 +20,7 @@ class Licencia extends Base
         return $this->hasMany('Ruta');
     }
 
-    public function getArea(){
+    public function getLicencia(){
         $area=DB::table('licencias')
                 ->select('id','nombre','estado')
                 ->where( 

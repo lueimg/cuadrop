@@ -9,7 +9,7 @@
     {{ HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js') }}
     {{ HTML::script('lib/daterangepicker/js/daterangepicker_single.js') }}
     {{ HTML::script('lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js') }}
-    {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js') }}
+    {{ HTML::script('lib/vue.js') }}
 
     @include( 'admin.js.slct_global_ajax' )
     @include( 'admin.js.slct_global' )
@@ -316,23 +316,90 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <select class="form-control grupo" name="slct_pe_area_id" id="slct_pe_area_id">
                                     </select>
                                 </div>
-                                <div class="col-sm-3 grupo-personal-d grupo-jefe">
+                                <div class="col-sm-4 grupo-personal-d grupo-jefe">
                                     <label class="control-label">Jefe:</label>
                                     <input type="text" name="txt_pe_jefe" id="txt_pe_jefe" class="form-control grupo">
                                 </div>
-                                <div class="col-sm-3 grupo-personal-d grupo-motivo">
+                                <div class="col-sm-5 grupo-personal-d grupo-motivo">
                                     <label class="control-label">Motivo:</label>
                                     <input type="text" name="txt_pe_motivo" id="txt_pe_motivo" class="form-control grupo">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="col-sm-3 grupo-personal-d grupo-solicita">
+                                <div class="col-sm-6 grupo-personal-d grupo-solicita">
                                     <label class="control-label">Que solicita:</label>
                                     <input type="text" name="txt_pe_solicita" id="txt_pe_solicita" class="form-control grupo">
                                 </div>
                                 <div class="col-sm-3 grupo-personal-d grupo-fecha">
                                     <label class="control-label">Fecha:</label>
                                     <input type="text" name="txt_pe_fecha" id="txt_pe_fecha" class="form-control grupo fecha">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-legal">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-legal-d grupo-razon">
+                                    <label class="control-label">Razón Social y/o Denominación:</label>
+                                    <select class="form-control grupo" name="slct_le_razon_id" id="slct_le_razon_id" required>
+                                        <option value="">.::Seleccione::.</option>
+                                        <option value="1">Telemática</option>
+                                        <option value="2">Intur</option>
+                                        <option value="3">Telesup E.I.R.L</option>
+                                        <option value="4">Universidad</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9 grupo-legal-d grupo-obs">
+                                    <label class="control-label">Observaciones:</label>
+                                    <textarea rows="2" required name="txt_le_observacion" id="txt_le_observacion" class="form-control grupo"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-legal-d grupo-licencia">
+                                    <label class="control-label">Licencia:</label>
+                                    <select class="form-control grupo" name="slct_le_licencia_id" id="slct_le_licencia_id" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 grupo-legal-d grupo-municipal">
+                                    <label class="control-label">Municipal:</label>
+                                    <select class="form-control grupo" name="slct_le_municipal_id" id="slct_le_municipal_id" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 grupo-legal-d grupo-articulo">
+                                    <label class="control-label">Servicio:</label>
+                                    <select class="form-control grupo" name="slct_le_articulo_id" id="slct_le_articulo_id" required>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 grupo-legal-d grupo-fecha">
+                                    <label class="control-label">Fecha Notificación:</label>
+                                    <input type="text" name="txt_le_fecha" id="txt_le_fecha" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-6 grupo-legal-d grupo-entidad">
+                                    <label class="control-label">Nombre Entidad:</label>
+                                    <input type="text" name="txt_le_entidad" id="txt_le_entidad" class="form-control grupo" required>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-contabilidad">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-contabilidad-d grupo-proveedor">
+                                    <label class="control-label">Proveedor:</label>
+                                    <input type="text" name="txt_co_proveedor" id="txt_co_proveedor" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-contabilidad-d grupo-recibo">
+                                    <label class="control-label">Recibo:</label>
+                                    <input type="text" name="txt_co_recibo" id="txt_co_recibo" class="form-control grupo">
                                 </div>
                             </div>
                           </div>

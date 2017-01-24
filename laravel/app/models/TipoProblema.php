@@ -74,7 +74,7 @@ class TipoProblema extends Base
 
                         }
                     }
-                )->orderBy('nombre')->get();
+                )->orderBy('tp.nombre,tpc.nombre')->get();
 
         /*if ( Input::has('porusuario') ) {
             $tipoproblema->select('tpc.id','tpc.nombre','tp.nombre as grupo','tpc.estado');

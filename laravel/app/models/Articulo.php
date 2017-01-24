@@ -20,4 +20,21 @@ class Articulo extends Base
         $r= DB::select($Ssql);
         return $r;
     }
+
+    public static function getListar(){
+        $estado="";
+        if( Input::has('estado') ){
+            $estado=" AND a.estado=1 ";
+        }
+        if( Input::has('servicio') ){
+            $estado=" AND a.tipo_articulo=1 ";
+        }
+        $Ssql=" SELECT a.id,a.nombre
+                FROM articulos a
+                WHERE 1=1 
+                ".$estado;
+
+        $r= DB::select($Ssql);
+        return $r;
+    }
 }

@@ -201,6 +201,7 @@ class RegistrarProblemaController extends BaseController
         if ( Input::has('pe_area_id') || Input::has('pe_jefe') || Input::has('persona_id') || Input::has('pe_motivo') || Input::has('pe_solicita') || Input::has('pe_fecha') ) {   
             $personal=new ProblemaPersonal;
             $personal['problema_id']=$problema->id;
+            $personal['usuario_created_at']=$id;
             if ( Input::has('pe_area_id') )
                 $personal['area_id']=Input::get('pe_area_id');
             if ( Input::has('pe_jefe') )
@@ -214,6 +215,30 @@ class RegistrarProblemaController extends BaseController
             if ( Input::has('pe_fecha') )
                 $personal['fecha']=Input::get('pe_fecha');
             $personal->save();
+        }
+        //**********************************************************************
+        //*********************************Legal*****************************
+        if ( Input::has('le_observacion') ) {   
+            $problemaLegal=new ProblemaLegal;
+            $problemaLegal['problema_id']=$problema->id;
+            $problemaLegal['usuario_created_at']=$id;
+            if ( Input::has('le_razon_id') )
+                $problemaLegal['razon_id']=Input::get('le_razon_id');
+            if ( Input::has('le_observacion') )
+                $problemaLegal['observacion']=Input::get('le_observacion');
+            if ( Input::has('le_licencia_id') )
+                $problemaLegal['licencia_id']=Input::get('le_licencia_id');
+            if ( Input::has('le_municipal_id') )
+                $problemaLegal['municipal_id']=Input::get('le_municipal_id');
+            if ( Input::has('le_articulo_id') )
+                $problemaLegal['articulo_id']=Input::get('le_articulo_id');
+            if ( Input::has('le_fecha') )
+                $problemaLegal['fecha']=Input::get('le_fecha');
+            if ( Input::has('le_entidad') )
+                $problemaLegal['entidad']=Input::get('le_entidad');
+            if ( Input::has('persona_id') )
+                $problemaLegal['persona_id']=Input::get('persona_id');
+            $problemaLegal->save();
         }
         //**********************************************************************
         //****************************Alumno Problema***************************

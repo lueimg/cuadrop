@@ -18,6 +18,15 @@ class ArticuloController extends \BaseController
             return Response::json(['rst'=>1,'datos'=>$sedes,'tipoarticulo'=>$tipoArticulo]);
         }
     }
+
+    public function postListar()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $rs = Articulo::getListar();
+            return Response::json(['rst'=>1,'datos'=>$rs]);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      * POST /articulo/crear

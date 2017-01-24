@@ -2,12 +2,19 @@
 var AlumnosObj, alumno_id;
 $(document).ready(function() { 
     $("#form_problemas").validate();
-    $('#fecha_problema').val('<?php echo date("Y-m-d H:i");?>');
-    $('#fecha_problema').daterangepicker({
+    $('#fecha_problema,#txt_pe_fecha').val('<?php echo date("Y-m-d H:i");?>');
+    $('#fecha_problema,#txt_pe_fecha').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
         timePicker24Hour: true,
         format: 'YYYY-MM-DD HH:mm',
+        showDropdowns: true
+    });
+    $('#txt_le_fecha').val('<?php echo date("Y-m-d");?>');
+    $('#txt_le_fecha').daterangepicker({
+        singleDatePicker: true,
+        timePicker: false,
+        format: 'YYYY-MM-DD',
         showDropdowns: true
     });
     $('#guardar').click(function(event) {
@@ -17,8 +24,8 @@ $(document).ready(function() {
     });
 
     $("#form_problemas .grupog").css("display","none");
-    $("#form_problemas input.grupo,#form_problemas select.grupo").val("");
-    $("#form_problemas input.grupo,#form_problemas select.grupo").attr("disabled","true");
+    $("#form_problemas input.grupo,#form_problemas textarea.grupo,#form_problemas select.grupo").val("");
+    $("#form_problemas input.grupo,#form_problemas textarea.grupo,#form_problemas select.grupo").attr("disabled","true");
     $("#t_ciclosemestre,#t_articulos,#tb_cursos,#tb_pagos,.grupo-archivo table tbody tr").html("");
     /******************************Cargar Datos********************************/
     var funcionesSede = {success:successSede};
@@ -28,10 +35,14 @@ $(document).ready(function() {
 
     slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,null,null,'#slct_articulo_id','TA');
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,1,null,null,null,null);
-    slctGlobalHtml('slct_categoria_tipo_problema_id','simple');
+    var data={estado:1,servicio:1}
+    slctGlobal.listarSlct('articulo','slct_le_articulo_id','simple',null,data);
+    slctGlobalHtml('slct_categoria_tipo_problema_id,#slct_le_razon_id','simple');
 
     var data={estado:1};
     slctGlobal.listarSlct2('area/listar','slct_pe_area_id','simple',null,data);
+    slctGlobal.listarSlct('municipalidad','slct_le_municipal_id','simple',null,data);
+    slctGlobal.listarSlct('licencia','slct_le_licencia_id','simple',null,data);
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
@@ -156,8 +167,8 @@ $(document).ready(function() {
     $('#slct_categoria_tipo_problema_id').change(function(event) {
         alumno_id=undefined;
         $("#tb_alumnos tr").removeClass("selec");
-        $("#form_problemas input.grupo").val("");
-        $("#form_problemas input.grupo").attr("disabled","true");
+        $("#form_problemas input.grupo,#form_problemas textarea.grupo").val("");
+        $("#form_problemas input.grupo,#form_problemas textarea.grupo").attr("disabled","true");
         $("#form_problemas select.grupo").multiselect("disable");
         $("#form_problemas .grupog").css("display","none");
 
@@ -179,6 +190,7 @@ ValidarHTML=function(datos){
             for (var i =0; i<data.campos.split(",").length; i++) {
                 $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]).css("display","");
                 $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]+" input.grupo").removeAttr("disabled");
+                $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]+" textarea.grupo").removeAttr("disabled");
                 $("#form_problemas .grupo-"+data.grupo+" .grupo-"+data.campos.split(",")[i]+" select.grupo").multiselect("enable");
             }
         }
@@ -435,6 +447,36 @@ Validar=function(){
     }
     if( $("#txt_pe_fecha").attr("disabled")==undefined && $.trim($("#txt_pe_fecha").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Fecha",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /**********************************Legal***********************************/
+    if( $("#slct_le_razon_id").attr("disabled")==undefined && $.trim($("#slct_le_razon_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Razon Social",4000);
+        r=false;
+    }
+    if( $("#txt_le_observacion").attr("disabled")==undefined && $.trim($("#txt_le_observacion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Observación",4000);
+        r=false;
+    }
+    if( $("#slct_le_licencia_id").attr("disabled")==undefined && $.trim($("#slct_le_licencia_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Licencia",4000);
+        r=false;
+    }
+    if( $("#slct_le_municipal_id").attr("disabled")==undefined && $.trim($("#slct_le_municipal_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Municipal",4000);
+        r=false;
+    }
+    if( $("#slct_le_articulo_id").attr("disabled")==undefined && $.trim($("#slct_le_articulo_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Servicio",4000);
+        r=false;
+    }
+    if( $("#txt_le_fecha").attr("disabled")==undefined && $.trim($("#txt_le_fecha").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Fecha de Notificación",4000);
+        r=false;
+    }
+    if( $("#txt_le_entidad").attr("disabled")==undefined && $.trim($("#txt_le_entidad").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nombre Entidad",4000);
         r=false;
     }
     /**************************************************************************/
