@@ -296,6 +296,8 @@ class RegistrarProblemaController extends BaseController
                 $problemaLog['tipo_comprobante']=Input::get('log_comprobante');
             if ( Input::has('log_nrocomprobante') )
                 $problemaLog['nro_comprobante']=Input::get('log_nrocomprobante');
+            if ( Input::has('log_autorizo') )
+                $problemaLog['autorizo']=Input::get('log_autorizo');
             if ( Input::has('log_tipotelefono') )
                 $problemaLog['tipo_telefono']=Input::get('log_tipotelefono');
             if ( Input::has('log_operador') )
@@ -307,6 +309,54 @@ class RegistrarProblemaController extends BaseController
             if ( Input::has('log_fecha') )
                 $problemaLog['fecha']=Input::get('log_fecha');
             $problemaLog->save();
+        }
+        //**********************************************************************
+        //*****************************Tesorería********************************
+        if ( Input::has('te_id') ) {   
+            $problemaTesoreria=new ProblemaTesoreria;
+            $problemaTesoreria['problema_id']=$problema->id;
+            $problemaTesoreria['usuario_created_at']=$id;
+            if ( Input::has('te_contrato') )
+                $problemaTesoreria['contrato']=Input::get('te_contrato');
+            if ( Input::has('te_gana') )
+                $problemaTesoreria['gana']=Input::get('te_gana');
+            if ( Input::has('te_autorizo') )
+                $problemaTesoreria['autorizo']=Input::get('te_autorizo');
+            if ( Input::has('te_mes') )
+                $problemaTesoreria['mes']=Input::get('te_mes');
+            if ( Input::has('te_nrocta') )
+                $problemaTesoreria['nrocta']=Input::get('te_nrocta');
+            if ( Input::has('te_banco') )
+                $problemaTesoreria['banco']=Input::get('te_banco');
+            $problemaTesoreria->save();
+        }
+        //**********************************************************************
+        //*****************************Tesorería2********************************
+        if ( Input::has('te2_id') ) {   
+            $problemaTesoreria=new ProblemaTesoreria;
+            $problemaTesoreria['problema_id']=$problema->id;
+            $problemaTesoreria['usuario_created_at']=$id;
+            if ( Input::has('te2_para') )
+                $problemaTesoreria['para']=Input::get('te2_para');
+            if ( Input::has('te2_area') )
+                $problemaTesoreria['area']=Input::get('te2_area');
+            if ( Input::has('te2_ode') )
+                $problemaTesoreria['ode']=Input::get('te2_ode');
+            if ( Input::has('te2_cajero') )
+                $problemaTesoreria['cajero']=Input::get('te2_cajero');
+            if ( Input::has('te2_cantidad') )
+                $problemaTesoreria['cantidad']=Input::get('te2_cantidad');
+            if ( Input::has('te2_empresa') )
+                $problemaTesoreria['empresa']=Input::get('te2_empresa');
+            if ( Input::has('te2_ultboleta') )
+                $problemaTesoreria['ultboleta']=Input::get('te2_ultboleta');
+            if ( Input::has('te2_enviar') )
+                $problemaTesoreria['enviar']=Input::get('te2_enviar');
+            if ( Input::has('te2_fecha') )
+                $problemaTesoreria['fecha']=Input::get('te2_fecha');
+            if ( Input::has('te2_adicional') )
+                $problemaTesoreria['adicional']=Input::get('te2_adicional');
+            $problemaTesoreria->save();
         }
         //**********************************************************************
         //****************************Alumno Problema***************************

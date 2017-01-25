@@ -9,6 +9,8 @@
     {{ HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js') }}
     {{ HTML::script('lib/daterangepicker/js/daterangepicker_single.js') }}
     {{ HTML::script('lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js') }}
+    {{ HTML::script('lib/input-mask/js/jquery.inputmask.js') }}
+
     {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js') }}
     @include( 'admin.js.slct_global_ajax' )
     @include( 'admin.js.slct_global' )

@@ -94,4 +94,56 @@ var slctGlobal={
         });
     }
 };
+
+var msjG = {
+    /**
+     * Muestra un mensaje al pie de la página
+     * 
+     * @param String tipo "success" para OK o "danger" para ERROR
+     * @param String texto El mensaje a mostrar
+     * @param Int tiempo Tiempo que tarda en desaparecer el mensaje
+     * @returns {undefined}
+     */
+    mensaje: function (tipo, texto, tiempo) {
+        if (tipo == 'danger' && texto.length == 0) {
+            texto = 'Ocurrio una interrupción en el proceso, favor de intentar nuevamente.';
+        }
+        $("#msj").html('<div class="alert alert-dismissable alert-' + tipo + '">' +
+                '<i class="fa fa-ban"></i>' +
+                '<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>' +
+                '<b>' + texto + '</b>' +
+                '</div>');
+        $("#msj").effect('shake');
+        $("#msj").fadeOut(tiempo);
+    },
+    validaDni:function(e,id){ 
+        tecla = (document.all) ? e.keyCode : e.which;//captura evento teclado
+        if (tecla==8 || tecla==0) return true;//8 barra, 0 flechas desplaz
+        if($('#'+id).val().length==8)return false;
+        patron = /\d/; // Solo acepta números
+        te = String.fromCharCode(tecla); 
+        return patron.test(te);
+    },
+    validaLetras:function(e) { // 1
+        tecla = (document.all) ? e.keyCode : e.which; // 2
+        if (tecla==8 || tecla==0) return true;//8 barra, 0 flechas desplaz
+        patron =/[A-Za-zñÑáéíóúÁÉÍÓÚ\s]/; // 4 ,\s espacio en blanco, patron = /\d/; // Solo acepta números, patron = /\w/; // Acepta números y letras, patron = /\D/; // No acepta números, patron =/[A-Za-z\s]/; //sin ñÑ
+        te = String.fromCharCode(tecla); // 5
+        return patron.test(te); // 6
+    },
+    validaAlfanumerico:function(e) { // 1
+        tecla = (document.all) ? e.keyCode : e.which; // 2
+        if (tecla==8 || tecla==0 || tecla==46) return true;//8 barra, 0 flechas desplaz
+        patron =/[A-Za-zñÑáéíóúÁÉÍÓÚ@.,_\-\s\d]/; // 4 ,\s espacio en blanco, patron = /\d/; // Solo acepta números, patron = /\w/; // Acepta números y letras, patron = /\D/; // No acepta números, patron =/[A-Za-z\s]/; //sin ñÑ
+        te = String.fromCharCode(tecla); // 5
+        return patron.test(te); // 6
+    },
+    validaNumeros:function(e) { // 1
+        tecla = (document.all) ? e.keyCode : e.which; // 2
+        if (tecla==8 || tecla==0 || tecla==46) return true;//8 barra, 0 flechas desplaz
+        patron = /\d/; // Solo acepta números
+        te = String.fromCharCode(tecla); // 5
+        return patron.test(te); // 6
+    },
+};
 </script>

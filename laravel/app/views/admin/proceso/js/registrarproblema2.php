@@ -2,8 +2,8 @@
 var AlumnosObj, alumno_id;
 $(document).ready(function() { 
     $("#form_problemas").validate();
-    $('#fecha_problema,#txt_pe_fecha').val('<?php echo date("Y-m-d H:i");?>');
-    $('#fecha_problema,#txt_pe_fecha').daterangepicker({
+    $('#fecha_problema,#txt_pe_fecha,#txt_te2_fecha').val('<?php echo date("Y-m-d H:i");?>');
+    $('#fecha_problema,#txt_pe_fecha,#txt_te2_fecha').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
         timePicker24Hour: true,
@@ -141,7 +141,9 @@ $(document).ready(function() {
             j=i+1;
             html+="<tr>"+
                 '<td>'+j+'</td>'+
-                '<td><input type="text" class="form-control" pattern="[A-Za-z]{5,20}\s\(([0-9]{1,2})\)" name="tc_curso[]" id="tc_curso_'+j+'" value="" required="required"></td>'+
+                '<td>'+
+                        '<input type="text" class="form-control" pattern="[A-Za-z]{3,10}\s\(([0-9]{1,2})\)" name="tc_curso[]" id="tc_curso_'+j+'" value="" required data-mask >'+
+                '</td>'+
                 '<td><input type="text" class="form-control" name="tc_frecuencia[]" id="tc_frecuencia_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tc_hora[]" id="tc_hora_'+j+'" value="" required="required"></td>'+
                 '<td><input type="text" class="form-control" name="tc_profesor[]" id="tc_profesor_'+j+'" value="" required="required"></td>'+
@@ -200,6 +202,7 @@ ValidarHTML=function(datos){
         else{
             $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
             $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
+            $("#form_problemas .grupo-"+data.grupo+" textarea.grupo").removeAttr("disabled");
         }
         $('#form_problemas select.grupo').multiselect('deselectAll', false);
         $('#form_problemas select.grupo').multiselect('refresh');
@@ -570,6 +573,10 @@ Validar=function(){
         Psi.mensaje("warning","Ingrese Nro Comprobante",4000);
         r=false;
     }
+    if( $("#txt_log_autorizo").attr("disabled")==undefined && $.trim($("#txt_log_autorizo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Persona que autorizó",4000);
+        r=false;
+    }
     if( $("#slct_log_tipotelefono").attr("disabled")==undefined && $.trim($("#slct_log_tipotelefono").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Tipo Teléfono",4000);
         r=false;
@@ -588,6 +595,74 @@ Validar=function(){
     }
     if( $("#txt_log_fecha").attr("disabled")==undefined && $.trim($("#txt_log_fecha").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Fecha estimada de entrega",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*****************************Tesorería*********************************/
+    if( $("#txt_te_contrato").attr("disabled")==undefined && $.trim($("#txt_te_contrato").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Quien contrató",4000);
+        r=false;
+    }
+    if( $("#txt_te_gana").attr("disabled")==undefined && $.trim($("#txt_te_gana").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Cuanto gana",4000);
+        r=false;
+    }
+    if( $("#txt_te_autorizo").attr("disabled")==undefined && $.trim($("#txt_te_autorizo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Quien autorizó",4000);
+        r=false;
+    }
+    if( $("#txt_te_mes").attr("disabled")==undefined && $.trim($("#txt_te_mes").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Mes que se le debe",4000);
+        r=false;
+    }
+    if( $("#txt_te_nrocta").attr("disabled")==undefined && $.trim($("#txt_te_nrocta").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nro de Cuenta",4000);
+        r=false;
+    }
+    if( $("#txt_te_banco").attr("disabled")==undefined && $.trim($("#txt_te_banco").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nombre del Banco",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /******************************Tesorería 2*********************************/
+    if( $("#txt_te2_para").attr("disabled")==undefined && $.trim($("#txt_te2_para").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Para",4000);
+        r=false;
+    }
+    if( $("#txt_te2_area").attr("disabled")==undefined && $.trim($("#txt_te2_area").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Área",4000);
+        r=false;
+    }
+    if( $("#txt_te2_ode").attr("disabled")==undefined && $.trim($("#txt_te2_ode").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Ode",4000);
+        r=false;
+    }
+    if( $("#txt_te2_cajero").attr("disabled")==undefined && $.trim($("#txt_te2_cajero").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nombre del cajero",4000);
+        r=false;
+    }
+    if( $("#txt_te2_cantidad").attr("disabled")==undefined && $.trim($("#txt_te2_cantidad").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Cantidad",4000);
+        r=false;
+    }
+    if( $("#txt_te2_empresa").attr("disabled")==undefined && $.trim($("#txt_te2_empresa").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Empresa",4000);
+        r=false;
+    }
+    if( $("#txt_te2_ultboleta").attr("disabled")==undefined && $.trim($("#txt_te2_ultboleta").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nro de última boleta de venta",4000);
+        r=false;
+    }
+    if( $("#txt_te2_enviar").attr("disabled")==undefined && $.trim($("#txt_te2_enviar").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese a enviar por",4000);
+        r=false;
+    }
+    if( $("#txt_te2_fecha").attr("disabled")==undefined && $.trim($("#txt_te2_fecha").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese fecha y hora aproximado de envio",4000);
+        r=false;
+    }
+    if( $("#txt_te2_adicional").attr("disabled")==undefined && $.trim($("#txt_te2_adicional").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Información adicional",4000);
         r=false;
     }
     /**************************************************************************/

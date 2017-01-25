@@ -9,6 +9,7 @@
     {{ HTML::script('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js') }}
     {{ HTML::script('lib/daterangepicker/js/daterangepicker_single.js') }}
     {{ HTML::script('lib/bootstrap-multiselect/dist/js/bootstrap-multiselect.js') }}
+
     {{ HTML::script('lib/vue.js') }}
 
     @include( 'admin.js.slct_global_ajax' )
@@ -482,7 +483,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     <input type="text" required name="txt_log_impuesto" id="txt_log_impuesto" class="form-control grupo">
                                 </div>
                                 <div class="col-sm-4 grupo-logistica-d grupo-recibo">
-                                    <label class="control-label">Recibo:</label>
+                                    <label class="control-label">Nro Recibo:</label>
                                     <input type="text" required name="txt_log_recibo" id="txt_log_recibo" class="form-control grupo">
                                 </div>
                                 <div class="col-sm-4 grupo-logistica-d grupo-suministro">
@@ -500,6 +501,10 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-4 grupo-logistica-d grupo-nrocomprobante">
                                     <label class="control-label">Nro Comprobante:</label>
                                     <input type="text" required name="txt_log_nrocomprobante" id="txt_log_nrocomprobante" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-autorizo">
+                                    <label class="control-label">Persona que Autorizó:</label>
+                                    <input type="text" required name="txt_log_autorizo" id="txt_log_autorizo" class="form-control grupo">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -528,6 +533,104 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-4 grupo-logistica-d grupo-fecha">
                                     <label class="control-label">Fecha Estimada de Entrega:</label>
                                     <input type="text" required name="txt_log_fecha" id="txt_log_fecha" class="form-control grupo">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-tesoreria">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-contrato">
+                                    <label class="control-label">Quien Contrató?:</label>
+                                    <input type="text" required name="txt_te_contrato" id="txt_te_contrato" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-gana">
+                                    <label class="control-label">Cuanto Gana:</label>
+                                    <input type="text" required name="txt_te_gana" id="txt_te_gana" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-autorizo">
+                                    <label class="control-label">Quien Autorizó?:</label>
+                                    <input type="text" required name="txt_te_autorizo" id="txt_te_autorizo" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-1 grupo-tesoreria-d grupo-id">
+                                    <input type="hidden" required name="txt_te_id" id="txt_te_id" class="form-control grupo ids">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-mes">
+                                    <label class="control-label">Mes que se le debe:</label>
+                                    <input type="text" required name="txt_te_mes" id="txt_te_mes" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-nrocta">
+                                    <label class="control-label">Nro Cuenta:</label>
+                                    <input type="text" required name="txt_te_nrocta" id="txt_te_nrocta" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria-d grupo-banco">
+                                    <label class="control-label">Nombre Banco:</label>
+                                    <input type="text" required name="txt_te_banco" id="txt_te_banco" class="form-control grupo">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-tesoreria2">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-para">
+                                    <label class="control-label">Para:</label>
+                                    <input type="text" required name="txt_te2_para" id="txt_te2_para" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-area">
+                                    <label class="control-label">Área:</label>
+                                    <input type="text" required name="txt_te2_area" id="txt_te2_area" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-1 grupo-tesoreria2-d grupo-id">
+                                    <input type="hidden" required name="txt_te2_id" id="txt_te2_id" class="form-control grupo ids">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-ode">
+                                    <label class="control-label">Ode Solicitante:</label>
+                                    <input type="text" required name="txt_te2_ode" id="txt_te2_ode" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-cajero">
+                                    <label class="control-label">Nombre del Cajero:</label>
+                                    <input type="text" required name="txt_te2_cajero" id="txt_te2_cajero" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-cantidad">
+                                    <label class="control-label">Cantidad:</label>
+                                    <input type="text" required name="txt_te2_cantidad" id="txt_te2_cantidad" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-empresa">
+                                    <label class="control-label">Empresa:</label>
+                                    <input type="text" required name="txt_te2_empresa" id="txt_te2_empresa" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-ultboleta">
+                                    <label class="control-label">Nro Última boleta de venta:</label>
+                                    <input type="text" required name="txt_te2_ultboleta" id="txt_te2_ultboleta" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-enviar">
+                                    <label class="control-label">Enviar por:</label>
+                                    <input type="text" required name="txt_te2_enviar" id="txt_te2_enviar" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-fecha">
+                                    <label class="control-label">Fecha y Hora aproximado de envio:</label>
+                                    <input type="text" required name="txt_te2_fecha" id="txt_te2_fecha" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-tesoreria2-d grupo-adicional">
+                                    <label class="control-label">Información Adicional:</label>
+                                    <textarea rows="2" required name="txt_te2_adicional" id="txt_te2_adicional" class="form-control grupo"></textarea>
                                 </div>
                             </div>
                           </div>
