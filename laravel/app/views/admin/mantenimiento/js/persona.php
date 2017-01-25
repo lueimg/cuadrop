@@ -3,10 +3,11 @@ $(document).ready(function() {
     Persona.CargarPersonas(activarTabla);
     var data={estado:1}
     slctGlobal.listarSlct2('tipoproblema/listargrupo','slct_tipo_problema_id','multiplegrupo',null,data);
+    slctGlobal.listarSlct('cargo','slct_cargos','simple');
 
     $('#personaModal').on('show.bs.modal', function (event) {
-        $('#slct_tipo_problema_id').multiselect('deselectAll', false);
-        $('#slct_tipo_problema_id').multiselect('destroy');
+        $('#slct_cargos,#slct_tipo_problema_id').multiselect('deselectAll', false);
+        $('#slct_cargos,#slct_tipo_problema_id').multiselect('destroy');
 
         $('#txt_fecha_nac').daterangepicker({
             format: 'YYYY-MM-DD',
@@ -23,14 +24,14 @@ $(document).ready(function() {
         modal.find('.modal-title').text(titulo+' Persona');
         $('#form_personas [data-toggle="tooltip"]').css("display","none");
         $("#form_personas input[type='hidden']").remove();
-        slctGlobal.listarSlct('cargo','slct_cargos','simple');
         if(titulo=='Nuevo'){
-            slctGlobalHtml('slct_tipo_problema_id','multiple');
             modal.find('.modal-footer .btn-primary').text('Guardar');
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form_personas input').val('');
             $('#form_personas #slct_estado').val(1); 
             $('#form_personas #txt_nombre').focus();
+            slctGlobalHtml('slct_cargos','simple');
+            slctGlobalHtml('slct_tipo_problema_id','multiple');
         }
         else{
             Persona.CargarSedes(PersonaObj[persona_id].id); //no es multiselect
@@ -46,13 +47,13 @@ $(document).ready(function() {
             $('#form_personas #txt_email').val( PersonaObj[persona_id].email );
             $('#form_personas #slct_sexo').val( PersonaObj[persona_id].sexo );
             $('#form_personas #slct_estado').val( PersonaObj[persona_id].estado );
+            slctGlobalHtml('slct_cargos','simple');
             $('#form_personas #txt_telefono').val( PersonaObj[persona_id].telefono );
             $("#form_personas").append("<input type='hidden' value='"+PersonaObj[persona_id].id+"' name='id'>");
             if( PersonaObj[persona_id].tipo_problema_ids!='' ){
                 slctGlobalHtml('slct_tipo_problema_id','multiple',PersonaObj[persona_id].tipo_problema_ids.split(","));
             }
             else{
-                alert(PersonaObj[persona_id].tipo_problema_ids);
                 slctGlobalHtml('slct_tipo_problema_id','multiple');
             }
         }
@@ -70,7 +71,7 @@ $(document).ready(function() {
     $('#personaModal').on('hide.bs.modal', function (event) {
         var modal = $(this); //captura el modal
         modal.find('.modal-body input').val(''); // busca un input para copiarle texto
-        $('#slct_cargos').multiselect('destroy');
+        //$('#slct_cargos').multiselect('destroy');
         $("#t_cargoPersona").html('');
     });
 });

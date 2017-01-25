@@ -22,17 +22,17 @@ class Articulo extends Base
     }
 
     public static function getListar(){
-        $estado="";
+        $where="";
         if( Input::has('estado') ){
-            $estado=" AND a.estado=1 ";
+            $where.=" AND a.estado=1 ";
         }
         if( Input::has('servicio') ){
-            $estado=" AND a.tipo_articulo=1 ";
+            $where.=" AND a.tipo_articulo=1 ";
         }
         $Ssql=" SELECT a.id,a.nombre
                 FROM articulos a
                 WHERE 1=1 
-                ".$estado;
+                ".$where;
 
         $r= DB::select($Ssql);
         return $r;

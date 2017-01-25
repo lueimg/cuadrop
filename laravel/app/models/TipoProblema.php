@@ -62,7 +62,7 @@ class TipoProblema extends Base
     public function getTipoProblemaGrupo(){
         $tipoproblema=DB::table('tipo_problema as tp')
                 ->join('tipo_problema_categorias as tpc','tp.id','=','tpc.tipo_problema_id')
-                ->select('tpc.id','tpc.nombre','tp.nombre as grupo')
+                ->select('tpc.id','tpc.nombre','tp.nombre as grupo','tp.id as grupo_id')
                 ->where( 
                     function($query){
                         if ( Input::get('estado') ) {
@@ -74,7 +74,7 @@ class TipoProblema extends Base
 
                         }
                     }
-                )->orderBy('tp.nombre,tpc.nombre')->get();
+                )->orderBy('tp.nombre')->orderBy('tpc.nombre')->get();
 
         /*if ( Input::has('porusuario') ) {
             $tipoproblema->select('tpc.id','tpc.nombre','tp.nombre as grupo','tpc.estado');

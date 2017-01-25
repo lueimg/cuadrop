@@ -217,7 +217,7 @@ class RegistrarProblemaController extends BaseController
             $personal->save();
         }
         //**********************************************************************
-        //*********************************Legal*****************************
+        //*********************************Legal********************************
         if ( Input::has('le_observacion') ) {   
             $problemaLegal=new ProblemaLegal;
             $problemaLegal['problema_id']=$problema->id;
@@ -239,6 +239,68 @@ class RegistrarProblemaController extends BaseController
             if ( Input::has('persona_id') )
                 $problemaLegal['persona_id']=Input::get('persona_id');
             $problemaLegal->save();
+        }
+        //**********************************************************************
+        //*****************************Contabilidad*****************************
+        if ( Input::has('co_observacion') || Input::has('co_proveedor') ) {   
+            $problemaConta=new ProblemaContabilidad;
+            $problemaConta['problema_id']=$problema->id;
+            $problemaConta['usuario_created_at']=$id;
+            if ( Input::has('co_proveedor') )
+                $problemaConta['proveedor']=Input::get('co_proveedor');
+            if ( Input::has('co_observacion') )
+                $problemaConta['observacion']=Input::get('co_observacion');
+            if ( Input::has('co_recibo') )
+                $problemaConta['recibo']=Input::get('co_recibo');
+            if ( Input::has('co_fecha') )
+                $problemaConta['fecha']=Input::get('co_fecha');
+            $problemaConta->save();
+        }
+        //**********************************************************************
+        //*****************************Logística********************************
+        if ( Input::has('log_id') ) {   
+            $problemaLog=new ProblemaLogistica;
+            $problemaLog['problema_id']=$problema->id;
+            $problemaLog['usuario_created_at']=$id;
+            if ( Input::has('log_arrendador') )
+                $problemaLog['arrendador']=Input::get('log_arrendador');
+            if ( Input::has('log_moneda') )
+                $problemaLog['tipo_moneda']=Input::get('log_moneda');
+            if ( Input::has('log_empresa') )
+                $problemaLog['empresa']=Input::get('log_empresa');
+            if ( Input::has('log_ruc') )
+                $problemaLog['ruc']=Input::get('log_ruc');
+            if ( Input::has('log_telefono') )
+                $problemaLog['telefono']=Input::get('log_telefono');
+            if ( Input::has('log_observacion') )
+                $problemaLog['observacion']=Input::get('log_observacion');
+            if ( Input::has('log_direccion') )
+                $problemaLog['direccion']=Input::get('log_direccion');
+            if ( Input::has('log_personal') )
+                $problemaLog['personal_contacto']=Input::get('log_personal');
+            if ( Input::has('log_telpersonal') )
+                $problemaLog['telefono_contacto']=Input::get('log_telpersonal');
+            if ( Input::has('log_plazo') )
+                $problemaLog['plazo']=Input::get('log_plazo');
+            if ( Input::has('log_multa') )
+                $problemaLog['tipo_multa']=Input::get('log_multa');
+            if ( Input::has('log_impuesto') )
+                $problemaLog['tipo_impuesto']=Input::get('log_impuesto');
+            if ( Input::has('log_recibo') )
+                $problemaLog['recibo']=Input::get('log_recibo');
+            if ( Input::has('log_suministro') )
+                $problemaLog['nro_suministro']=Input::get('log_suministro');
+            if ( Input::has('log_monto') )
+                $problemaLog['monto']=Input::get('log_monto');
+            if ( Input::has('log_comprobante') )
+                $problemaLog['tipo_comprobante']=Input::get('log_comprobante');
+            if ( Input::has('log_nrocomprobante') )
+                $problemaLog['nro_comprobante']=Input::get('log_nrocomprobante');
+            if ( Input::has('log_tipotelefono') )
+                $problemaLog['tipo_telefono']=Input::get('log_tipotelefono');
+            if ( Input::has('log_operador') )
+                $problemaLog['operador']=Input::get('log_operador');
+            $problemaLog->save();
         }
         //**********************************************************************
         //****************************Alumno Problema***************************

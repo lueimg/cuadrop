@@ -395,11 +395,124 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             <div class="col-sm-12">
                                 <div class="col-sm-4 grupo-contabilidad-d grupo-proveedor">
                                     <label class="control-label">Proveedor:</label>
-                                    <input type="text" name="txt_co_proveedor" id="txt_co_proveedor" class="form-control grupo">
+                                    <input type="text" required name="txt_co_proveedor" id="txt_co_proveedor" class="form-control grupo">
                                 </div>
                                 <div class="col-sm-4 grupo-contabilidad-d grupo-recibo">
                                     <label class="control-label">Recibo:</label>
-                                    <input type="text" name="txt_co_recibo" id="txt_co_recibo" class="form-control grupo">
+                                    <input type="text" required name="txt_co_recibo" id="txt_co_recibo" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-contabilidad-d grupo-fecha">
+                                    <label class="control-label">Fecha Notificación:</label>
+                                    <input type="text" required name="txt_co_fecha" id="txt_co_fecha" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-9 grupo-contabilidad-d grupo-obs">
+                                    <label class="control-label">Observaciones:</label>
+                                    <textarea rows="2" required name="txt_co_observacion" id="txt_co_observacion" class="form-control grupo"></textarea>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-logistica">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-logistica-d grupo-id">
+                                    <input type="hidden" value="1" required name="txt_log_id" id="txt_log_id" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-arrendador">
+                                    <label class="control-label">Arrendador:</label>
+                                    <input type="text" required name="txt_log_arrendador" id="txt_log_arrendador" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-moneda">
+                                    <label class="control-label">Tipo Moneda:</label>
+                                    <select required name="slct_log_moneda" id="slct_log_moneda" class="form-control grupo">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option value="1">Soles</option>
+                                        <option value="2">Dólares</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-logistica-d grupo-empresa">
+                                    <label class="control-label">Empresa:</label>
+                                    <input type="text" required name="txt_log_empresa" id="txt_log_empresa" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-logistica-d grupo-ruc">
+                                    <label class="control-label">RUC:</label>
+                                    <input type="number" required name="txt_log_ruc" id="txt_log_ruc" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-logistica-d grupo-telefono">
+                                    <label class="control-label">Teléfono:</label>
+                                    <input type="number" required name="txt_log_telefono" id="txt_log_telefono" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-9 grupo-logistica-d grupo-obs">
+                                    <label class="control-label">Observaciones:</label>
+                                    <textarea rows="2" required name="txt_log_observacion" id="txt_log_observacion" class="form-control grupo"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-logistica-d grupo-direccion">
+                                    <label class="control-label">Dirección:</label>
+                                    <textarea rows="2" required name="txt_log_direccion" id="txt_log_direccion" class="form-control grupo"></textarea>
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-personal">
+                                    <label class="control-label">Personal Contacto:</label>
+                                    <input type="text" required name="txt_log_personal" id="txt_log_personal" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-telpersonal">
+                                    <label class="control-label">Teléfono Personal Contacto:</label>
+                                    <input type="text" required name="txt_log_telpersonal" id="txt_log_telpersonal" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-plazo">
+                                    <label class="control-label">Plazo ejecución del Servicio:</label>
+                                    <input type="text" required name="txt_log_plazo" id="txt_log_plazo" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-logistica-d grupo-multa">
+                                    <label class="control-label">Tipo Multa:</label>
+                                    <input type="text" required name="txt_log_multa" id="txt_log_multa" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-impuesto">
+                                    <label class="control-label">Tipo Impuesto:</label>
+                                    <input type="text" required name="txt_log_impuesto" id="txt_log_impuesto" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-recibo">
+                                    <label class="control-label">Recibo:</label>
+                                    <input type="text" required name="txt_log_recibo" id="txt_log_recibo" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-suministro">
+                                    <label class="control-label">Nro Suministro:</label>
+                                    <input type="text" required name="txt_log_suministro" id="txt_log_suministro" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-monto">
+                                    <label class="control-label">Monto:</label>
+                                    <input type="text" required name="txt_log_monto" id="txt_log_monto" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-comprobante">
+                                    <label class="control-label">Tipo Comprobante:</label>
+                                    <input type="text" required name="txt_log_comprobante" id="txt_log_comprobante" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-nrocomprobante">
+                                    <label class="control-label">Nro Comprobante:</label>
+                                    <input type="text" required name="txt_log_nrocomprobante" id="txt_log_nrocomprobante" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-logistica-d grupo-tipotelefono">
+                                    <label class="control-label">Tipo Teléfono:</label>
+                                    <select required name="slct_log_tipotelefono" id="slct_log_tipotelefono" class="form-control grupo">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option value="1">Movil</option>
+                                        <option value="2">Fijo</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-operador">
+                                    <label class="control-label">Operador:</label>
+                                    <input type="text" required name="txt_log_operador" id="txt_log_operador" class="form-control grupo">
                                 </div>
                             </div>
                           </div>

@@ -126,6 +126,7 @@
                   <label class="control-label">Cargos:
                   </label>
                   <select class="form-control" name="slct_cargos" id="slct_cargos">
+                    <option value="">.::Seleccione::.</option>
                   </select>
                 </div>
                 <div class="col-sm-6">

@@ -33,11 +33,12 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
     slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id','I');
 
-    slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,null,null,'#slct_articulo_id','TA');
+    var data={estado:1}
+    slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,data,null,'#slct_articulo_id','TA');
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,1,null,null,null,null);
     var data={estado:1,servicio:1}
     slctGlobal.listarSlct('articulo','slct_le_articulo_id','simple',null,data);
-    slctGlobalHtml('slct_categoria_tipo_problema_id,#slct_le_razon_id','simple');
+    slctGlobalHtml('slct_categoria_tipo_problema_id,#slct_le_razon_id,#slct_log_moneda,#slct_log_tipotelefono','simple');
 
     var data={estado:1};
     slctGlobal.listarSlct2('area/listar','slct_pe_area_id','simple',null,data);
@@ -477,6 +478,102 @@ Validar=function(){
     }
     if( $("#txt_le_entidad").attr("disabled")==undefined && $.trim($("#txt_le_entidad").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Nombre Entidad",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*****************************Contabilidad*********************************/
+    if( $("#txt_co_proveedor").attr("disabled")==undefined && $.trim($("#txt_co_proveedor").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Proveedor",4000);
+        r=false;
+    }
+    if( $("#txt_co_recibo").attr("disabled")==undefined && $.trim($("#txt_co_recibo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Recibo",4000);
+        r=false;
+    }
+    if( $("#txt_co_fecha").attr("disabled")==undefined && $.trim($("#txt_co_fecha").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Fecha Notificación",4000);
+        r=false;
+    }
+    if( $("#txt_co_observacion").attr("disabled")==undefined && $.trim($("#txt_co_observacion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Observación",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*******************************Logística**********************************/
+    if( $("#txt_log_arrendador").attr("disabled")==undefined && $.trim($("#txt_log_arrendador").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Arrendador",4000);
+        r=false;
+    }
+    if( $("#slct_log_moneda").attr("disabled")==undefined && $.trim($("#slct_log_moneda").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Tipo Moneda",4000);
+        r=false;
+    }
+    if( $("#txt_log_empresa").attr("disabled")==undefined && $.trim($("#txt_log_empresa").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Empresa",4000);
+        r=false;
+    }
+    if( $("#txt_log_ruc").attr("disabled")==undefined && $.trim($("#txt_log_ruc").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese RUC",4000);
+        r=false;
+    }
+    if( $("#txt_log_telefono").attr("disabled")==undefined && $.trim($("#txt_log_telefono").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Teléfono",4000);
+        r=false;
+    }
+    if( $("#txt_log_observacion").attr("disabled")==undefined && $.trim($("#txt_log_observacion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Observación",4000);
+        r=false;
+    }
+    if( $("#txt_log_direccion").attr("disabled")==undefined && $.trim($("#txt_log_direccion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Dirección",4000);
+        r=false;
+    }
+    if( $("#txt_log_personal").attr("disabled")==undefined && $.trim($("#txt_log_personal").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Personal de contacto",4000);
+        r=false;
+    }
+    if( $("#txt_log_telpersonal").attr("disabled")==undefined && $.trim($("#txt_log_telpersonal").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Teléfono del personal de contacto",4000);
+        r=false;
+    }
+    if( $("#txt_log_plazo").attr("disabled")==undefined && $.trim($("#txt_log_plazo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Plazo de ejecución del servicio",4000);
+        r=false;
+    }
+    if( $("#txt_log_multa").attr("disabled")==undefined && $.trim($("#txt_log_multa").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Tipo de Multa",4000);
+        r=false;
+    }
+    if( $("#txt_log_impuesto").attr("disabled")==undefined && $.trim($("#txt_log_impuesto").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Tipo de Impuesto",4000);
+        r=false;
+    }
+    if( $("#txt_log_recibo").attr("disabled")==undefined && $.trim($("#txt_log_recibo").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Recibo",4000);
+        r=false;
+    }
+    if( $("#txt_log_suministro").attr("disabled")==undefined && $.trim($("#txt_log_suministro").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nro Suministro",4000);
+        r=false;
+    }
+    if( $("#txt_log_monto").attr("disabled")==undefined && $.trim($("#txt_log_monto").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Monto",4000);
+        r=false;
+    }
+    if( $("#txt_log_comprobante").attr("disabled")==undefined && $.trim($("#txt_log_comprobante").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Tipo Comprobante",4000);
+        r=false;
+    }
+    if( $("#txt_log_nrocomprobante").attr("disabled")==undefined && $.trim($("#txt_log_nrocomprobante").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Nro Comprobante",4000);
+        r=false;
+    }
+    if( $("#slct_log_tipotelefono").attr("disabled")==undefined && $.trim($("#slct_log_tipotelefono").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Tipo Teléfono",4000);
+        r=false;
+    }
+    if( $("#txt_log_operador").attr("disabled")==undefined && $.trim($("#txt_log_operador").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Operador",4000);
         r=false;
     }
     /**************************************************************************/

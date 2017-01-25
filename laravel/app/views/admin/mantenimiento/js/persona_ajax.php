@@ -60,7 +60,6 @@ var Persona={
             dataType    : 'json',
             beforeSend : function() {
                 $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
-                slctGlobal.listarSlct('cargo','slct_cargos','simple');//para que cargue antes el cargo
             },
             success : function(obj) {
                 if(obj.rst==1){
