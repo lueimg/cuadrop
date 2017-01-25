@@ -364,6 +364,10 @@ class RegistrarProblemaController extends BaseController
                 $data['carrera_id'] = Null;
             if (!Input::has('especialidad_id') )
                 $data['especialidad_id'] = Null;
+            if (!Input::has('diafalto') )
+                $data['diafalto'] = Null;
+            if (!Input::has('ciclo_id') )
+                $data['ciclo_id'] = Null;
             if (!Input::has('ciclo_id') )
                 $data['ciclo_id'] = Null;
             if (!Input::has('semestre_ini_id') )

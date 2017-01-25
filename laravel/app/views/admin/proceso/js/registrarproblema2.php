@@ -32,7 +32,7 @@ $(document).ready(function() {
     var funcionesSede = {success:successSede};
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
-    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id','I');
+    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id,#slct_ciclo_id','I');
 
     var data={estado:1}
     slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,data,null,'#slct_articulo_id','TA');
@@ -48,7 +48,7 @@ $(document).ready(function() {
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
-    slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id,#slct_ciclo_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple');
     /**************************************************************************/
@@ -181,6 +181,7 @@ $(document).ready(function() {
 
         if(this.value!=''){
             var datos={categoria_tipo_problema_id:this.value};
+            $(".grupo-pago .panel-title").html("Pago de: <b>"+$(this).find("option:selected").text()+"</b>");
             Problema.Validar(ValidarHTML,datos);
         }
     });
@@ -431,6 +432,14 @@ Validar=function(){
     }
     if( $("#txt_ad_nota").attr("disabled")==undefined && $.trim($("#txt_ad_nota").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Nota",4000);
+        r=false;
+    }
+    if( $("#txt_diafalto").attr("disabled")==undefined && $.trim($("#txt_diafalto").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Días que falto",4000);
+        r=false;
+    }
+    if( $("#slct_ciclo_id").attr("disabled")==undefined && $.trim($("#slct_ciclo_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Ciclo",4000);
         r=false;
     }
     /**************************************************************************/

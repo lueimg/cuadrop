@@ -131,10 +131,10 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                     </button>
                                 </div>
                             </div>
-                            <fieldset>
-                                <legend>Lista de Ciclo Semestre</legend>
+                            <div class="col-sm-12">
+                                <label><h2>Lista de Ciclo Semestre</h2></label>
                                 <ul class="list-group" id="t_ciclosemestre"></ul>
-                            </fieldset>
+                            </div>
                           </div>
                         </div>
 
@@ -302,6 +302,15 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-3 grupo-adicional-d grupo-ad_nota">
                                     <label class="control-label">Nota Alumno:</label>
                                     <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-diafalto">
+                                    <label class="control-label">Días que falto:</label>
+                                    <input type="number" class="form-control grupo" name="txt_diafalto" id="txt_diafalto">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-ciclo_id">
+                                    <label class="control-label">Ciclo:</label>
+                                    <select class="form-control grupo" name="slct_ciclo_id" id="slct_ciclo_id">
+                                    </select>
                                 </div>
                             </div>
                           </div>
