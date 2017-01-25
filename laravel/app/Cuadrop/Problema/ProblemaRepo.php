@@ -73,10 +73,6 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                             GROUP BY problema_id) pd2
                 ON pd.id=pd2.id
                 JOIN estado_problema ep ON pd.estado_problema_id=ep.id
-                LEFT JOIN alumno_problema ap ON p.id=ap.problema_id
-                LEFT JOIN alumnos a ON ap.alumno_id=a.id
-                LEFT JOIN carreras c ON ap.carrera_id = c.id
-                LEFT JOIN tipo_carrera tc ON c.tipo_carrera_id=tc.id
                 WHERE p.estado=1 AND pd.estado=1 and p.sede_id in ($sede)
                 and p.categoria_tipo_problema_id in ($tipo)
                 $estado $fecha

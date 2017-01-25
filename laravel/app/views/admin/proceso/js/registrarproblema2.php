@@ -10,8 +10,8 @@ $(document).ready(function() {
         format: 'YYYY-MM-DD HH:mm',
         showDropdowns: true
     });
-    $('#txt_le_fecha').val('<?php echo date("Y-m-d");?>');
-    $('#txt_le_fecha').daterangepicker({
+    $('#txt_le_fecha,#txt_log_fecha').val('<?php echo date("Y-m-d");?>');
+    $('#txt_le_fecha,#txt_log_fecha').daterangepicker({
         singleDatePicker: true,
         timePicker: false,
         format: 'YYYY-MM-DD',
@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     $("#form_problemas .grupog").css("display","none");
     $("#form_problemas input.grupo,#form_problemas textarea.grupo,#form_problemas select.grupo").val("");
+    $("#form_problemas input.ids").val("1");
     $("#form_problemas input.grupo,#form_problemas textarea.grupo,#form_problemas select.grupo").attr("disabled","true");
     $("#t_ciclosemestre,#t_articulos,#tb_cursos,#tb_pagos,.grupo-archivo table tbody tr").html("");
     /******************************Cargar Datos********************************/
@@ -169,6 +170,7 @@ $(document).ready(function() {
         alumno_id=undefined;
         $("#tb_alumnos tr").removeClass("selec");
         $("#form_problemas input.grupo,#form_problemas textarea.grupo").val("");
+        $("#form_problemas input.ids").val("1");
         $("#form_problemas input.grupo,#form_problemas textarea.grupo").attr("disabled","true");
         $("#form_problemas select.grupo").multiselect("disable");
         $("#form_problemas .grupog").css("display","none");
@@ -574,6 +576,18 @@ Validar=function(){
     }
     if( $("#txt_log_operador").attr("disabled")==undefined && $.trim($("#txt_log_operador").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Operador",4000);
+        r=false;
+    }
+    if( $("#txt_log_cantidad").attr("disabled")==undefined && $.trim($("#txt_log_cantidad").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Cantidad",4000);
+        r=false;
+    }
+    if( $("#txt_log_medida").attr("disabled")==undefined && $.trim($("#txt_log_medida").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Unidad de Medida",4000);
+        r=false;
+    }
+    if( $("#txt_log_fecha").attr("disabled")==undefined && $.trim($("#txt_log_fecha").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Fecha estimada de entrega",4000);
         r=false;
     }
     /**************************************************************************/

@@ -45,9 +45,9 @@ class AlumnoProblemaRepo extends BaseRepo implements AlumnoProblemaRepoInterface
     }
     public function getAlumnoProblemaProblema($problemaId)
     {
-        $sql="SELECT ap.id, IFNULL(c.nombre,carrera) AS carrera,
-            IFNULL(ci.nombre,'') AS ciclo, documento,
-            observacion, CONCAT(a.paterno,' ',a.materno,', ',a.nombre) AS alumno
+        $sql="SELECT ap.id, IFNULL(c.nombre,'') AS carrera,
+            IFNULL(ci.nombre,'') AS ciclo, '' documento,
+            '' observacion, CONCAT(a.paterno,' ',a.materno,', ',a.nombre) AS alumno
             FROM alumno_problema ap
             JOIN `alumnos` a 
             ON ap.alumno_id=a.id

@@ -83,7 +83,8 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                             </div>
                             <div class="col-sm-12">
                                 <div class="col-sm-12">
-                                    <label class="control-label">Descripcion del problema:</label>
+                                    <br>
+                                    <label class="control-label">Descripcion:</label>
                                     <textarea id="descripcion" name="descripcion" class="form-control" rows="2" required></textarea>
                                 </div>
                             </div>
@@ -419,9 +420,6 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                           <div class="panel-body">
                             <div class="col-sm-12">
-                                <div class="col-sm-4 grupo-logistica-d grupo-id">
-                                    <input type="hidden" value="1" required name="txt_log_id" id="txt_log_id" class="form-control grupo">
-                                </div>
                                 <div class="col-sm-4 grupo-logistica-d grupo-arrendador">
                                     <label class="control-label">Arrendador:</label>
                                     <input type="text" required name="txt_log_arrendador" id="txt_log_arrendador" class="form-control grupo">
@@ -434,21 +432,24 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                         <option value="2">Dólares</option>
                                     </select>
                                 </div>
+                                <div class="col-sm-1 grupo-logistica-d grupo-id">
+                                    <input type="hidden" value="1" required name="txt_log_id" id="txt_log_id" class="form-control grupo ids">
+                                </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="col-sm-3 grupo-logistica-d grupo-empresa">
+                                <div class="col-sm-4 grupo-logistica-d grupo-empresa">
                                     <label class="control-label">Empresa:</label>
                                     <input type="text" required name="txt_log_empresa" id="txt_log_empresa" class="form-control grupo">
                                 </div>
-                                <div class="col-sm-3 grupo-logistica-d grupo-ruc">
+                                <div class="col-sm-4 grupo-logistica-d grupo-ruc">
                                     <label class="control-label">RUC:</label>
                                     <input type="number" required name="txt_log_ruc" id="txt_log_ruc" class="form-control grupo">
                                 </div>
-                                <div class="col-sm-3 grupo-logistica-d grupo-telefono">
+                                <div class="col-sm-4 grupo-logistica-d grupo-telefono">
                                     <label class="control-label">Teléfono:</label>
                                     <input type="number" required name="txt_log_telefono" id="txt_log_telefono" class="form-control grupo">
                                 </div>
-                                <div class="col-sm-9 grupo-logistica-d grupo-obs">
+                                <div class="col-sm-8 grupo-logistica-d grupo-obs">
                                     <label class="control-label">Observaciones:</label>
                                     <textarea rows="2" required name="txt_log_observacion" id="txt_log_observacion" class="form-control grupo"></textarea>
                                 </div>
@@ -513,6 +514,20 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-4 grupo-logistica-d grupo-operador">
                                     <label class="control-label">Operador:</label>
                                     <input type="text" required name="txt_log_operador" id="txt_log_operador" class="form-control grupo">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-logistica-d grupo-cantidad">
+                                    <label class="control-label">Cantidad:</label>
+                                    <input type="number" required name="txt_log_cantidad" id="txt_log_cantidad" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-medida">
+                                    <label class="control-label">Unidad de medida:</label>
+                                    <input type="text" required name="txt_log_medida" id="txt_log_medida" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-4 grupo-logistica-d grupo-fecha">
+                                    <label class="control-label">Fecha Estimada de Entrega:</label>
+                                    <input type="text" required name="txt_log_fecha" id="txt_log_fecha" class="form-control grupo">
                                 </div>
                             </div>
                           </div>

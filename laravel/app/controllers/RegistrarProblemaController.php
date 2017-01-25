@@ -300,6 +300,12 @@ class RegistrarProblemaController extends BaseController
                 $problemaLog['tipo_telefono']=Input::get('log_tipotelefono');
             if ( Input::has('log_operador') )
                 $problemaLog['operador']=Input::get('log_operador');
+            if ( Input::has('log_cantidad') )
+                $problemaLog['cantidad']=Input::get('log_cantidad');
+            if ( Input::has('log_medida') )
+                $problemaLog['medida']=Input::get('log_medida');
+            if ( Input::has('log_fecha') )
+                $problemaLog['fecha']=Input::get('log_fecha');
             $problemaLog->save();
         }
         //**********************************************************************
