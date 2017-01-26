@@ -32,7 +32,7 @@ $(document).ready(function() {
     var funcionesSede = {success:successSede};
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
-    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id,#slct_ciclo_id','I');
+    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id,#slct_ciclo_id,#slct_ciclo_ids','I');
 
     var data={estado:1}
     slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,data,null,'#slct_articulo_id','TA');
@@ -49,6 +49,7 @@ $(document).ready(function() {
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
     slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id,#slct_ciclo_id','simple',null,null,1);
+    slctGlobal.listarSlct('lista/cicloinstituto','slct_ciclo_ids','multiple',null,null,1);
     slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple');
     /**************************************************************************/
@@ -92,6 +93,7 @@ $(document).ready(function() {
             $('#form_alumno #txt_email').val( AlumnosObj[id].email );
             $('#form_alumno #slct_sexo').val( AlumnosObj[id].sexo );
             $('#form_alumno #slct_estado').val( AlumnosObj[id].estado );
+            $('#form_alumno #txt_codigo').val( AlumnosObj[id].codigo );
             $("#form_alumno").append("<input type='hidden' value='"+AlumnosObj[id].id+"' name='id'>");
         }
     });
@@ -395,18 +397,6 @@ Validar=function(){
         }
     }
     /**************************************************************************/
-    /*******************************Alumno*************************************/
-    if( $("#alumno_id").attr("disabled")==undefined && $.trim($("#alumno_id").val())=='' && r==true ){
-        Psi.mensaje("warning","Busque y Seleccione Alumno",4000);
-        r=false;
-    }
-    /**************************************************************************/
-    /*******************************Persona************************************/
-    if( $("#persona_id").attr("disabled")==undefined && $.trim($("#persona_id").val())=='' && r==true ){
-        Psi.mensaje("warning","Busque y Seleccione Persona",4000);
-        r=false;
-    }
-    /**************************************************************************/
     /********************************Carta*************************************/
     if( $("#txt_cp_instituto").attr("disabled")==undefined && $.trim($("#txt_cp_instituto").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Instituto",4000);
@@ -440,6 +430,22 @@ Validar=function(){
     }
     if( $("#slct_ciclo_id").attr("disabled")==undefined && $.trim($("#slct_ciclo_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Ciclo",4000);
+        r=false;
+    }
+    if( $("#slct_ciclo_ids").attr("disabled")==undefined && $.trim($("#slct_ciclo_ids").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione almenos 1 Ciclo",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*******************************Alumno*************************************/
+    if( $("#alumno_id").attr("disabled")==undefined && $.trim($("#alumno_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Busque y Seleccione Alumno",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*******************************Persona************************************/
+    if( $("#persona_id").attr("disabled")==undefined && $.trim($("#persona_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Busque y Seleccione Persona",4000);
         r=false;
     }
     /**************************************************************************/
@@ -811,6 +817,7 @@ alumnosHTML=function(datos){
 
         estado='onClick="seleccionar('+data.id+',this)"';
         html+="<tr "+estado+" >"+
+            "<td>"+data.codigo+"</td>"+
             "<td>"+data.paterno+"</td>"+
             "<td>"+data.materno+"</td>"+
             "<td>"+data.nombre+"</td>"+

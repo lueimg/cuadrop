@@ -9,5 +9,5 @@ use Cuadrop\Base\BaseEntity;
 class Alumno extends BaseEntity
 {
     protected $table = 'alumnos';
-    protected $fillable = ['paterno','materno','nombre','email','telefono','sexo', 'estado'];
+    protected $fillable = ['paterno','materno','nombre','email','telefono','sexo', 'estado','codigo'];
 }

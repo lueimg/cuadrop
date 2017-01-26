@@ -189,6 +189,38 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
+                        <div class="panel panel-info grupog grupo-adicional">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-adicional-d grupo-ad_cambiando">
+                                    <label class="control-label">Cambiando:</label>
+                                    <input type="number" name="txt_ad_cambiando" id="txt_ad_cambiando" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-ad_nota">
+                                    <label class="control-label">Nota Alumno:</label>
+                                    <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-diafalto">
+                                    <label class="control-label">Días que falto:</label>
+                                    <input type="number" class="form-control grupo" name="txt_diafalto" id="txt_diafalto">
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-ciclo_id">
+                                    <label class="control-label">Ciclo:</label>
+                                    <select class="form-control grupo" name="slct_ciclo_id" id="slct_ciclo_id">
+                                    </select>
+                                </div>
+                                <div class="col-sm-3 grupo-adicional-d grupo-ciclo_ids">
+                                    <label class="control-label">Ciclo(s):</label>
+                                    <select class="form-control grupo" name="slct_ciclo_ids[]" id="slct_ciclo_ids" multiple>
+                                    </select>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="panel panel-info grupog grupo-alumno">
                           <div class="panel-heading">
                             <h3 class="panel-title">Alumnos
@@ -212,6 +244,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                             <table id="t_alumnos" class="table table-bordered">
                                                 <thead>
                                                     <tr>
+                                                        <th>Código</th>
                                                         <th>Apellido P</th>
                                                         <th>Apellido M</th>
                                                         <th>Nombres</th>
@@ -224,6 +257,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                                 <tbody id="tb_alumnos"></tbody>
                                                 <tfoot>
                                                     <tr>
+                                                        <th>Código</th>
                                                         <th>Apellido P</th>
                                                         <th>Apellido M</th>
                                                         <th>Nombres</th>
@@ -284,33 +318,6 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                         </div><!-- /.box-body -->
                                     </div><!-- /.box -->
                                     <!-- Finaliza contenido -->
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="panel panel-info grupog grupo-adicional">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Datos requeridos</h3>
-                          </div>
-                          <div class="panel-body">
-                            <div class="col-sm-12">
-                                <div class="col-sm-3 grupo-adicional-d grupo-ad_cambiando">
-                                    <label class="control-label">Cambiando:</label>
-                                    <input type="number" name="txt_ad_cambiando" id="txt_ad_cambiando" class="form-control grupo">
-                                </div>
-                                <div class="col-sm-3 grupo-adicional-d grupo-ad_nota">
-                                    <label class="control-label">Nota Alumno:</label>
-                                    <input type="number" name="txt_ad_nota" id="txt_ad_nota" class="form-control grupo">
-                                </div>
-                                <div class="col-sm-3 grupo-adicional-d grupo-diafalto">
-                                    <label class="control-label">Días que falto:</label>
-                                    <input type="number" class="form-control grupo" name="txt_diafalto" id="txt_diafalto">
-                                </div>
-                                <div class="col-sm-3 grupo-adicional-d grupo-ciclo_id">
-                                    <label class="control-label">Ciclo:</label>
-                                    <select class="form-control grupo" name="slct_ciclo_id" id="slct_ciclo_id">
-                                    </select>
                                 </div>
                             </div>
                           </div>

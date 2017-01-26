@@ -71,6 +71,11 @@
               </div>
 
               <div class="col-sm-12">
+                <div class="col-sm-6">
+                  <label class="control-label">Código del Alumno:
+                  </label>
+                  <input type="text" class="form-control" placeholder="Ingrese Código" name="txt_codigo" id="txt_codigo">
+                </div>
 
                 <div class="col-sm-6">
                   <label class="control-label">Estado:

@@ -368,8 +368,8 @@ class RegistrarProblemaController extends BaseController
                 $data['diafalto'] = Null;
             if (!Input::has('ciclo_id') )
                 $data['ciclo_id'] = Null;
-            if (!Input::has('ciclo_id') )
-                $data['ciclo_id'] = Null;
+            if (!Input::has('ciclo_ids') )
+                $data['ciclo_ids'] = Null;
             if (!Input::has('semestre_ini_id') )
                 $data['semestre_ini_id'] = Null;
             if (!Input::has('semestre_fin_id') )
@@ -385,6 +385,9 @@ class RegistrarProblemaController extends BaseController
             if (!Input::has('ad_nota') )
                 $data['ad_nota'] = Null;
             if (Input::has('alumno_id')) {
+                if( Input::has('ciclo_ids') ){
+                    $data['ciclo_ids'] = implode(",", Input::get('ciclo_ids'));
+                }
                 $data['carrera'] = Null;
                 $data['documento'] = Null;
                 $data['observacion'] = Null;
