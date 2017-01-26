@@ -158,11 +158,6 @@ HTMLCargarDetalle=function(datos){
             html+="<div class='col-sm-12'>";
             html+="<div class='col-sm-6'><label>Alumno: &nbsp</label>"+val.alumno+"</div>";
             html+="<div class='col-sm-4'><label>Carrera: &nbsp</label>"+val.carrera+"</div>";
-            html+="<div class='col-sm-2'><label>Ciclo: &nbsp</label>"+val.ciclo+"</div>";
-            html+="</div>";
-            html+="<div class='col-sm-12'>";
-            html+="<div class='col-sm-6'><label>Obervacion: &nbsp</label>"+val.observacion+"</div>";
-            html+="<div class='col-sm-6'><label>Documento: &nbsp</label>"+val.documento+"</div>";
             html+="</div>";
         });
         $('#alumno').css('display','');
@@ -194,9 +189,10 @@ HTMLCargarDetalle=function(datos){
         $.each(datos.pago, function(index, val) {
             //val.   console.log();
             html+="<tr><td>"+(index+1)+"</td>";
-            html+="<td>"+val.curso+"</td>";
+            html+="<td>"+val.fecha+"</td>";
             html+="<td>"+val.recibo+"</td>";
             html+="<td>"+val.monto+"</td>";
+            html+="<td><a class='btn bg-navy btn-sm' href='"+val.ruta_archivo+"' TARGET='_blank'><i class='fa fa-cloud-download'></i></a></td>";
             html+="</tr>";
         });
         $('#div_pagos').css('display','');
@@ -204,6 +200,20 @@ HTMLCargarDetalle=function(datos){
         $('#div_pagos').css('display','none');
     }
     $('#tb_pagos').html(html);
+    html='';
+    if (datos.archivo!==undefined && datos.archivo!=='undefined') {
+        $.each(datos.archivo, function(index, val) {
+            //val.   console.log();
+            html+="<tr><td>"+(index+1)+"</td>";
+            html+="<td>"+val.nombre_archivo+"</td>";
+            html+="<td><a class='btn bg-navy btn-sm' href='"+val.ruta_archivo+"' TARGET='_blank'><i class='fa fa-cloud-download'></i></a></td>";
+            html+="</tr>";
+        });
+        $('#div_archivos').css('display','');
+    } else {
+        $('#div_archivos').css('display','none');
+    }
+    $('#tb_archivos').html(html);
 };
 
 CambiarEstado=function(id){

@@ -112,6 +112,28 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
+                        <div class="panel panel-info grupog grupo-seminario">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Seminario</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-seminario-d grupo-tema">
+                                    <label class="control-label">Tema del Seminario:</label>
+                                    <input type="text" class="form-control grupo" name="txt_tema_seminario" id="txt_tema_seminario"/>
+                                </div>
+                                <div class="col-sm-4 grupo-seminario-d grupo-hora">
+                                    <label class="control-label">Cantidad Hora del Seminario:</label>
+                                    <input type="text" class="form-control grupo" name="txt_hora_seminario" id="txt_hora_seminario"/>
+                                </div>
+                                <div class="col-sm-4 grupo-seminario-d grupo-fecha">
+                                    <label class="control-label">Fecha del Seminario:</label>
+                                    <input type="text" class="form-control grupo" name="txt_fecha_seminario" id="txt_fecha_seminario"/>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="panel panel-info grupog grupo-ciclosemestre">
                           <div class="panel-heading">
                             <h3 class="panel-title">Ciclo - Semestre</h3>
@@ -152,6 +174,26 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 <div class="col-sm-6">
                                     <label class="control-label">Semestre Final:</label>
                                     <select name="slct_semestre_fin_id" id="slct_semestre_fin_id" class="form-control grupo">
+                                    </select>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel panel-info grupog grupo-semestre2">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Semestre</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6 grupo-semestre2-d grupo-semreserva">
+                                    <label class="control-label">Semestre que va Reservar:</label>
+                                    <select name="slct_semestre_reserva_id" id="slct_semestre_reserva_id" class="form-control grupo">
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 grupo-semestre2-d grupo-semreincorporarse">
+                                    <label class="control-label">Semestre que va Reincorporarse:</label>
+                                    <select name="slct_semestre_reincorporarse_id" id="slct_semestre_reincorporarse_id" class="form-control grupo">
                                     </select>
                                 </div>
                             </div>

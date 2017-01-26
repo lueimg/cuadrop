@@ -143,12 +143,17 @@ class SolucionarProblemaController extends BaseController
                 $alumnoProblemaId=$alumnoProblema[0]->id;
                 $pago=$this->alumnoProblemaRepo->getAlumnoProblemaPagoProblema($alumnoProblemaId);
                 $nota=$this->alumnoProblemaRepo->getAlumnoProblemaNotaProblema($alumnoProblemaId);
+                
                 if (isset($pago) && count($pago) >0 ) {
                     $data['pago']=$pago;
                 }
                 if (isset($nota) && count($nota) >0 ) {
                     $data['nota']=$nota;
                 }
+            }
+            $archivo=Archivo::getArchivos();
+            if (isset($archivo) && count($archivo) >0 ) {
+                $data['archivo']=$archivo;
             }
         }
         return Response::json(array('rst'=>1,'datos'=>$data));

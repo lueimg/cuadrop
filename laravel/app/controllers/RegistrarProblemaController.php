@@ -374,6 +374,10 @@ class RegistrarProblemaController extends BaseController
                 $data['semestre_ini_id'] = Null;
             if (!Input::has('semestre_fin_id') )
                 $data['semestre_fin_id'] = Null;
+            if (!Input::has('semestre_reserva_id') )
+                $data['semestre_reserva_id'] = Null;
+            if (!Input::has('semestre_reincorporarse_id') )
+                $data['semestre_reincorporarse_id'] = Null;
             if (!Input::has('cp_instituto') )
                 $data['cp_instituto'] = Null;
             if (!Input::has('cp_persona') )
@@ -384,6 +388,12 @@ class RegistrarProblemaController extends BaseController
                 $data['cp_area'] = Null;
             if (!Input::has('ad_nota') )
                 $data['ad_nota'] = Null;
+            if (!Input::has('tema_seminario') )
+                $data['tema_seminario'] = Null;
+            if (!Input::has('hora_seminario') )
+                $data['hora_seminario'] = Null;
+            if (!Input::has('fecha_seminario') )
+                $data['fecha_seminario'] = Null;
             if (Input::has('alumno_id')) {
                 if( Input::has('ciclo_ids') ){
                     $data['ciclo_ids'] = implode(",", Input::get('ciclo_ids'));

@@ -23,4 +23,15 @@ class Archivo extends Base
     {
         return $this->belongsTo('Problema');
     }
+
+    public static function getArchivos()
+    {
+        $sql="  SELECT nombre_archivo,ruta_archivo
+                FROM archivos
+                WHERE problema_id=".Input::get('problema_id');
+
+        $r=DB::select($sql);
+
+        return $r;
+    }
 }

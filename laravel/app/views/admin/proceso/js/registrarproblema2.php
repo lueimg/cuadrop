@@ -10,8 +10,8 @@ $(document).ready(function() {
         format: 'YYYY-MM-DD HH:mm',
         showDropdowns: true
     });
-    $('#txt_le_fecha,#txt_log_fecha').val('<?php echo date("Y-m-d");?>');
-    $('#txt_le_fecha,#txt_log_fecha').daterangepicker({
+    $('#txt_le_fecha,#txt_log_fecha,#txt_fecha_seminario').val('<?php echo date("Y-m-d");?>');
+    $('#txt_le_fecha,#txt_log_fecha,#txt_fecha_seminario').daterangepicker({
         singleDatePicker: true,
         timePicker: false,
         format: 'YYYY-MM-DD',
@@ -51,7 +51,7 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id,#slct_ciclo_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/cicloinstituto','slct_ciclo_ids','multiple',null,null,1);
     slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
-    slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id','simple');
+    slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id,#slct_semestre_reserva_id,#slct_semestre_reincorporarse_id','simple');
     /**************************************************************************/
     /***********************************Alumnos********************************/
     Alumno.Cargar(alumnosHTML);
@@ -347,6 +347,20 @@ Validar=function(){
         r=false;
     }
     /**************************************************************************/
+    /*****************************Seminario************************************/
+    if( $("#txt_tema_seminario").attr("disabled")==undefined && $.trim($("#txt_tema_seminario").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Tema del Seminario",4000);
+        r=false;
+    }
+    if( $("#txt_hora_seminario").attr("disabled")==undefined && $.trim($("#txt_hora_seminario").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Hora del Seminario",4000);
+        r=false;
+    }
+    if( $("#txt_fecha_seminario").attr("disabled")==undefined && $.trim($("#txt_fecha_seminario").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Fecha del Seminario",4000);
+        r=false;
+    }
+    /**************************************************************************/
     /*****************************Ciclo Semestre*******************************/
     if( $("#slct_cs_ciclo_id").attr("disabled")==undefined && r==true ){
         if( $("#t_ciclosemestre .list-group-item").length==0 ){
@@ -374,6 +388,16 @@ Validar=function(){
     }
     if( $("#slct_semestre_fin_id").attr("disabled")==undefined && $.trim($("#slct_semestre_fin_id").val())=='' && r==true ){
         Psi.mensaje("warning","Seleccione Semestre Fin",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /*****************************Semestre2************************************/
+    if( $("#slct_semestre_reserva_id").attr("disabled")==undefined && $.trim($("#slct_semestre_reserva_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Semestre a Reservar",4000);
+        r=false;
+    }
+    if( $("#slct_semestre_reincorporarse_id").attr("disabled")==undefined && $.trim($("#slct_semestre_reincorporarse_id").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Semestre a Reincorporarse",4000);
         r=false;
     }
     /**************************************************************************/

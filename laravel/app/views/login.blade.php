@@ -9,7 +9,7 @@
 		<link rel="shortcut icon" href="assets/ico/favicon.ico">
 		<meta name="description" content="">
 		<title>			
-				Telesup - Cuadro Problema
+				Telesup - Cuadro de Necesidades de Problema
 		</title>
 			<?php echo HTML::style('lib/font-awesome-4.2.0/css/font-awesome.min.css'); ?>
 			<?php echo HTML::style('lib/bootstrap-3.3.1/css/bootstrap.min.css'); ?>
@@ -27,7 +27,7 @@
 <body  bgcolor="#FFF" onkeyup="return validaEnter(event,'btnIniciar');">
 <div id="mainWrap">
 	<div id="loggit">
-		<h1><i class="fa fa-lock"></i> Cuadro Problema </h1>
+		<h1><i class="fa fa-lock"></i> Cuadro de Necesidades de Problema </h1>
 			<h3 id="mensaje_msj"  class="label-success">
 			<?=	Session::get('msj'); ?>			
 			</h3>

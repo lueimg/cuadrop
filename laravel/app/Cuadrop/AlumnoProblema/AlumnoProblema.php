@@ -12,7 +12,8 @@ class AlumnoProblema extends BaseEntity
     protected $fillable = ['problema_id','alumno_id','carrera_id','ciclo_id',
     'estado','usuario_created_at','usuario_updated_at',
     'especialidad_id','semestre_ini_id','semestre_fin_id','cp_persona','cp_instituto',
-    'cp_area','cp_cargo','ad_nota','diafalto','ciclo_ids'];
+    'cp_area','cp_cargo','ad_nota','diafalto','ciclo_ids','semestre_reserva_id','semestre_reincorporarse_id',
+    'fecha_seminario','hora_seminario','tema_seminario'];
     /**
      * AlumnoProblemaPago relationship
      */

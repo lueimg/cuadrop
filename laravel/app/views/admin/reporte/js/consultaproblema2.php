@@ -9,6 +9,8 @@ $(document).ready(function() {
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede','multiple');
     slctGlobal.listarSlct('lista/estadoproblemaestado','slct_estado','multiple',null,data);
+    var data={porusuario:1,estado:1};
+    slctGlobal.listarSlct('tipoproblema','slct_tipo_reporte','simple',null,data);
     slctGlobalHtml('slct_tipo_reporte','simple');
 
     $("#buscar").click(mostrar);

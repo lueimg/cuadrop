@@ -90,12 +90,29 @@
                               <thead>
                                   <tr>
                                       <th>N</th>
-                                      <th>Curso</th>
+                                      <th>Fecha</th>
                                       <th>Recibo</th>
                                       <th>Monto</th>
+                                      <th>Archivo</th>
                                   </tr>
                               </thead>
                               <tbody id="tb_pagos"></tbody>
+                          </table>
+                      </div><!-- /.box-body -->
+                  </div>
+              </div>
+              <div class="col-sm-12"  id="div_archivos">
+                  <div class="col-sm-12">
+                      <div class="box-body table-responsive">
+                          <table id="t_archivos" class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>N</th>
+                                      <th>Nombre del Archivo</th>
+                                      <th>Archivo</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="tb_archivos"></tbody>
                           </table>
                       </div><!-- /.box-body -->
                   </div>

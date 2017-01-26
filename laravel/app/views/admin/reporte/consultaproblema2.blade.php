@@ -46,11 +46,6 @@
                                 </label>
                                 <select class="form-control" name="slct_tipo_reporte" id="slct_tipo_reporte">
                                     <option value="">.::Todo::.</option>
-                                    <option value="1">Académico</option>
-                                    <option value="2">Legal</option>
-                                    <option value="3">Logística</option>
-                                    <option value="4">Constancia y Certificado</option>
-                                    <option value="5">Standar</option>
                                 </select>
                             </div>
                             <div class="col-sm-3">

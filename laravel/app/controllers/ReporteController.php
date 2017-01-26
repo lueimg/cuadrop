@@ -236,7 +236,7 @@ class ReporteController extends BaseController
         elseif( $datos['tipo']=='5' ){
             $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido','Resultado');
         }
-        elseif( $datos['tipo']=='4' ){
+        elseif( $datos['tipo']=='13' ){
             $cabecera=array('N°','Persona-Trabajador','Telefono','Sede','Instituto','Modalidad','Problema General','Tipo Problema','Descripción','Estado Problema','Fecha Registro','Fecha Actual','Tiempo Transcurrido',
                             'Paterno','Materno','Nombre','Email','Telefono','Carrera','Tipo Carrera','Documento','Observación',
                             'Curso Nota','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
@@ -373,7 +373,7 @@ class ReporteController extends BaseController
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->resultado);$azpos++;
             }
-            elseif( $datos['tipo']=='4' ){
+            elseif( $datos['tipo']=='13' ){
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$cont);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->persona);$azpos++;
                 $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$r->telefono);$azpos++;
