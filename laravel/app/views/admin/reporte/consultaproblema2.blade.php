@@ -42,7 +42,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label class="control-label">Tipo Reporte:
+                                <label class="control-label">Problema General:
                                 </label>
                                 <select class="form-control" name="slct_tipo_reporte" id="slct_tipo_reporte">
                                     <option value="">.::Todo::.</option>

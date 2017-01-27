@@ -85,21 +85,8 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
         $sede= implode($datos['sede'],',');
         $tipo= $datos['tipo'];
 
-        if( $datos['tipo']!='' AND $datos['tipo']=='5' ){
-            $tipo=" AND p.tipo_problema_id NOT IN (1,3,5,6)";
-        }
-        elseif( $datos['tipo']!='' AND $datos['tipo']=='4' ){
-            $tipo=" AND p.tipo_problema_id=3";
-        }
-        elseif( $datos['tipo']!='' AND $datos['tipo']=='3' ){
-            $tipo=" AND p.tipo_problema_id=6";
-        }
-        elseif( $datos['tipo']!='' AND $datos['tipo']=='2' ){
-            $tipo=" AND p.tipo_problema_id=5";
-        }
-        elseif( $datos['tipo']!='' AND $datos['tipo']=='1' ){
-            $tipo=" AND p.tipo_problema_id=1";
-        }
+        $tipo=" AND p.tipo_problema_id=".$tipo;
+        
         $estado='';$fecha='';
 
         if( isset($datos['fecha_ini']) AND isset($datos['fecha_fin']) ){
@@ -125,10 +112,6 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                             GROUP BY problema_id) pd2
                 ON pd.id=pd2.id
                 JOIN estado_problema ep ON pd.estado_problema_id=ep.id
-                LEFT JOIN alumno_problema ap ON p.id=ap.problema_id
-                LEFT JOIN alumnos a ON ap.alumno_id=a.id
-                LEFT JOIN carreras c ON ap.carrera_id = c.id
-                LEFT JOIN tipo_carrera tc ON c.tipo_carrera_id=tc.id
                 WHERE p.estado=1 AND pd.estado=1 and p.sede_id in ($sede)
                 $tipo
                 $estado $fecha

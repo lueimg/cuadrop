@@ -192,7 +192,12 @@ HTMLCargarDetalle=function(datos){
             html+="<td>"+val.fecha+"</td>";
             html+="<td>"+val.recibo+"</td>";
             html+="<td>"+val.monto+"</td>";
-            html+="<td><a class='btn bg-navy btn-sm' href='"+val.ruta_archivo+"' TARGET='_blank'><i class='fa fa-cloud-download'></i></a></td>";
+            if( $.trim(val.ruta_archivo)!=''){
+                html+="<td><a class='btn bg-navy btn-sm' href='"+val.ruta_archivo+"' TARGET='_blank'><i class='fa fa-cloud-download'></i></a></td>";
+            }
+            else{
+                html+="<td>&nbsp;</td>";
+            }
             html+="</tr>";
         });
         $('#div_pagos').css('display','');

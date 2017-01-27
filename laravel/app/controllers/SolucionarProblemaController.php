@@ -106,6 +106,7 @@ class SolucionarProblemaController extends BaseController
     public function postCreate()
     {
         $data = Input::all();
+        $data['usuario_created_at']=Auth::id();
         //$data['estado_problema_id'] = 2;
         $validator = Validator::make($data, $this->_rules, $this->_mensaje);
         if ( $validator->passes() ) {
