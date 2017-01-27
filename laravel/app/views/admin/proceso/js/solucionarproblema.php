@@ -128,6 +128,7 @@ HTMLCargar=function(datos){
             "<td>"+(index+1)+' '+"</td>"+
             "<td>"+data.sede+' '+"</td>"+
             "<td>"+data.tipo_problema+"</td>"+
+            "<td>"+data.categoria_tipo_problema+"</td>"+
             "<td>"+data.descripcion+"</td>"+
             "<td>"+data.fecha_problema+"</td>"+
             "<td>"+data.fecha_registro+"</td>"+

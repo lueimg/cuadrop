@@ -62,9 +62,11 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 descripcion, ep.id AS estado_problema_id, ep.clase_boton,
                 p.tipo_problema_id, p.sede_id, p.fecha_problema,
                 pd.id AS problema_detalle_id, p.created_at AS fecha_registro,
-                pd.fecha_estado, pd.resultado, ep.nombre AS estado_problema
+                pd.fecha_estado, pd.resultado, ep.nombre AS estado_problema,
+                tpc.nombre AS categoria_tipo_problema
                 FROM problemas p
-                JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
+                JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
+                JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id
@@ -101,9 +103,11 @@ class ProblemaRepo extends BaseRepo implements ProblemaRepoInterface
                 descripcion, ep.id AS estado_problema_id, ep.clase_boton,
                 p.tipo_problema_id, p.sede_id, p.fecha_problema,
                 pd.id AS problema_detalle_id, p.created_at AS fecha_registro,
-                pd.fecha_estado, pd.resultado, ep.nombre AS estado_problema
+                pd.fecha_estado, pd.resultado, ep.nombre AS estado_problema,
+                tpc.nombre AS categoria_tipo_problema
                 FROM problemas p
-                JOIN tipo_problema tp ON p.tipo_problema_id=tp.id
+                JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
+                JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON p.sede_id=s.id
                 JOIN problema_detalle pd ON p.id=pd.problema_id
                 JOIN (SELECT MAX(id) AS id

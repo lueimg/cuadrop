@@ -259,6 +259,24 @@ class ReporteController extends BaseController
                     }
                     $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$tt);$azpos++;
                 }
+                elseif($campos[$i]=='ciclosemestre'){
+                    $ciclosemestre=explode('**',$row[$campos[$i]]);
+                    $detalleciclosemestre=array();
+                    for( $j=0;$j<count($ciclosemestre);$j++ ){
+                        $dciclosemestre=explode("|",$ciclosemestre[$j]);
+                        for( $k=0;$k<count($dciclosemestre);$k++ ){
+                            if($j==0){
+                                $detalleciclosemestre[]='';
+                            }
+                            $detalleciclosemestre[$k].=$dciclosemestre[$k]."\n";
+                        }
+                    }
+
+                    for( $j=0;$j<count($detalleciclosemestre);$j++ ){
+                        $objPHPExcel->getActiveSheet()->setCellValue($az[$azpos].$valorinicial,$detalleciclosemestre[$j]);
+                        $objPHPExcel->getActiveSheet()->getStyle($az[$azpos].$valorinicial)->getAlignment()->setWrapText(true);$azpos++;
+                    }
+                }
                 elseif($campos[$i]=='nota'){
                     $nota=explode('**',$row[$campos[$i]]);
                     $detallenota=array();
