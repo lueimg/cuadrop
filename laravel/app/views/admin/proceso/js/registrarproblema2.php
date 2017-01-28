@@ -38,7 +38,7 @@ $(document).ready(function() {
     slctGlobal.listarSlct('lista/articulo','slct_articulo_id','simple',null,null,1,null,null,null,null);
     var data={estado:1,servicio:1}
     slctGlobal.listarSlct('articulo','slct_le_articulo_id','simple',null,data);
-    slctGlobalHtml('slct_categoria_tipo_problema_id,#slct_le_razon_id,#slct_log_moneda,#slct_log_tipotelefono','simple');
+    slctGlobalHtml('slct_categoria_tipo_problema_id,#slct_le_razon_id,#slct_log_moneda,#slct_log_tipotelefono,#slct_le2_tipo_persona,#slct_le2_estado_civil','simple');
 
     var data={estado:1};
     slctGlobal.listarSlct2('area/listar','slct_pe_area_id','simple',null,data);
@@ -574,11 +574,11 @@ Validar=function(){
         Psi.mensaje("warning","Seleccione Estado Civil",4000);
         r=false;
     }
-    if( $("#txt_le2_persona_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_persona_conyugue").val())=='' && r==true ){
+    if( $("#slct_le2_estado_civil").val()==2 && $("#txt_le2_persona_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_persona_conyugue").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Datos del Conyugue",4000);
         r=false;
     }
-    if( $("#txt_le2_dni_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_dni_conyugue").val())=='' && r==true ){
+    if( $("#slct_le2_estado_civil").val()==2 && $("#txt_le2_dni_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_dni_conyugue").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese DNI del Conyugue",4000);
         r=false;
     }

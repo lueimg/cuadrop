@@ -218,7 +218,7 @@ class RegistrarProblemaController extends BaseController
         }
         //**********************************************************************
         //*********************************Legal********************************
-        if ( Input::has('le_observacion') ) {   
+        if ( Input::has('le_observacion') OR Input::has('le2_observacion') ) {
             $problemaLegal=new ProblemaLegal;
             $problemaLegal['problema_id']=$problema->id;
             $problemaLegal['usuario_created_at']=$id;

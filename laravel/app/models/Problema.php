@@ -660,9 +660,15 @@ protected $table = '';
                 /*Legal*/
                 e.nombre empresa,pl.observacion,pl.fecha,pl.entidad,
                 li.nombre licencia,mu.nombre municipal, ar.nombre servicio,
-                tipo_persona,persona,dni,direccion,departamento,provincia,distrito,
-                estado_civil,persona_conyugue,dni_conyugue,direccion2,
-                tiempo_contrato,departamento2,provincia2,distrito2,
+                pl.persona,pl.dni,pl.direccion,pl.departamento,pl.provincia,pl.distrito,
+                pl.persona_conyugue,pl.dni_conyugue,pl.direccion2,
+                pl.tiempo_contrato,pl.departamento2,pl.provincia2,pl.distrito2,
+                IF(pl.tipo_persona=1,'Persona Natural',
+                    IF(pl.tipo_persona=2,'Persona Jurídica','')
+                ) tipo_persona,
+                IF(pl.estado_civil=1,'Soltero',
+                    IF(pl.estado_civil=2,'Casado','')
+                ) estado_civil,
                 /**************************************************************/
                 DATEDIFF(CURDATE(),DATE(p.created_at)) tiempo_transcurrido
                 /**************************************************************/
@@ -685,7 +691,7 @@ protected $table = '';
                 JOIN problema_legal pl ON pl.problema_id=p.id
                 /**************************************************************/
                 /*Empresas*/
-                JOIN empresas e ON e.id=pl.razon_id
+                LEFT JOIN empresas e ON e.id=pl.razon_id
                 /**************************************************************/
                 /*Licencia*/
                 LEFT JOIN licencias li ON li.id=pl.licencia_id
