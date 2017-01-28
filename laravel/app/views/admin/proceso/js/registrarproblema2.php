@@ -32,7 +32,6 @@ $(document).ready(function() {
     var funcionesSede = {success:successSede};
 
     slctGlobal.listarSlct('lista/sedepersona','slct_sede_id','simple',null,null,null,null,null,null,null,funcionesSede);
-    slctGlobal.listarSlct('lista/instituto','slct_instituto_id','simple',null,null,null,'#slct_carrera_id,#slct_cs_ciclo_id,#slct_ciclo_id,#slct_ciclo_ids','I');
 
     var data={estado:1}
     slctGlobal.listarSlct('lista/tipoarticulo','slct_tipo_articulo','simple',null,data,null,'#slct_articulo_id','TA');
@@ -164,9 +163,11 @@ $(document).ready(function() {
     /**************************************************************************/
     /******************************Tipo Problema*******************************/
     $('#slct_tipo_problema_id').change(function(event) {
-        $("#slct_categoria_tipo_problema_id").multiselect('destroy');
+        $("#slct_categoria_tipo_problema_id,#slct_instituto_id").multiselect('destroy');
         var data={estado:1,porusuario:1,tipo_problema_id:this.value};
         slctGlobal.listarSlct('categoriatipoproblema','slct_categoria_tipo_problema_id','simple',null,data);
+        var data={estado:1,tipo_problema_id:this.value}
+        slctGlobal.listarSlct('instituto','slct_instituto_id','simple',null,data,null,'#slct_carrera_id,#slct_cs_ciclo_id,#slct_ciclo_id,#slct_ciclo_ids','I');
     });
     /**************************************************************************/
     /*************************Categoría Tipo Problema**************************/
@@ -189,6 +190,17 @@ $(document).ready(function() {
     });
     /**************************************************************************/
 });
+IngresarConyugue=function(val){
+    $("#txt_le2_persona_conyugue,#txt_le2_dni_conyugue").removeAttr("readonly");
+    $("#txt_le2_persona_conyugue,#txt_le2_dni_conyugue").val("");
+    if( val=="2" ){
+        $("#txt_le2_persona_conyugue").focus();
+    }
+    else{
+        $("#txt_le2_persona_conyugue,#txt_le2_dni_conyugue").attr("readonly","true");
+    }
+
+}
 ValidarHTML=function(datos){
     $.each(datos,function(index,data){
         $("#form_problemas .grupo-"+data.grupo).css("display","");
@@ -522,6 +534,72 @@ Validar=function(){
     }
     if( $("#txt_le_entidad").attr("disabled")==undefined && $.trim($("#txt_le_entidad").val())=='' && r==true ){
         Psi.mensaje("warning","Ingrese Nombre Entidad",4000);
+        r=false;
+    }
+    /**************************************************************************/
+    /**********************************Legal2***********************************/
+    if( $("#slct_le2_tipo_persona").attr("disabled")==undefined && $.trim($("#slct_le2_tipo_persona").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Tipo Personal",4000);
+        r=false;
+    }
+    if( $("#txt_le2_observacion").attr("disabled")==undefined && $.trim($("#txt_le2_observacion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Observación",4000);
+        r=false;
+    }
+    if( $("#txt_le2_persona").attr("disabled")==undefined && $.trim($("#txt_le2_persona").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Datos del Arrendador",4000);
+        r=false;
+    }
+    if( $("#txt_le2_dni").attr("disabled")==undefined && $.trim($("#txt_le2_dni").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese DNI del Arrendador",4000);
+        r=false;
+    }
+    if( $("#txt_le2_direccion").attr("disabled")==undefined && $.trim($("#txt_le2_direccion").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Dirección del Arrendador",4000);
+        r=false;
+    }
+    if( $("#txt_le2_departamento").attr("disabled")==undefined && $.trim($("#txt_le2_departamento").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Departamento",4000);
+        r=false;
+    }
+    if( $("#txt_le2_provincia").attr("disabled")==undefined && $.trim($("#txt_le2_provincia").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Provincia",4000);
+        r=false;
+    }
+    if( $("#txt_le2_distrito").attr("disabled")==undefined && $.trim($("#txt_le2_distrito").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Distrito",4000);
+        r=false;
+    }
+    if( $("#slct_le2_estado_civil").attr("disabled")==undefined && $.trim($("#slct_le2_estado_civil").val())=='' && r==true ){
+        Psi.mensaje("warning","Seleccione Estado Civil",4000);
+        r=false;
+    }
+    if( $("#txt_le2_persona_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_persona_conyugue").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Datos del Conyugue",4000);
+        r=false;
+    }
+    if( $("#txt_le2_dni_conyugue").attr("disabled")==undefined && $.trim($("#txt_le2_dni_conyugue").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese DNI del Conyugue",4000);
+        r=false;
+    }
+    if( $("#txt_le2_direccion2").attr("disabled")==undefined && $.trim($("#txt_le2_direccion2").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Dirección del mueble arrendar",4000);
+        r=false;
+    }
+    if( $("#txt_le2_tiempo_contrato").attr("disabled")==undefined && $.trim($("#txt_le2_tiempo_contrato").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Duración del contrato",4000);
+        r=false;
+    }
+    if( $("#txt_le2_departamento2").attr("disabled")==undefined && $.trim($("#txt_le2_departamento2").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Departamento",4000);
+        r=false;
+    }
+    if( $("#txt_le2_provincia2").attr("disabled")==undefined && $.trim($("#txt_le2_provincia2").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Provincia",4000);
+        r=false;
+    }
+    if( $("#txt_le2_distrito2").attr("disabled")==undefined && $.trim($("#txt_le2_distrito2").val())=='' && r==true ){
+        Psi.mensaje("warning","Ingrese Distinto",4000);
         r=false;
     }
     /**************************************************************************/

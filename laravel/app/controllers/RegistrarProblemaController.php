@@ -238,6 +238,40 @@ class RegistrarProblemaController extends BaseController
                 $problemaLegal['entidad']=Input::get('le_entidad');
             if ( Input::has('persona_id') )
                 $problemaLegal['persona_id']=Input::get('persona_id');
+
+            if ( Input::has('le2_tipo_persona') )
+                $problemaLegal['tipo_persona']=Input::get('le2_tipo_persona');
+            if ( Input::has('le2_observacion') )
+                $problemaLegal['observacion']=Input::get('le2_observacion');
+            if ( Input::has('le2_persona') )
+                $problemaLegal['persona']=Input::get('le2_persona');
+            if ( Input::has('le2_dni') )
+                $problemaLegal['dni']=Input::get('le2_dni');
+            if ( Input::has('le2_direccion') )
+                $problemaLegal['direccion']=Input::get('le2_direccion');
+            if ( Input::has('le2_departamento') )
+                $problemaLegal['departamento']=Input::get('le2_departamento');
+            if ( Input::has('le2_provincia') )
+                $problemaLegal['provincia']=Input::get('le2_provincia');
+            if ( Input::has('le2_distrito') )
+                $problemaLegal['distrito']=Input::get('le2_distrito');
+            if ( Input::has('le2_estado_civil') )
+                $problemaLegal['estado_civil']=Input::get('le2_estado_civil');
+            if ( Input::has('le2_persona_conyugue') )
+                $problemaLegal['persona_conyugue']=Input::get('le2_persona_conyugue');
+            if ( Input::has('le2_dni_conyugue') )
+                $problemaLegal['dni_conyugue']=Input::get('le2_dni_conyugue');
+            if ( Input::has('le2_direccion2') )
+                $problemaLegal['direccion2']=Input::get('le2_direccion2');
+            if ( Input::has('le2_tiempo_contrato') )
+                $problemaLegal['tiempo_contrato']=Input::get('le2_tiempo_contrato');
+            if ( Input::has('le2_departamento2') )
+                $problemaLegal['departamento2']=Input::get('le2_departamento2');
+            if ( Input::has('le2_provincia2') )
+                $problemaLegal['provincia2']=Input::get('le2_provincia2');
+            if ( Input::has('le2_distrito2') )
+                $problemaLegal['distrito2']=Input::get('le2_distrito2');
+            
             $problemaLegal->save();
         }
         //**********************************************************************

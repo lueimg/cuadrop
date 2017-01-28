@@ -104,6 +104,9 @@ class TipoProblemaController extends \BaseController
 
             $tipoproblema = new TipoProblema;
             $tipoproblema->nombre = Input::get('nombre');
+            if( Input::has('instituto') ){
+                $tipoproblema->instituto_ids = implode(",",Input::get('instituto'));
+            }
             $tipoproblema->estado = Input::get('estado');
             $tipoproblema->usuario_created_at = Auth::user()->id;
             $tipoproblema->save();
@@ -152,6 +155,9 @@ class TipoProblemaController extends \BaseController
             $tipoproblemaId = Input::get('id');
             $tipoproblema = TipoProblema::find($tipoproblemaId);
             $tipoproblema->nombre = Input::get('nombre');
+            if( Input::has('instituto') ){
+                $tipoproblema->instituto_ids = implode(",",Input::get('instituto'));
+            }
             $tipoproblema->estado = Input::get('estado');
             $tipoproblema->usuario_updated_at = Auth::user()->id;
             $tipoproblema->save();

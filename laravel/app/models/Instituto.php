@@ -44,4 +44,18 @@ class Instituto extends Base
                 
         return $sede;
     }
+
+    public function getInstitutoProblema($id){
+        $sql="SELECT *
+                FROM institutos
+                WHERE FIND_IN_SET(id,
+                    (SELECT instituto_ids
+                    FROM tipo_problema
+                    WHERE id=$id
+                    )
+                )>0
+                AND estado=1";
+        $r=DB::select($sql);
+        return $r;
+    }
 }

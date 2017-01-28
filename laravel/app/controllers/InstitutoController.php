@@ -54,7 +54,13 @@ class InstitutoController extends \BaseController
         if ( Request::ajax() ) {
             $a      = new Instituto;
             $listar = Array();
-            $listar = $a->getInstituto();
+            if( Input::has('tipo_problema_id') ){
+                $listar = $a->getInstitutoProblema(Input::get('tipo_problema_id'));
+            }
+            else{
+                $listar = $a->getInstituto();
+                
+            }
 
             return Response::json(
                 array(

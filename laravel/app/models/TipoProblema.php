@@ -3,8 +3,8 @@
 class TipoProblema extends Base
 {
     public $table = "tipo_problema";
-    public static $where =['id', 'nombre', 'estado'];
-    public static $selec =['id', 'nombre', 'estado'];
+    public static $where =['id', 'nombre', 'instituto_ids', 'estado'];
+    public static $selec =['id', 'nombre', 'instituto_ids', 'estado'];
     /**
      * Cargos relationship
      */

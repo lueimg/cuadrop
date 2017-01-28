@@ -447,6 +447,98 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           </div>
                         </div>
 
+                        <div class="panel panel-info grupog grupo-legal2">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Datos requeridos</h3>
+                          </div>
+                          <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-legal2-d grupo-tipo">
+                                    <label class="control-label">Tipo Persona:</label>
+                                    <select class="form-control grupo" name="slct_le2_tipo_persona" id="slct_le2_tipo_persona" required>
+                                        <option value="">.::Seleccione::.</option>
+                                        <option value="1">Persona Natural</option>
+                                        <option value="2">Persona Jurídica</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9 grupo-legal2-d grupo-obs">
+                                    <label class="control-label">Observaciones:</label>
+                                    <textarea rows="2" required name="txt_le2_observacion" id="txt_le2_observacion" class="form-control grupo"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-legal2-d grupo-arrendador">
+                                    <label class="control-label">Datos del Arrendedor:</label>
+                                    <input type="text" name="txt_le2_persona" id="txt_le2_persona" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-4 grupo-legal2-d grupo-dni">
+                                    <label class="control-label">DNI del Arrendedor:</label>
+                                    <input type="text" name="txt_le2_dni" id="txt_le2_dni" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-4 grupo-legal2-d grupo-direccion">
+                                    <label class="control-label">Dirección del Arrendor:</label>
+                                    <textarea rows="2" required name="txt_le2_direccion" id="txt_le2_direccion" class="form-control grupo"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-legal2-d grupo-departamento">
+                                    <label class="control-label">Departamento:</label>
+                                    <input type="text" name="txt_le2_departamento" id="txt_le2_departamento" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-provincia">
+                                    <label class="control-label">Provincia:</label>
+                                    <input type="text" name="txt_le2_provincia" id="txt_le2_provincia" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-distrito">
+                                    <label class="control-label">Distrito:</label>
+                                    <input type="text" name="txt_le2_distrito" id="txt_le2_distrito" class="form-control grupo fecha" required>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-estado">
+                                    <label class="control-label">Estado Civil:</label>
+                                    <select class="form-control grupo" name="slct_le2_estado_civil" id="slct_le2_estado_civil" onchange="IngresarConyugue(this.value);" required>
+                                        <option value="">.::Seleccione::.</option>
+                                        <option value="1">Soltero</option>
+                                        <option value="2">Casado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-legal2-d grupo-arrendador">
+                                    <label class="control-label">Datos del Conyugue:</label>
+                                    <input type="text" name="txt_le2_persona_conyugue" id="txt_le2_persona_conyugue" class="form-control grupo readonly">
+                                </div>
+                                <div class="col-sm-4 grupo-legal2-d grupo-dni">
+                                    <label class="control-label">DNI del Conyugue:</label>
+                                    <input type="text" name="txt_le2_dni_conyugue" id="txt_le2_dni_conyugue" class="form-control grupo readonly">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 grupo-legal2-d grupo-direccion">
+                                    <label class="control-label">Dirección del inmueble arrendar:</label>
+                                    <textarea rows="2" required name="txt_le2_direccion2" id="txt_le2_direccion2" class="form-control grupo"></textarea>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-departamento">
+                                    <label class="control-label">Duración de contrato:</label>
+                                    <input type="text" name="txt_le2_tiempo_contrato" id="txt_le2_tiempo_contrato" class="form-control grupo" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-3 grupo-legal2-d grupo-departamento">
+                                    <label class="control-label">Departamento:</label>
+                                    <input type="text" name="txt_le2_departamento2" id="txt_le2_departamento2" class="form-control grupo" required>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-provincia">
+                                    <label class="control-label">Provincia:</label>
+                                    <input type="text" name="txt_le2_provincia2" id="txt_le2_provincia2" class="form-control grupo" required>
+                                </div>
+                                <div class="col-sm-3 grupo-legal2-d grupo-distrito">
+                                    <label class="control-label">Distrito:</label>
+                                    <input type="text" name="txt_le2_distrito2" id="txt_le2_distrito2" class="form-control grupo" required>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+
                         <div class="panel panel-info grupog grupo-contabilidad">
                           <div class="panel-heading">
                             <h3 class="panel-title">Datos requeridos</h3>

@@ -1,11 +1,15 @@
 <script type="text/javascript">
 $(document).ready(function() {  
     TipoProblema.CargarTipoProblema(activarTabla);
+    var data={estado:1};
+    slctGlobal.listarSlct2('lista/instituto','slct_instituto','multiple',null,data);
 
     $('#tipoproblemaModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // captura al boton
       var titulo = button.data('titulo'); // extrae del atributo data-
       var tipoproblema_id = button.data('id');
+    $('#slct_instituto').multiselect('deselectAll', false);
+    $('#slct_instituto').multiselect('destroy');
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
       var modal = $(this); //captura el modal
@@ -19,6 +23,7 @@ $(document).ready(function() {
             modal.find('.modal-footer .btn-primary').attr('onClick','Agregar();');
             $('#form_tipoproblema #slct_estado').val(1); 
             $('#form_tipoproblema #txt_nombre').focus();
+            slctGlobalHtml('slct_instituto','multiple');
         }
         else{
             var id = TipoProblemaObj[tipoproblema_id].id;
@@ -28,6 +33,12 @@ $(document).ready(function() {
             $('#form_tipoproblema #txt_nombre').val( TipoProblemaObj[tipoproblema_id].nombre );
             $('#form_tipoproblema #slct_estado').val( TipoProblemaObj[tipoproblema_id].estado );
             $("#form_tipoproblema").append("<input type='hidden' value='"+id+"' name='id'>");
+            if( TipoProblemaObj[tipoproblema_id].instituto_ids!='' ){
+                slctGlobalHtml('slct_instituto','multiple',TipoProblemaObj[tipoproblema_id].instituto_ids.split(","));
+            }
+            else{
+                slctGlobalHtml('slct_instituto','multiple');
+            }
         }
     });
 

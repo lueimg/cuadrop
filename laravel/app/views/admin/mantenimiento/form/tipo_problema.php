@@ -19,6 +19,12 @@
             <input type="text" class="form-control" placeholder="Ingrese Nombre" name="txt_nombre" id="txt_nombre">
           </div>
           <div class="form-group">
+            <label class="control-label">Instituciones
+            </label>
+            <select name="slct_instituto[]" id="slct_instituto" multiple>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="control-label">Estado:
             </label>
             <select class="form-control" name="slct_estado" id="slct_estado">

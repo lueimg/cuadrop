@@ -660,6 +660,9 @@ protected $table = '';
                 /*Legal*/
                 e.nombre empresa,pl.observacion,pl.fecha,pl.entidad,
                 li.nombre licencia,mu.nombre municipal, ar.nombre servicio,
+                tipo_persona,persona,dni,direccion,departamento,provincia,distrito,
+                estado_civil,persona_conyugue,dni_conyugue,direccion2,
+                tiempo_contrato,departamento2,provincia2,distrito2,
                 /**************************************************************/
                 DATEDIFF(CURDATE(),DATE(p.created_at)) tiempo_transcurrido
                 /**************************************************************/
@@ -702,24 +705,36 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            20,30,15,20,
+            30,20,15,20,
             15,15,15,
+            15,20,15,30,
+            15,15,15,15,
+            20,15,30,
+            15,15,15,15,
             15,
             25,15,
             15,15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Empresa','Observación','Fecha de Notificación','Entidad',
+            'Observación','Empresa','Fecha de Notificación','Entidad',
             'Licencia','Municipal','Servicio',
+            'Tipo Persona','Datos del Arrendador','DNI del Arrendador','Dirección del Arrendador',
+            'Departamento','Provincia','Distrito','Estado Civil',
+            'Datos del Conyugue','DNI del Conyugue','Dirección del inmueble arrendar',
+            'Tiempo del Contrato','Departamento','Provincia','Distrito',
             'Fecha Registro',
             'Persona que atendió Problema','Fecha Atención',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'empresa','observacion','fecha','entidad',
+            'observacion','empresa','fecha','entidad',
             'licencia','municipal','servicio',
+            'tipo_persona','persona','dni','direccion',
+            'departamento','provincia','distrito','estado_civil',
+            'persona_conyugue','dni_conyugue','direccion2',
+            'tiempo_contrato','departamento2','provincia2','distrito2',
             'fecha_registro',
             'persona_atendio','fecha_atendio',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
