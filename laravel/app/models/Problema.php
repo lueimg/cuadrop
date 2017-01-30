@@ -125,7 +125,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -151,14 +154,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Instituto*/
                 JOIN institutos i ON i.id=p.instituto_id
@@ -186,20 +181,27 @@ protected $table = '';
                     GROUP BY app.alumno_problema_id
                 ) appf ON appf.alumno_problema_id=ap.id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
-
+        
         $length=array(
             5,25,15,20,26,40,
             15,15,15,25,25,
             11,15,15,15,25,15,
             17,11,20,15,15,10,
             15,10,10,15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -208,7 +210,7 @@ protected $table = '';
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Curso/Tema','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -217,7 +219,7 @@ protected $table = '';
             'codigo','paterno','materno','nombre','email','telefono',
             'nota',
             'pago','fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -233,7 +235,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -262,14 +267,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Instituto*/
                 JOIN institutos i ON i.id=p.instituto_id
@@ -302,10 +299,17 @@ protected $table = '';
                     GROUP BY apc.alumno_problema_id
                 ) apcf ON apcf.alumno_problema_id=ap.id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -315,7 +319,7 @@ protected $table = '';
             15,15,15,15,15,
             11,15,15,15,25,15,
             15,10,10,15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -324,7 +328,7 @@ protected $table = '';
             'Semestre Inicio','Semestre Final','Ciclo','Semestre Inicio del Ciclo','Semestre Final del Ciclo',
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -333,7 +337,7 @@ protected $table = '';
             'semestre_ini_id','semestre_fin_id','ciclosemestre',
             'codigo','paterno','materno','nombre','email','telefono',
             'pago','fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -349,7 +353,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -376,14 +383,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Instituto*/
                 JOIN institutos i ON i.id=p.instituto_id
@@ -411,10 +410,18 @@ protected $table = '';
                 ) apnf ON apnf.alumno_problema_id=ap.id
                 /**************************************************************/
                 LEFT JOIN especialidades e ON e.id=ap.especialidad_id
-                WHERE p.estado=1 AND pd.estado=1 
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -425,7 +432,7 @@ protected $table = '';
             11,15,15,15,25,15,
             17,11,20,15,15,10,
             15,10,10,15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -435,7 +442,7 @@ protected $table = '';
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Curso/Tema','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -445,7 +452,7 @@ protected $table = '';
             'codigo','paterno','materno','nombre','email','telefono',
             'nota',
             'pago','fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -461,7 +468,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -492,14 +502,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Instituto*/
                 JOIN institutos i ON i.id=p.instituto_id
@@ -530,10 +532,17 @@ protected $table = '';
                 LEFT JOIN semestres s3 ON s3.id=ap.semestre_ini_id
                 LEFT JOIN semestres s4 ON s4.id=ap.semestre_fin_id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -545,7 +554,7 @@ protected $table = '';
             20,15,10,
             11,15,15,15,25,15,
             15,10,10,15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -556,7 +565,7 @@ protected $table = '';
             'Tema Seminario','Fecha Seminario','Hora Seminario',
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -567,7 +576,7 @@ protected $table = '';
             'tema_seminario','fecha_seminario','hora_seminario',
             'codigo','paterno','materno','nombre','email','telefono',
             'pago','fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -583,7 +592,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -599,22 +611,21 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Contabilidad*/
                 JOIN problema_contabilidad pc ON pc.problema_id=p.id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -622,21 +633,21 @@ protected $table = '';
             5,25,15,20,26,40,
             20,15,15,30,
             15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
             'Proveedor','Recibo','Fecha de Notificación','Observación',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
             'proveedor','recibo','fecha','observacion',
             'fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -652,7 +663,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -678,14 +692,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Contabilidad*/
                 JOIN problema_legal pl ON pl.problema_id=p.id
@@ -702,10 +708,17 @@ protected $table = '';
                 /*Articulo*/
                 LEFT JOIN articulos ar ON ar.id=pl.articulo_id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -718,7 +731,7 @@ protected $table = '';
             20,15,30,
             15,15,15,15,
             15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -730,7 +743,7 @@ protected $table = '';
             'Datos del Conyugue','DNI del Conyugue','Dirección del inmueble arrendar',
             'Tiempo del Contrato','Departamento','Provincia','Distrito',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -742,7 +755,7 @@ protected $table = '';
             'persona_conyugue','dni_conyugue','direccion2',
             'tiempo_contrato','departamento2','provincia2','distrito2',
             'fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -758,7 +771,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -784,22 +800,21 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Logistica*/
                 JOIN problema_logistica pl ON pl.problema_id=p.id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -811,7 +826,7 @@ protected $table = '';
             15,15,15,
             15,15,10,15,15,
             15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -822,7 +837,7 @@ protected $table = '';
             'Tipo Comprobante','Nro Comprobante','Persona que Autorizó',
             'Tipo Teléfono','Operador','Cantidad','Unidad de Medida','Fecha estimada de entrega',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -833,7 +848,7 @@ protected $table = '';
             'tipo_comprobante','nro_comprobante','autorizo',
             'tipo_telefono','operador','cantidad','medida','fecha_entrega',
             'fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -849,7 +864,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -866,14 +884,6 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Personal*/
                 JOIN problema_personal pp ON pp.problema_id=p.id
@@ -884,10 +894,17 @@ protected $table = '';
                 /*Personas*/
                 LEFT JOIN personas pe ON pe.id=pp.persona_id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -895,21 +912,21 @@ protected $table = '';
             5,25,15,20,26,40,
             20,15,20,20,30,15,
             15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
             'Persona','Área','Jefe','Motivo','Que solicita','Fecha',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
             'persona_personal','area','jefe','motivo','solicita','fecha',
             'fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
@@ -925,7 +942,10 @@ protected $table = '';
                 /*Problema y Problema Detalle*/
                 p.id, tp.nombre AS problema_general, tpc.nombre tipo_problema,
                 s.nombre AS sede, p.descripcion, p.created_at AS fecha_registro,
-                ep.nombre AS estado_problema, pd.created_at fecha_atendio, pd.resultado,
+                IFNULL(ep.nombre,
+                    IF(pd.id IS NULL,'En espera','Atendiendo')
+                ) AS estado_problema, 
+                pd.created_at fecha_atendio, pd2.created_at fecha_fin, pd2.resultado,
                 CONCAT(per.paterno,' ',per.materno,', ',per.nombre) persona, 
                 CONCAT(perate.paterno,' ',perate.materno,', ',perate.nombre) persona_atendio,
                 per.telefono, CURDATE() fecha_actual,
@@ -943,22 +963,21 @@ protected $table = '';
                 JOIN tipo_problema tp ON tp.id=p.tipo_problema_id
                 JOIN tipo_problema_categorias tpc ON tpc.id=p.categoria_tipo_problema_id
                 JOIN sedes s ON s.id=p.sede_id
-                JOIN problema_detalle pd ON p.id=pd.problema_id
-                JOIN (SELECT MAX(id) AS id
-                            FROM problema_detalle
-                            WHERE estado=1
-                            GROUP BY problema_id) pd2
-                ON pd.id=pd2.id
-                JOIN personas perate ON perate.id=pd.usuario_created_at
-                JOIN estado_problema ep ON pd.estado_problema_id=ep.id
                 /**************************************************************/
                 /*Tesoreria*/
                 JOIN problema_tesoreria pt ON pt.problema_id=p.id
                 /**************************************************************/
-                WHERE p.estado=1 AND pd.estado=1 
+                LEFT JOIN problema_detalle pd ON pd.problema_id=p.id AND pd.estado_problema_id=2
+                /**************************************************************/
+                LEFT JOIN problema_detalle pd2 ON pd2.problema_id=p.id AND (pd2.estado_problema_id=3 OR pd2.estado_problema_id=4)
+                /**************************************************************/
+                LEFT JOIN personas perate ON perate.id=pd.usuario_created_at
+                /**************************************************************/
+                LEFT JOIN estado_problema ep ON pd2.estado_problema_id=ep.id
+                /**************************************************************/
+                WHERE p.estado=1 
                 AND p.sede_id in (".$array['sede'].")
                 ".$array['tipo']."
-                ".$array['estado']." 
                 ".$array['fecha'];
         $rsql= DB::select($sql);
 
@@ -969,7 +988,7 @@ protected $table = '';
             20,15,15,20,20,10,
             15,15,15,30,
             15,
-            25,15,
+            25,15,15,
             15,15,15,40
         );
         $cabecera=array(
@@ -979,7 +998,7 @@ protected $table = '';
             'Para','Área','Ode Solicitante','Nombre Cajero','Empresa','Cantidad',
             'Nro Última boleta de venta','Enviar por','Fecha y Hora aproximado de envio','Información Adicional',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención',
+            'Persona que atendió Problema','Fecha Atención','Fecha Final',
             'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
@@ -989,7 +1008,7 @@ protected $table = '';
             'para','area','ode','cajero','empresa','cantidad',
             'ultboleta','enviar','fecha','adicional',
             'fecha_registro',
-            'persona_atendio','fecha_atendio',
+            'persona_atendio','fecha_atendio','fecha_fin',
             'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;

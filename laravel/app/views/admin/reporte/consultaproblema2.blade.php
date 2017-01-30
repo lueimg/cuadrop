@@ -48,12 +48,6 @@
                                     <option value="">.::Todo::.</option>
                                 </select>
                             </div>
-                            <div class="col-sm-3">
-                                <label class="control-label">Estados:
-                                </label>
-                                <select class="form-control" name="slct_estado[]" id="slct_estado" multiple>
-                                </select>
-                            </div>
                         </div>
                     </div>
                     <div class="row  form-group">
