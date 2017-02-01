@@ -46,10 +46,10 @@ $(document).ready(function() {
     slctGlobal.listarSlct('licencia','slct_le_licencia_id','simple',null,data);
     var data={porusuario:1,estado:1};
     slctGlobal.listarSlct('tipoproblema','slct_tipo_problema_id','simple',null,data);
+    slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/carrerainstituto','slct_carrera_id','simple',null,null,1,'#slct_especialidad_id','C');
     slctGlobal.listarSlct('lista/cicloinstituto','slct_cs_ciclo_id,#slct_ciclo_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/cicloinstituto','slct_ciclo_ids','multiple',null,null,1);
-    slctGlobal.listarSlct('lista/especialidad','slct_especialidad_id','simple',null,null,1);
     slctGlobal.listarSlct('lista/semestre','slct_semestre_ini_id,#slct_semestre_fin_id,#slct_semestre_reserva_id,#slct_semestre_reincorporarse_id','simple');
     /**************************************************************************/
     /***********************************Alumnos********************************/
@@ -215,13 +215,14 @@ ValidarHTML=function(datos){
             }
         }
         else{
-            $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
-            $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
-            $("#form_problemas .grupo-"+data.grupo+" textarea.grupo").removeAttr("disabled");
+                $("#form_problemas .grupo-"+data.grupo+" input.grupo").removeAttr("disabled");
+                $("#form_problemas .grupo-"+data.grupo+" select.grupo").multiselect("enable");
+                $("#form_problemas .grupo-"+data.grupo+" textarea.grupo").removeAttr("disabled");
         }
-        $('#form_problemas select.grupo').multiselect('deselectAll', false);
-        $('#form_problemas select.grupo').multiselect('refresh');
-        $('#form_problemas select.grupo').trigger('change');
+
+            $('#form_problemas select.grupo').multiselect('deselectAll', false);
+            $('#form_problemas select.grupo').multiselect('refresh');
+            $('#form_problemas select.grupo').trigger('change');
     });
 }
 onPagos=function(event,item){

@@ -50,7 +50,6 @@
                                       <th>N</th>
                                       <th>Descripcion</th>
                                       <th>Estado</th>
-                                      <th>Fecha del estado</th>
                                       <th>Fecha registro</th>
                                   </tr>
                               </thead>
@@ -127,13 +126,13 @@
                     </label>
                     <textarea id="resultado" name="resultado" class="form-control" rows="2" required placeholder="Ingrese descripcion de solucion"></textarea>
                   </div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-3" style="display:none">
                     <label class="control-label">FECHA ATENCIÓN:
                         <a id="error_fecha_estado" style="display:none" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="bottom" title="Ingrese descripcion de solucion">
                             <i class="fa fa-exclamation"></i>
                         </a>
                     </label>
-                    <input type="text" class="form-control" placeholder="AAAA-MM-DD HH:mm" name="fecha_estado" id="fecha_estado" onfocus="blur()">
+                    <input type="text" class="form-control" placeholder="AAAA-MM-DD HH:mm" name="fecha_estado" id="fecha_estado" onfocus="blur()" value="<?php echo date("Y-m-d H:i:s"); ?>">
                   </div>
                   <div class="col-sm-3">
                     <label class="control-label">Estado:

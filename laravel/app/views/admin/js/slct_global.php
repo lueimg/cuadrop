@@ -55,6 +55,9 @@ htmlListarSlct=function(obj,slct,tipo,valarray,afectado,afectados,slct_id,slctan
             else if (data.estado==1 && tipo=='multiple'){
                 html += "<option selected"+rel+rel2+x+y+direccion+" value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
             }
+            else if ( valarray==null && tipo=='simple' && obj.datos.length==1 ){
+                html += "<option selected value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
+            }
             else{
                 html += "<option "+rel+rel2+rel3+x+y+direccion+" value=\"" + data.id + "\" "+disabled+">" + data.nombre + "</option>";
             }
@@ -66,9 +69,8 @@ htmlListarSlct=function(obj,slct,tipo,valarray,afectado,afectados,slct_id,slctan
         }
     }      
     $("#"+slct).html(html);
-    
     slctGlobalHtml(slct,tipo,valarray,afectado,afectados,slct_id,slctant,slctant_id, funciones);
-    
+
 };
 
 slctGlobalHtml=function(slct,tipo,valarray,afectado,afectados,slct_id,slctant,slctant_id, funciones){
@@ -144,6 +146,13 @@ slctGlobalHtml=function(slct,tipo,valarray,afectado,afectados,slct_id,slctant,sl
             if( tipo!="multiple" && $("#"+slct+">option[value='"+$("#"+slct).val()+"']").attr('data-evento') ){
                 eventoSlctGlobalSimple(slct,$("#"+slct+">option[value='"+$("#"+slct).val()+"']").attr('data-evento'));
             }
+    }
+
+    if( $("#"+slct+" option:selected").length==1 && tipo=='simple' && afectados!='' ){
+        var select=$("#"+slct+">option[value='"+$("#"+slct).val()+"']").attr('data-select');
+        if(slct_id!='' && slct_id!=null && afectados!='' && afectados!=null){
+            filtroSlct(slct,tipo,slct_id,afectados,slctant,slctant_id,select);
+        }
     }
     
     $("li.multiselect-all").removeAttr("data-select");

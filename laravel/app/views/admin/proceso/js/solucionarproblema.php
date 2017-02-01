@@ -146,7 +146,6 @@ HTMLCargarDetalle=function(datos){
             html+="<tr><td>"+(index+1)+"</td>";
             html+="<td>"+val.resultado+"</td>";
             html+="<td><span class='btn btn-"+val.clase_boton+" disabled'>"+val.estado+"</span></td>";
-            html+="<td>"+val.fecha_estado+"</td>";
             html+="<td>"+val.created_at+"</td>";
             html+="</tr>";
         });

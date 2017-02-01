@@ -202,7 +202,7 @@ protected $table = '';
             17,11,20,15,15,10,
             15,10,10,15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -210,8 +210,8 @@ protected $table = '';
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Curso/Tema','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -220,7 +220,7 @@ protected $table = '';
             'nota',
             'pago','fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -320,7 +320,7 @@ protected $table = '';
             11,15,15,15,25,15,
             15,10,10,15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -328,8 +328,8 @@ protected $table = '';
             'Semestre Inicio','Semestre Final','Ciclo','Semestre Inicio del Ciclo','Semestre Final del Ciclo',
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -338,7 +338,7 @@ protected $table = '';
             'codigo','paterno','materno','nombre','email','telefono',
             'pago','fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -433,7 +433,7 @@ protected $table = '';
             17,11,20,15,15,10,
             15,10,10,15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -442,8 +442,8 @@ protected $table = '';
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Curso/Tema','Frencuencia','Profesor','Fecha Inicio','Fecha Fin','Nota',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -453,7 +453,7 @@ protected $table = '';
             'nota',
             'pago','fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -555,7 +555,7 @@ protected $table = '';
             11,15,15,15,25,15,
             15,10,10,15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -565,8 +565,8 @@ protected $table = '';
             'Tema Seminario','Fecha Seminario','Hora Seminario',
             'Código','Paterno','Materno','Nombre','Email','Telefono',
             'Fecha Pago','Recibo','Monto','Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -577,7 +577,7 @@ protected $table = '';
             'codigo','paterno','materno','nombre','email','telefono',
             'pago','fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -634,21 +634,21 @@ protected $table = '';
             20,15,15,30,
             15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
             'Proveedor','Recibo','Fecha de Notificación','Observación',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
             'proveedor','recibo','fecha','observacion',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -732,7 +732,7 @@ protected $table = '';
             15,15,15,15,
             15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -743,8 +743,8 @@ protected $table = '';
             'Datos del Conyugue','DNI del Conyugue','Dirección del inmueble arrendar',
             'Tiempo del Contrato','Departamento','Provincia','Distrito',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -756,7 +756,7 @@ protected $table = '';
             'tiempo_contrato','departamento2','provincia2','distrito2',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -827,7 +827,7 @@ protected $table = '';
             15,15,10,15,15,
             15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -837,8 +837,8 @@ protected $table = '';
             'Tipo Comprobante','Nro Comprobante','Persona que Autorizó',
             'Tipo Teléfono','Operador','Cantidad','Unidad de Medida','Fecha estimada de entrega',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -849,7 +849,7 @@ protected $table = '';
             'tipo_telefono','operador','cantidad','medida','fecha_entrega',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -913,21 +913,21 @@ protected $table = '';
             20,15,20,20,30,15,
             15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
             'Persona','Área','Jefe','Motivo','Que solicita','Fecha',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
             'persona_personal','area','jefe','motivo','solicita','fecha',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
@@ -989,7 +989,7 @@ protected $table = '';
             15,15,15,30,
             15,
             25,15,15,
-            15,15,15,40
+            15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
@@ -998,8 +998,8 @@ protected $table = '';
             'Para','Área','Ode Solicitante','Nombre Cajero','Empresa','Cantidad',
             'Nro Última boleta de venta','Enviar por','Fecha y Hora aproximado de envio','Información Adicional',
             'Fecha Registro',
-            'Persona que atendió Problema','Fecha Atención','Fecha Final',
-            'Fecha Actual','Tiempo Transcurrido','Estado Problema','Resultado'
+            'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
+            'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
@@ -1009,7 +1009,7 @@ protected $table = '';
             'ultboleta','enviar','fecha','adicional',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
-            'fecha_actual','tiempo_transcurrido','estado_problema','resultado'
+            'tiempo_transcurrido','estado_problema','resultado'
         );
         $r['data']=$rsql;
         $r['cabecera']=$cabecera;
