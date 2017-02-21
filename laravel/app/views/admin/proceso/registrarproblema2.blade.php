@@ -62,7 +62,7 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                                 </div>
                                 <div class="col-sm-4 grupog grupo-instituto">
                                     <label class="control-label">Institución</label>
-                                    <select class="form-control" name="slct_instituto_id" id="slct_instituto_id">
+                                    <select class="form-control grupo" name="slct_instituto_id" id="slct_instituto_id">
                                     </select>
                                 </div>
                             </div>
