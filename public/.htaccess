@@ -1,3 +1,4 @@
+ AddHandler application/x-httpd-php54 .php 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
@@ -13,3 +14,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+RewriteCond %{HTTP_HOST} ^activista\.planeosweb\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.activista\.planeosweb\.com$
+RewriteRule ^/?$ "http\:\/\/planeosweb\.com\/activista\.planeosweb\.com\/public\/" [R=301,L]
+

@@ -23,7 +23,7 @@ IniciarSession=function(){
 		MostrarMensaje("Ingrese su <strong>Password</strong>");
 	}
 	else{
-		Login.IniciarLogin();	
+		Login.IniciarLogin();
 	}
 }
 
