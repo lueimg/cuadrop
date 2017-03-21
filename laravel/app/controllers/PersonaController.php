@@ -49,6 +49,63 @@ class PersonaController extends BaseController
      *
      * @return Response
      */
+    public function postCrearaux()
+    {
+        //si la peticion es ajax
+        if ( Request::ajax() ) {
+            $regex='regex:/^([a-zA-Z .,ñÑÁÉÍÓÚáéíóú]{2,60})$/i';
+            $required='required';
+            $reglas = array(
+                'nombre' => $required.'|'.$regex,
+                'paterno' => $required.'|'.$regex,
+                'materno' => $required.'|'.$regex,
+                'email' => 'email|unique:personas,email',
+                'dni'      => 'required|min:8|unique:personas,dni',
+            );
+
+            $mensaje= array(
+                'required'    => ':attribute Es requerido',
+                'regex'        => ':attribute Solo debe ser Texto',
+                'exists'       => ':attribute ya existe',
+            );
+
+            $validator = Validator::make(Input::all(), $reglas, $mensaje);
+
+            if ( $validator->fails() ) {
+                return Response::json(
+                    array(
+                    'rst'=>2,
+                    'msj'=>$validator->messages(),
+                    )
+                );
+            }
+
+            $persona = new Persona;
+            $persona['paterno'] = Input::get('paterno');
+            $persona['materno'] = Input::get('materno');
+            $persona['nombre'] = Input::get('nombre');
+            if( Input::has('email') ){
+                $persona['email'] = Input::get('email');
+            }
+            $persona['dni'] = Input::get('dni');
+            $persona['sexo'] = Input::get('sexo');
+            if( Input::has('telefono') ){
+                $persona['telefono'] = Input::get('telefono');
+            }
+            $persona['password'] = Hash::make(Input::get('dni'));
+            $persona['estado'] = Input::get('estado');
+            $persona['usuario_created_at'] = Auth::user()->id;
+            $persona->save();
+            $personaId = $persona->id;
+            return Response::json(
+                array(
+                'rst'=>1,
+                'msj'=>'Registro realizado correctamente'.$personaId,
+                )
+            );
+        }
+    }
+
     public function postCrear()
     {
         //si la peticion es ajax

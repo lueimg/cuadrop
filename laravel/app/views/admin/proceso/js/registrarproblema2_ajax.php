@@ -128,6 +128,39 @@ var Problema={
                 Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
             }
         });
+    },
+    AgregarEditarPersona:function(){
+        var datos=$("#form_personas").serialize().split("txt_").join("").split("slct_").join("");
+        var accion="persona/crearaux";
+
+        $.ajax({
+            url         : accion,
+            type        : 'POST',
+            cache       : false,
+            dataType    : 'json',
+            data        : datos,
+            beforeSend : function() {
+                $("body").append('<div class="overlay"></div><div class="loading-img"></div>');
+            },
+            success : function(obj) {
+                $(".overlay,.loading-img").remove();
+                if(obj.rst==1){
+                    Psi.mensaje('success', obj.msj, 6000);
+                    $('#personaModal .modal-footer [data-dismiss="modal"]').click();
+                    Alumno.CargarP(personasHTML);
+                }
+                else{ 
+                    $.each(obj.msj,function(index,datos){
+                        $("#error_"+index).attr("data-original-title",datos);
+                        $('#error_'+index).css('display','');
+                    });
+                }
+            },
+            error: function(){
+                $(".overlay,.loading-img").remove();
+                Psi.mensaje('danger', 'ocurrio un error en la carga', 6000);
+            }
+        });
     }
 };
 </script>
