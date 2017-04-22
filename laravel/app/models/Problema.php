@@ -631,21 +631,21 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            20,15,15,30,
+            15,20,15,15,30,
             15,
             25,15,15,
             15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Proveedor','Recibo','Fecha de Notificación','Observación',
+            'Sede','Proveedor','Recibo','Fecha de Notificación','Observación',
             'Fecha Registro',
             'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
             'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'proveedor','recibo','fecha','observacion',
+            'sede','proveedor','recibo','fecha','observacion',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
             'tiempo_transcurrido','estado_problema','resultado'
@@ -674,7 +674,7 @@ protected $table = '';
                 /*Legal*/
                 e.nombre empresa,pl.observacion,pl.fecha,pl.entidad,
                 li.nombre licencia,mu.nombre municipal, ar.nombre servicio,
-                pl.persona,pl.dni,pl.direccion,pl.departamento,pl.provincia,pl.distrito,
+                pl.persona persona_legal,pl.dni,pl.direccion,pl.departamento,pl.provincia,pl.distrito,
                 pl.persona_conyugue,pl.dni_conyugue,pl.direccion2,
                 pl.tiempo_contrato,pl.departamento2,pl.provincia2,pl.distrito2,
                 IF(pl.tipo_persona=1,'Persona Natural',
@@ -724,7 +724,7 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            30,20,15,20,
+            15,30,20,15,20,
             15,15,15,
             15,20,15,30,
             15,15,15,15,
@@ -736,7 +736,7 @@ protected $table = '';
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Observación','Empresa','Fecha de Notificación','Entidad',
+            'Sede','Observación','Empresa','Fecha de Notificación','Entidad',
             'Licencia','Municipal','Servicio',
             'Tipo Persona','Datos del Arrendador','DNI del Arrendador','Dirección del Arrendador',
             'Departamento','Provincia','Distrito','Estado Civil',
@@ -748,9 +748,9 @@ protected $table = '';
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'observacion','empresa','fecha','entidad',
+            'sede','observacion','empresa','fecha','entidad',
             'licencia','municipal','servicio',
-            'tipo_persona','persona','dni','direccion',
+            'tipo_persona','persona_legal','dni','direccion',
             'departamento','provincia','distrito','estado_civil',
             'persona_conyugue','dni_conyugue','direccion2',
             'tiempo_contrato','departamento2','provincia2','distrito2',
@@ -820,7 +820,7 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            20,15,20,15,15,30,
+            15,20,15,20,15,15,30,
             25,15,15,15,
             15,15,15,15,10,
             15,15,15,
@@ -831,7 +831,7 @@ protected $table = '';
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Arrendador','Tipo Moneda','Empresa','RUC','Teléfono','Observación',
+            'Sede','Arrendador','Tipo Moneda','Empresa','RUC','Teléfono','Observación',
             'Dirección','Personal Contacto','Teléfono Personal Contacto','Plazo ejecución del Servicio',
             'Tipo Multa','Tipo Impuesto','Nro Recibo','Nro Suministro','Monto',
             'Tipo Comprobante','Nro Comprobante','Persona que Autorizó',
@@ -842,7 +842,7 @@ protected $table = '';
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'arrendador','tipo_moneda','empresa','ruc','telefono_pl','observacion',
+            'sede','arrendador','tipo_moneda','empresa','ruc','telefono_pl','observacion',
             'direccion','personal_contacto','telefono_contacto','plazo',
             'tipo_multa','tipo_impuesto','recibo','nro_suministro','monto',
             'tipo_comprobante','nro_comprobante','autorizo',
@@ -910,21 +910,21 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            20,15,20,20,30,15,
+            15,20,15,20,20,30,15,
             15,
             25,15,15,
             15,15,40
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Persona','Área','Jefe','Motivo','Que solicita','Fecha',
+            'Sede','Persona','Área','Jefe','Motivo','Que solicita','Fecha',
             'Fecha Registro',
             'Persona que atendió Problema','Fecha Atención','Fecha Solucionado/Rechazado',
             'Tiempo Transcurrido','Estado Problema','Resultado'
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'persona_personal','area','jefe','motivo','solicita','fecha',
+            'sede','persona_personal','area','jefe','motivo','solicita','fecha',
             'fecha_registro',
             'persona_atendio','fecha_atendio','fecha_fin',
             'tiempo_transcurrido','estado_problema','resultado'
@@ -983,7 +983,7 @@ protected $table = '';
 
         $length=array(
             5,25,15,20,26,40,
-            20,15,20,
+            15,20,15,20,
             15,15,15,
             20,15,15,20,20,10,
             15,15,15,30,
@@ -993,7 +993,7 @@ protected $table = '';
         );
         $cabecera=array(
             'N°','Persona que registró Problema','Telefono','Problema General','Tipo Problema','Descripción',
-            'Persona que Contrató','Cuanto gana','Persona que Autorizó',
+            'Sede','Persona que Contrató','Cuanto gana','Persona que Autorizó',
             'Mes que se debe','Nro cuenta','Nombre Banco',
             'Para','Área','Ode Solicitante','Nombre Cajero','Empresa','Cantidad',
             'Nro Última boleta de venta','Enviar por','Fecha y Hora aproximado de envio','Información Adicional',
@@ -1003,7 +1003,7 @@ protected $table = '';
         );
         $campos=array(
             '','persona','telefono','problema_general','tipo_problema','descripcion',
-            'contrato','gana','autorizo',
+            'sede','contrato','gana','autorizo',
             'mes','nrocta','banco',
             'para','area','ode','cajero','empresa','cantidad',
             'ultboleta','enviar','fecha','adicional',
