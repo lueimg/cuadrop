@@ -101,6 +101,38 @@ $(document).ready(function() {
         var modal = $(this);
         modal.find('.modal-body input').val('');
     });
+
+        $('#personaModal').on('show.bs.modal', function (event) {
+
+        $('#txt_fecha_nac').daterangepicker({
+            format: 'YYYY-MM-DD',
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+
+        var button = $(event.relatedTarget); // captura al boton
+        var titulo = button.data('titulo'); // extrae del atributo data-
+        var persona_id = button.data('id'); //extrae el id del atributo data
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this); //captura el modal
+        modal.find('.modal-title').text(titulo+' Persona');
+        $('#form_personas [data-toggle="tooltip"]').css("display","none");
+        $("#form_personas input[type='hidden']").remove();
+        
+            modal.find('.modal-footer .btn-primary').text('Guardar');
+            modal.find('.modal-footer .btn-primary').attr('onClick','AgregarPersona();');
+            $('#form_personas input').val('');
+            $('#form_personas #slct_estado').val(1); 
+            $('#form_personas #txt_nombre').focus();
+    });
+
+    $('#personaModal').on('hide.bs.modal', function (event) {
+        var modal = $(this); //captura el modal
+        modal.find('.modal-body input').val(''); // busca un input para copiarle texto
+        //$('#slct_cargos').multiselect('destroy');
+        $("#t_cargoPersona").html('');
+    });
     /**************************************************************************/
     /***********************************Pagos**********************************/
     var i, cant;
@@ -190,6 +222,11 @@ $(document).ready(function() {
     });
     /**************************************************************************/
 });
+
+AgregarPersona=function(){
+        Problema.AgregarEditarPersona();
+}
+
 IngresarConyugue=function(val){
     $("#txt_le2_persona_conyugue,#txt_le2_dni_conyugue").removeAttr("readonly");
     $("#txt_le2_persona_conyugue,#txt_le2_dni_conyugue").val("");

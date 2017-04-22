@@ -331,6 +331,10 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
                           <div class="panel-body">
                             <div class="row form-group collapse" id="collapsePersona">
                                 <div class="col-sm-12">
+                                    <a class='btn btn-primary btn-sm' data-toggle="modal" data-target="#personaModal" data-titulo="Nuevo">
+                                    <i class="fa fa-plus fa-lg"></i>&nbsp;Nuevo</a>
+                                </div>
+                                <div class="col-sm-12">
                                     <!-- Inicia contenido -->
                                     <div class="box">
                                         <div class="box-body table-responsive">
@@ -997,4 +1001,5 @@ input:required:invalid {  border: 1px solid red;  }  input:required:valid {  bor
 
 @section('formulario')
      @include( 'admin.proceso.form.alumno' )
+     @include( 'admin.proceso.form.persona' )
 @stop
