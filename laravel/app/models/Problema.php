@@ -504,13 +504,13 @@ protected $table = '';
                 JOIN sedes s ON s.id=p.sede_id
                 /**************************************************************/
                 /*Instituto*/
-                JOIN institutos i ON i.id=p.instituto_id
-                JOIN modalidades m ON m.id=i.modalidad_id
+                LEFT JOIN institutos i ON i.id=p.instituto_id
+                LEFT JOIN modalidades m ON m.id=i.modalidad_id
                 /**************************************************************/
                 /*Alumno - Carrera*/
-                JOIN alumno_problema ap ON ap.problema_id=p.id
-                JOIN alumnos a ON a.id=ap.alumno_id
-                JOIN carreras c ON c.id=ap.carrera_id
+                LEFT JOIN alumno_problema ap ON ap.problema_id=p.id
+                LEFT JOIN alumnos a ON a.id=ap.alumno_id
+                LEFT JOIN carreras c ON c.id=ap.carrera_id
                 /**************************************************************/
                 /*Pago*/
                 LEFT JOIN (
